@@ -2,6 +2,7 @@
 Dispocición de carpetas:
 
 Frontend ###################################################
+    src/assets - las imagenes en formato .svg o demás recursos del sitio
     src/components - los componentes de react como alerts, buttons, modals, etc.
     src/app
     src/domain - IUEstructuras
