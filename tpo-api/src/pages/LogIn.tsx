@@ -1,8 +1,7 @@
-document.body.style.backgroundImage = "url(./src/assets/LogIn_Back.svg)";
-document.body.style.backgroundSize = "cover";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import image from "/src/assets/LogIn_Back.svg";
 
 export default function LogIn() {
   {
@@ -16,8 +15,11 @@ export default function LogIn() {
   }
 
   return (
-    <div className="bg-white/75 w-screen h-screen">
-      <div className="flex flex-col items-center justify-center">
+    <div
+      style={{ backgroundImage: `url(${image})`, backgroundSize: "cover" }}
+      className="w-screen h-screen"
+    >
+      <div className="flex flex-col items-center justify-center bg-white/70 h-screen">
         <img
           src="./src/assets/nopay.svg"
           alt="Nopay logo"
