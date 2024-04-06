@@ -23,6 +23,11 @@ Decidimos crear un e-commerce para una tienda de ropa en este caso, la cual cump
 - Realizar el checkout del carrito con el correspondiente cálculo automático del total de la compra. -
 - Una vez realizado el checkout (sin procesamiento de pago), se descontará el stock de dicho producto. Se deberá validar si cuenta con el stock correspondiente.
 
+### Gestión de Productos:
+- Los usuarios registrados como vendedores podrán realizar el alta de una publicación de un producto adjuntando una o más fotos del producto. 
+- En dicha publicación deberá adjuntar la descripción del producto, junto con la categoría a la cual pertenece y el precio. 
+- El usuario que crea dicho producto, podrá manejar el stock del mismo. 
+- El usuario podrá eliminar dicho producto.
 
 &nbsp;
 # Casos de Uso
@@ -43,12 +48,15 @@ Tenemos que definir en este caso los casos de uso para el diseño de nuestro e-c
 | 011  | Modificar producto del carrito                 | Compra    |
 | 012  | Eliminar producto del carrito                  | Compra    |
 | 013  | Realizar checkout del carrito                  | Compra    |
+| 014  | Publicar producto                              | Venta     |
+| 015  | Modificar stock de producto                    | Venta     |
+| 016  | Eliminar producto en venta                     | Venta     |
 
 
 &nbsp;
 # Decisiones de diseño
 Nosotros en lo que respecta a los requerimientos indicados hemos tomado las siguientes decisiones para un desarrollo mas eficiente, seguro y mantenible:
-- La creación de usuarios vendedores será realizada a los correos que tengan el dominio "@nopay.com" de esta forma validamos y controlamos de una forma mas profesional los accesos y registros en el sitio web.
+
 
 
 &nbsp;
