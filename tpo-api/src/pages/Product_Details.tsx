@@ -1,0 +1,3 @@
+{
+  /* Specific Product Details */
+}
