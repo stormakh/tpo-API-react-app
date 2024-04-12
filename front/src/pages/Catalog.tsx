@@ -1,0 +1,3 @@
+{
+  /* Here goes catalog stuff */
+}
