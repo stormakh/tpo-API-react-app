@@ -1,4 +1,5 @@
-import NavBar from "@/components/ui/nav-bar";
+import Footer from "@/components/Footer";
+import NavBar from "@/components/Navbar";
 import {
   Carousel,
   CarouselContent,
@@ -41,6 +42,7 @@ export default function () {
           </div>
         </CardContent>
       </Card>
+      <Footer></Footer>
     </>
   );
 }

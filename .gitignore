@@ -1,25 +1,24 @@
 # Dependency directories
-/node_modules
-
+node_modules
+ 
 # Build output
 /build
 /dist
-
+ 
 # Environment variables
 .env
-
+ 
 # IDE and editor files
 /.idea
 /.vscode
 *.swp
 *.swo
-
+ 
 # Logs
 /logs
-
+ 
 # Compiled output
 *.log
 *.zip
-
-#Java Spring Boot
+.DS_Store
 
