@@ -1,4 +1,5 @@
-import NavBar from "@/components/ui/nav-bar";
+import Footer from "@/components/Footer";
+import NavBar from "@/components/NavBar";
 import {
   Carousel,
   CarouselContent,
@@ -22,7 +23,6 @@ export default function () {
           </CarouselItem>
         </CarouselContent>
         <CarouselPrevious />
-        <CarouselNext />
       </Carousel>
       <Card className="w-screen">
         <CardContent className="flex justify-center pt-36">
@@ -41,6 +41,7 @@ export default function () {
           </div>
         </CardContent>
       </Card>
+      <Footer></Footer>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Input } from "@/components/ui/input";
+//import { Input } from "@/components/ui/input";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -25,7 +25,7 @@ import {
 export default function NavBar() {
   return (
     <div>
-      <NavigationMenu className="fixed">
+      <NavigationMenu className="sticky top-0  ">
         <NavigationMenuList className="w-screen justify-between h-16">
           <div className="flex my-3 px-5">
             <NavigationMenuItem>
@@ -48,6 +48,18 @@ export default function NavBar() {
                 </DropdownMenuContent>
               </DropdownMenu>
             </NavigationMenuItem>
+          </div>
+          <img
+            src="./src/assets/nopay.svg"
+            alt="Nopay Logo"
+            className="size-24 justify-self-center"
+          ></img>
+          <div className="flex justify-self-end px-5">
+            <NavigationMenuItem className="mx-2">
+              <Button size="icon" className="bg-transparent hover:bg-slate-50">
+                <Search color="black" />
+              </Button>
+            </NavigationMenuItem>
             <NavigationMenuItem className="mx-2">
               <Button size="icon" className="bg-transparent hover:bg-slate-50">
                 <Link to="/LogIn">
@@ -65,27 +77,6 @@ export default function NavBar() {
                 <ShoppingBag className="mr-1" color="black" />
                 <a className="text-black">0</a>
                 {/*implement UseState here to track products in cart */}
-              </Button>
-            </NavigationMenuItem>
-          </div>
-          <img
-            src="./src/assets/nopay.svg"
-            alt="Nopay Logo"
-            className="size-24 justify-self-center"
-          ></img>
-          <div className="justify-self-end px-5">
-            <NavigationMenuItem className="flex relative">
-              <Input
-                type="Search"
-                className="w-80"
-                placeholder="Search"
-              ></Input>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="mx-2 absolute right-0 top-0 mr-3 hover:bg-slate-50"
-              >
-                <Search />
               </Button>
             </NavigationMenuItem>
           </div>
