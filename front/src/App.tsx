@@ -5,7 +5,8 @@ import Home from "./pages/Home";
 import Catalog from "./pages/Catalog";
 import ProductDetailsSeller from "./pages/ProductDetailsSeller";
 import ShoppingCart from "./pages/ShoppingCart";
-
+import ProductDetailsClient from "./pages/ProductDetailsClient";
+import UserProfile from "./pages/UserProfile";
 const router = createBrowserRouter([
   {
     path: "/Home",
@@ -24,12 +25,20 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/catalog",
+    path: "/Catalog",
     element: <Catalog />,
+  },
+  {
+    path: "/ProductDetailsClient",
+    element: <ProductDetailsClient />,
   },
   {
     path: "/ShoppingCart",
     element: <ShoppingCart />,
+  },
+  {
+    path: "/UserProfile",
+    element: <UserProfile />,
   },
 ]);
 
