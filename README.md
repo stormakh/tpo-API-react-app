@@ -3,6 +3,7 @@ TPO para la materia de Aplicaciones Interactivas 3ro UADE
 Proyecto con el Front realizado con REACT + Vite y Tailwind CSS + Shadcn para el estilado.
 Recuerden de correr npm install para que se ejecute correctamente el proyecto, Harry.
 
+<<<<<<< HEAD
 &nbsp;
 # Introducción al Proyecto
 Decidimos crear un e-commerce para una tienda de ropa en este caso, la cual cumplirá con los siguientes requerimientos detallados en el proyecto:
@@ -67,3 +68,9 @@ Dejamos como adjunto una imagen de como se relacionan las ramas en este modelo:
 
 ![alt text](https://miro.medium.com/v2/resize:fit:1400/1*3-0EDzE63S_UZx2KbIz_dg.png)
 
+=======
+
+# Conexión con la base de datos
+- URL del proyecto: https://kpbkxyhpapejtqrlfoqv.supabase.co
+- API Key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtwYmt4eWhwYXBlanRxcmxmb3F2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI5MzM1NzcsImV4cCI6MjAyODUwOTU3N30.niSCoguhr6k0qmDq1VaNFH8Q6_IOWHXD3WawA-IAeUo
+>>>>>>> main
