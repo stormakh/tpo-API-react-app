@@ -7,15 +7,16 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import Banner from "@/components/Banner";
 {
   /* Specific Product Details */
 }
-import { Save, CircleX } from "lucide-react";
+import { Save, CircleX, Ban } from "lucide-react";
 export default function () {
   return (
     <>
       <NavBarSeller></NavBarSeller>
-      <img src="src/assets/Banner.svg"></img>
+      <Banner text=""></Banner>
       <div className="flex justify-center pt-24 px-5">
         <div className="mx-12">
           <h1 className="pb-5 font-roboto font-semibold">
