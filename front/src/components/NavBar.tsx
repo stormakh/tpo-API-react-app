@@ -25,7 +25,7 @@ import {
 export default function NavBar() {
   return (
     <div>
-      <NavigationMenu className="sticky top-0  ">
+      <NavigationMenu className="sticky top">
         <NavigationMenuList className="w-screen justify-between h-16">
           <div className="flex my-3 px-5">
             <NavigationMenuItem>

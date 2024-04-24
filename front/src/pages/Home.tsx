@@ -23,6 +23,7 @@ export default function () {
           </CarouselItem>
         </CarouselContent>
         <CarouselPrevious />
+        <CarouselNext />
       </Carousel>
       <Card className="w-screen">
         <CardContent className="flex justify-center pt-36">

@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import NavBarSeller from "@/components/NavBarSeller";
 import {
   Carousel,
@@ -16,7 +17,7 @@ export default function () {
     <>
       <NavBarSeller></NavBarSeller>
       <img src="src/assets/Banner.svg"></img>
-      <div className="flex justify-center pt-24 px-5">
+      <div className="flex justify-center pt-24 px-5 mb-10">
         <div className="mx-12">
           <h1 className="pb-5 font-roboto font-semibold">
             PRODUCTOS PUBLICADOS / EDITAR PRODUCTO
@@ -61,6 +62,7 @@ export default function () {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </>
   );
 }
