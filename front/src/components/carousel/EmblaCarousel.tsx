@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import { DotButton, useDotButton } from './EmblaCarouselDotButton'
 import useEmblaCarousel from 'embla-carousel-react'
 import './embla.css'
 
 type PropType = {
-  slides: number[]
+  slides: ReactNode[]
   options?: EmblaOptionsType
 }
 
@@ -21,9 +21,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       <div className="embla__viewport h-full" ref={emblaRef}>
         <div className="embla__container h-full">
           
-          {slides.map((index) => (
+          {slides.map((slide,index) => (
             <div className="embla__slide h-full" key={index}>
-              <div className="embla__slide__number border-none shadow-none h-full">{index + 1}</div>
+              <div className="embla__slide__number border-none shadow-none h-full">{slide}</div>
             </div>
           ))}
         </div>
