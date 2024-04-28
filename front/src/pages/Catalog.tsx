@@ -4,7 +4,7 @@ import NavBar from "@/components/NavBar";
 
 import CarouselWrapper from "@/components/carousel/CarouselWrapper";
 import ImageSlide from "@/components/carousel/ImageSlide";
-import CatalogMenu from "@/components/CatalogMenu";
+import CatalogMenu from "@/components/catalog/CatalogMenu";
 import Eye from "../assets/Eye.svg";
 import {
   Select,
@@ -15,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import CatalogFilter from "@/components/catalog/CatalogFilter";
 
 // Assuming you have an ItemCard component
 const items = [
@@ -39,6 +40,7 @@ const categories = [
   { categorie: "Accessories", link: "/accessories" },
 ];
 
+
 export default function Catalog() {
   return (
     <>
@@ -46,30 +48,19 @@ export default function Catalog() {
       <Banner text="Upper"></Banner>
 
       <div className="w-2/5 flex flex-row items-baseline m-4 justify-between gap-4 text-xl h-auto">
-        <Select>
-          <SelectTrigger className=" border-none focus:ring-0 focus:ring-offset-0">
-            <SelectValue placeholder="FILTER" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>Categories</SelectLabel>
-              {categories.map((categorie) => (
-                <SelectItem key={categorie.categorie} value={categorie.categorie} >
-                  {categorie.categorie}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+        <div className="stroke-0">
+          <CatalogFilter categories={categories} />
+        </div>
         <CatalogMenu />
       </div>
 
-      <div className="grid grid-cols-4 gap-4 mt-8 mx-4 ">
+      <div className="grid  gap-4 mt-8 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
         {items.map((item) => (
           <CarouselWrapper
             ratio={9 / 16}
             slides={[<ImageSlide src={Eye} />, "text", 5, 3, 4]}
-            options={{loop: true}}
+            options={{ loop: true }}
+            className="min-w-[200px] "
             key={item.id}
           >
             <p className="  text-zinc-950 absolute top-0 left-0 transform -rotate-90 -translate-x-2 translate-y-12 antialiased opacity-65 z-10">
@@ -81,6 +72,7 @@ export default function Catalog() {
           </CarouselWrapper>
         ))}
       </div>
+      
     </>
   );
 }
