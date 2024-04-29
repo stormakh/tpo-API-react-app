@@ -6,15 +6,7 @@ import CarouselWrapper from "@/components/carousel/CarouselWrapper";
 import ImageSlide from "@/components/carousel/ImageSlide";
 import CatalogMenu from "@/components/catalog/CatalogMenu";
 import Eye from "../assets/Eye.svg";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import CatalogFilter from "@/components/catalog/CatalogFilter";
 
 // Assuming you have an ItemCard component
@@ -40,7 +32,6 @@ const categories = [
   { categorie: "Accessories", link: "/accessories" },
 ];
 
-
 export default function Catalog() {
   return (
     <>
@@ -56,23 +47,24 @@ export default function Catalog() {
 
       <div className="grid  gap-4 mt-8 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
         {items.map((item) => (
-          <CarouselWrapper
-            ratio={9 / 16}
-            slides={[<ImageSlide src={Eye} />, "text", 5, 3, 4]}
-            options={{ loop: true }}
-            className="min-w-[200px] "
-            key={item.id}
-          >
-            <p className="  text-zinc-950 absolute top-0 left-0 transform -rotate-90 -translate-x-2 translate-y-12 antialiased opacity-65 z-10">
-              <b>NEW</b> IN
+          <div>
+            <CarouselWrapper
+              ratio={9 / 16}
+              slides={[<ImageSlide src={Eye} />, "text", 5, 3, 4]}
+              options={{ loop: true }}
+              className="min-w-[200px] "
+              key={item.id}
+            >
+              <p className="  text-zinc-950 absolute top-0 left-0 transform -rotate-90 -translate-x-2 translate-y-12 antialiased opacity-65 z-10">
+                <b>NEW</b> IN
+              </p>
+            </CarouselWrapper>
+            <p className="text-start z-10">
+              {item.name.toUpperCase()} <b>${item.price}</b>
             </p>
-            <p className="absolute inset-x-0  bottom-14 text-center z-10">
-              Price: {item.price}
-            </p>
-          </CarouselWrapper>
+          </div>
         ))}
       </div>
-      
     </>
   );
 }
