@@ -60,13 +60,14 @@ DropdownMenuSubContent.displayName =
 interface DropdownMenuContentProps {
   className?: string;
   sideOffset?: number;
+  children: React.ReactElement | React.ReactElement[];
   // Define other props here
 }
 
 const DropdownMenuContent = React.forwardRef<
   HTMLDivElement,
   DropdownMenuContentProps
->(({ className, sideOffset = 4, ...props }, ref) => (
+>(({ children,className, sideOffset = 4, ...props }, ref) => (
   <DropdownMenuPrimitive.Portal>
     <DropdownMenuPrimitive.Content
       ref={ref}
@@ -76,7 +77,9 @@ const DropdownMenuContent = React.forwardRef<
         className
       )}
       {...props}
-    />
+    >
+    {children}
+    </DropdownMenuPrimitive.Content>
   </DropdownMenuPrimitive.Portal>
 ));
 
