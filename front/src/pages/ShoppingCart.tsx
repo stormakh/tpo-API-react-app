@@ -1,61 +1,27 @@
 import NavBar from "@/components/NavBar";
-
+import ShoppingItem from "@/components/ShoppingCart/ShoppingItem";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-
-import {PlusIcon, MinusIcon} from "lucide-react";
+import { CircleX, Save, ShoppingBag } from "lucide-react";
 import { useState } from "react";
 
 export default function(){
 
-  
+    const [products, setProducts] = useState([
+      {id: 1, name: 'Producto 1', price: 200.23, size: "xs", quantity: 1 },
+      {id: 2, name: 'Producto 2', price: 300.44, size: "m", quantity: 2 },
+      {id: 3, name: 'Producto 3', price: 250.66, size: "L", quantity:1 },
+    ]);
 
-  const [products, setProducts] = useState([
-    {id: 1, name: 'Producto 1', price: 200.23, size: "xs", quantity: 1 },
-    {id: 2, name: 'Producto 2', price: 300.44, size: "m", quantity: 2 },
-    {id: 3, name: 'Producto 3', price: 250.66, size: "L", quantity:1 },
-  ]);
-
-  const [productsQuantity, setQuantity] = useState(products.reduce((total, element) => total + element.quantity,0));
-
-  const sumarProducto = (id) => {
-    console.log(products);
-    setProducts(products =>{
-      return products.map(element =>
-        {
-          if (element.id == id){
-            setQuantity(productsQuantity+1);
-            return {...element, quantity: element.quantity+1};
-          }
-          else {
-            return element;
-          }
-        }
-      );
-    });
-  };
-
-  const restarProducto = (id) => {
-    console.log(products);
-    setProducts(products =>{
-      return products.map(element =>
-        {
-          if (element.id == id && element.quantity >0){
-            setQuantity(productsQuantity-1);
-            return {...element, quantity: element.quantity-1};
-          }
-          else {
-            return element;
-          }
-        }
-      );
-    });
-  };
+    const [productsQuantity, setQuantity] = useState(products.reduce((total, element) => total + element.quantity,0));
 
   return (
     <>
       <NavBar></NavBar>
       <div className="flex justify-center mt-24 h-screen">
-        <div className="p-10 w-2/3 pr-20 text-2xl">
+        <div className="p-10 pl-30 w-2/3 text-2xl">
+          
           <div className="flex  mb-3">
             <h1 className="pb-5 font-roboto font-semibold w-3/4">
               SHOPPING CART
@@ -69,48 +35,50 @@ export default function(){
 
           <table className="w-full divide-x-100 mt-10 text-xl">
             <thead>
-              <tr className=" h-14 align-top">
-                <th className="w-1/2 text-left font-normal">Product Details</th> 
-                <th className="w-1/4 text-center font-normal">Quantity</th>  
-                <th className="w-1/4 text-center font-normal ">Total</th>
+              <tr className="h-14 w-full">
+                <th className="w-1/5 text-left font-normal">Producto</th> 
+                <th className="w-1/5 text-center font-normal">Detalle</th> 
+                <th className="w-1/5 text-center font-normal">Precio</th>  
+                <th className="w-1/5 text-center font-normal">Cantidad</th> 
+                <th className="w-1/5 text-center font-normal ">Total</th>
               </tr>
             </thead>
             <tbody>
-              {products.map(item => (
-                <tr key={item.id} className="h-32">
-                  <td className="text-left flex mb-10">
-                    <img className="rounded-lg w-32 h-32 object-cover mr-4" src={'https://acdn.mitiendanube.com/stores/001/126/411/products/img_6410-45e22b7745aa8ecce417076008276388-1024-1024.webp'} alt="Ejemplo" />
-                    <div className="flex flex-col justify-between ">
-                      <div><b>{item.name}</b></div>
-                      <div><b>Precio:</b> {item.price}</div>
-                      <div><b>Talle:</b>  {item.size}</div>
-                    </div>
-                  </td>
-                  <td className="text-center h-32">
-                    <div className="flex justify-center h-full">
-                      <div className="flex rounded-md h-8 items-center">
-                        <button className="flex items-center justify-center content-start w-6 h-6 border-2 border-black hover:bg-gray-200 rounded-full" onClick={() => sumarProducto(item.id)}>
-                          <PlusIcon className="w-4 h-4 text-black-900" /> 
-                        </button>
-                        <input type="text" className="w-14 outline-none ml-2 mr-2 border-2 border-chiro-nopay text-center rounded-md text-black" placeholder={item.quantity.toString()} />
-                        <button className="flex items-center justify-center w-6 h-6 border-2 border-black hover:bg-gray-200 rounded-full" onClick={() => restarProducto(item.id)}>
-                          <MinusIcon className="w-4 h-4 text-black-900" /> 
-                        </button>
-                      </div>
-                    </div>
-                  </td>
-
-                  <td className=" h-32 text-center align-top">
-                    <b>$ {(item.price * item.quantity).toFixed(2)}</b> 
-                  </td>
-                </tr>
+              {products.map(item => ( 
+                <ShoppingItem productData={item}></ShoppingItem>
               ))}
             </tbody>
           </table>
         </div>
 
-        <div className="p-10 w-1/3 justify-center font-roboto bg-gray-300 h-full">
-          <h1 className="font-semibold">SUMMARY</h1>  
+        <div className=" w-1/3 font-roboto h-full pl-20 pr-20 flex flex-col justify-start">
+          <h1 className="font-semibold text-4xl">Resumen de la compra</h1>  
+          <Card className="bg-gray-100 border-solid border-gray-300 mb-20 mt-20 ">
+            <div className="h-20 w-full flex ">
+              <span className="w-3/4">Subtotal</span>
+              <span className="w-1/4">$300.000</span>
+            </div>
+            <Separator className="bg-gray-300 w-5/6"></Separator> 
+              <div>
+                <div className="h-20 w-full flex ">
+                  <span className="w-3/4">Costo Envio</span>
+                  <span className="w-1/4">A calcular</span>
+                </div>
+                <div className="h-20 w-full flex ">
+                  <span className="w-3/4">Tarifa por servicio</span>
+                  <span className="w-1/4">$2.350</span>
+                </div>
+              </div>
+            <Separator className="bg-gray-300"></Separator> 
+            <div className="h-20 w-full flex ">
+              <span className="w-3/4">Total</span>
+              <span className="w-1/4">$304.500</span>
+            </div>
+          </Card>
+          <span>Al hacer click en Finalizar compra, estás aceptando nuestros <b>Términos y condiciones</b>. </span>
+          <Button className="bg-black border-silk border-2 text-black w-full h-16 text-2xl text-white mt-5">
+            Finalizar Compra 
+          </Button>
         </div>
       </div>
     </>
