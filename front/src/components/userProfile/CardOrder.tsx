@@ -2,7 +2,7 @@ import {
     Card,
     CardContent
   } from "@/components/ui/card"
-import { EyeIcon, Trash, Wallet } from "lucide-react"
+import { EyeIcon } from "lucide-react"
 import { Button } from "../ui/button";
 
 interface CardOrderProps{
@@ -11,7 +11,6 @@ interface CardOrderProps{
     paymentMethod: string;
     state: string;
 }
-
 
 export default function CardOrder({order, totalAmount, paymentMethod, state}: CardOrderProps){
 
@@ -27,10 +26,10 @@ export default function CardOrder({order, totalAmount, paymentMethod, state}: Ca
                         <p><b>{paymentMethod}</b></p>
                     </div>
                     <div className="flex flex-col justify-between text-end">
-                        <div className="flex text-end">
+                        <button className="flex text-end">
                             <p className=" pl-6 pr-3">ver detalles</p>
                             <EyeIcon></EyeIcon>
-                        </div>
+                        </button>
                         <Button className="bg-black border-silk border-2 text-black w-52 h-16 text-2xl text-white">
                             {state}
                         </Button>

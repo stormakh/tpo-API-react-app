@@ -1,10 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-import { AlertCircleIcon, LogOut, Pencil } from "lucide-react";
+import { AlertTriangle, LogOut } from "lucide-react";
 import Header from "../Header";
 import DefaultButton from "../DefaultButton";
-
 
 export default function (){
 
@@ -13,7 +9,7 @@ export default function (){
             <div className="h-5/6 h-full ">
                 <Header text={"log Out"} height={"1/6"} width={"full"}></Header>  
                 <div className="flex justify-center flex-col items-center">
-                    <AlertCircleIcon className="w-36 h-36"></AlertCircleIcon>
+                    <AlertTriangle className="w-36 h-36"></AlertTriangle>
                     <p className="m-36 text-4xl">VAS A CERRAR LA SESIÓN DE TU CUENTA</p>
                 </div>
                 <div className="h-1/6 flex justify-end pr-52 mt-12">

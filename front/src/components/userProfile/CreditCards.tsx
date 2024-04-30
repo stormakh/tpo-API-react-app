@@ -1,7 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-import { CreditCard, Pencil, Wallet } from "lucide-react";
+import { CreditCard } from "lucide-react";
 import CardAdded from "./CardAdded";
 import DefaultButton from "../DefaultButton";
 import Header from "../Header";

@@ -22,7 +22,9 @@ export default function CardAdded({last,bankName,expDate}: CardAddedProps){
                 <p className="font-thin">{bankName}</p>
                 <p className="font-thin">Vencimiento {expDate}</p>
             </CardContent>
-            <Trash className="m-9"></Trash>
+            <button>
+                <Trash className="m-9"></Trash>
+            </button>
         </Card>     
     );
 }
