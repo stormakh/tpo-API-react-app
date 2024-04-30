@@ -43,39 +43,40 @@ export default function () {
     <>
       <NavBarSeller></NavBarSeller>
       <Banner text="Mis Productos"></Banner>
-      <h1 className="ml-20 pb-5 font-roboto font-semibold mt-12 underline italic">
-        Mis Productos / Editar
-      </h1>
-      <div className="flex mb-48">
-        <div className="w-2/6 ml-20">
-          <img src="src/assets/Sample_Big.svg" className=""></img>
-          <Carousel
-            opts={{
-              align: "start",
-              containScroll: "trimSnaps",
-            }}
-            className="w-fit"
-          >
-            <CarouselContent className="-mt-1">
-              {imageSources.map((source, index) => (
-                <CarouselItem key={index} className="pt-1 md:basis-1/4 mt-6">
-                  <div className="p-1">
-                    <img src={source} className="mb-5"></img>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-          <a className="flex font-semibold">
-            Añadir Fotos <Camera className="mx-5" />
-          </a>
-        </div>
-        <div className="w-4/6 pl-28 pr-24">
-          <Card>
+      <section className="flex flex-col m-8">
+        <h1 className=" pb-5 font-roboto  underline italic">
+          Mis Productos / Editar
+        </h1>
+        <section className="w-svw h-auto flex sm:flex-row flex-col gap-8 items-start justify-center">
+          <div className="flex flex-col">
+            <img src="src/assets/Sample_Big.svg" className=""></img>
+            <Carousel
+              opts={{
+                align: "start",
+                containScroll: "trimSnaps",
+              }}
+              className="w-fit"
+            >
+              <CarouselContent className="-mt-1">
+                {imageSources.map((source, index) => (
+                  <CarouselItem key={index} className="pt-1 md:basis-1/4 mt-6">
+                    <div className="p-1">
+                      <img src={source} className="mb-5"></img>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
+            <a className="flex font-semibold">
+              Añadir Fotos <Camera className="mx-5" />
+            </a>
+          </div>
+
+          <Card className="max-w-96">
             <CardContent>
               <CardHeader>
                 <h2 className="text-5xl font-bold">Jean Iron washed</h2>
-                <h3 className="pt-14 font-roboto font-semibold my-5 text-3xl">
+                <h3 className=" font-roboto font-semibold my-5 text-3xl">
                   Precio
                 </h3>
                 <a className="pt-4 flex font-semibold">
@@ -85,7 +86,7 @@ export default function () {
               <h3 className="font-roboto font-semibold my-5 text-3xl pl-5">
                 Descripción
               </h3>
-              <p className="pl-5 text-2xl pr-96">
+              <p className="pl-5 text-2xl">
                 Sumérgete en un estilo casual con nuestro jean azul desgastado.
                 Su corte holgado y detalles de costuras visibles ofrecen
                 comodidad y estilo. Combínalo con una camiseta simple o una
@@ -143,8 +144,9 @@ export default function () {
               </Button>
             </CardFooter>
           </Card>
-        </div>
-      </div>
+        </section>
+      </section>
+
       <Footer></Footer>
     </>
   );
