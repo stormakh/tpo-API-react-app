@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { Pencil } from "lucide-react";
+import { AlertCircleIcon, Pencil } from "lucide-react";
 
 
 export default function (){
@@ -13,13 +13,13 @@ export default function (){
                     <div className="h-full content-center pr-12">Log Out</div>
                     <Separator className="w-5/6 bg-chiro-nopay mt-20"></Separator>
                 </div>
-                <div className="flex pb-12">
-                    
+                <div className="flex justify-center flex-col items-center">
+                    <AlertCircleIcon className="w-36 h-36"></AlertCircleIcon>
+                    <p className="m-36 text-4xl">VAS A CERRAR LA SESIÓN DE TU CUENTA</p>
                 </div>
                 <div className="h-1/6 flex justify-end pr-52 mt-12">
                     <Button className="bg-black border-silk border-2 text-black w-52 h-16 text-2xl text-white">
-                        Edit 
-                        <Pencil className="w-10 pl-4"/>
+                        Salir 
                     </Button>
                 </div>
             </div>
