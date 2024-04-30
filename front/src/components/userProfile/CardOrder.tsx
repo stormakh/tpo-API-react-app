@@ -5,18 +5,24 @@ import {
 import { EyeIcon, Trash, Wallet } from "lucide-react"
 import { Button } from "../ui/button";
 
-export default function (props){
+interface CardOrderProps{
+    order: number;
+    totalAmount: number;
+    paymentMethod: string;
+    state: string;
+}
 
-    let {orderNro, total, paymentMethod, state} = props.orderData;
-    
+
+export default function CardOrder({order, totalAmount, paymentMethod, state}: CardOrderProps){
+
     return (
         <Card className="flex flex-row justify-center items-center p-3 m-3">
             <CardContent className="">
                 <div className="flex">
                     <div className=" pr-36">
-                        <p className="text-4xl font-medium">N° {orderNro}</p>
+                        <p className="text-4xl font-medium">N° {order}</p>
                         <p className="font-thin text-l">TOTAL</p>
-                        <p><b>${total}</b></p>
+                        <p><b>${totalAmount}</b></p>
                         <p className="font-thin text-l">METODO DE PAGO</p>
                         <p><b>{paymentMethod}</b></p>
                     </div>

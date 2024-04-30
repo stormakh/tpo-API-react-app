@@ -1,7 +1,7 @@
 import NavBar from "@/components/NavBar";
 import ShoppingItem from "@/components/ShoppingCart/ShoppingItem";
 import { Button } from "@/components/ui/button";
-import  Card  from "@/components/ShoppingCart/Card";
+import  Card  from "@/components/ShoppingCart/CardCart";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, CircleX, Save, ShoppingBag } from "lucide-react";
 import { useState } from "react";
@@ -14,7 +14,7 @@ export default function(){
       {id: 3, name: 'Producto 3', price: 250.66, size: "L", quantity:1 },
     ]);
 
-    const cartAmouts = {sub:1000, shipCost:300, serviceTax:20};
+    const cartAmouts = {subTotal:1000, shipCost:300, serviceTax:20};
 
     const [productsQuantity, setQuantity] = useState(products.reduce((total, element) => total + element.quantity,0));
 
@@ -47,7 +47,7 @@ export default function(){
             </thead>
             <tbody>
               {products.map(item => ( 
-                <ShoppingItem productData={item}></ShoppingItem>
+                <ShoppingItem {...item}></ShoppingItem>
               ))}
             </tbody>
           </table>
@@ -59,7 +59,7 @@ export default function(){
 
         <div className=" w-1/3 font-roboto h-full p-10 pl-20 pr-20 flex flex-col justify-start">
           <h1 className="font-semibold text-4xl">Resumen de la compra</h1>  
-          <Card cartCosts={cartAmouts}></Card>
+          <Card {...cartAmouts}></Card>
           <span>Al hacer click en Finalizar compra, estás aceptando nuestros <b>Términos y condiciones</b>. </span>
           <Button className="bg-black border-silk border-2 text-black w-full h-16 text-2xl text-white mt-5">
             Finalizar Compra 

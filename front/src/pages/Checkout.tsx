@@ -1,6 +1,6 @@
 import Banner from "@/components/Banner";
 import NavBar from "@/components/NavBar";
-import Card from "@/components/ShoppingCart/Card";
+import Card from "@/components/ShoppingCart/CardCart";
 import CheckoutItem from "@/components/ShoppingCart/CheckoutItem";
 import PaymentCard from "@/components/ShoppingCart/PaymentCard";
 import { Button } from "@/components/ui/button";
@@ -17,8 +17,6 @@ export default function(){
         {imgUrl: "https://acdn.mitiendanube.com/stores/001/126/411/products/img_6410-45e22b7745aa8ecce417076008276388-1024-1024.webp", description: 'Producto 3', price: 250.66, size: "L", quantity:1 },
       ]);
     
-    const cartAmouts = {sub:1000, shipCost:300, serviceTax:20};
-
     return(
         <div className="flex flex-col">
             <NavBar></NavBar>
@@ -66,12 +64,12 @@ export default function(){
                     <tbody className="">
                         {products.map(item => ( 
                             <div>
-                                <CheckoutItem productData={item}></CheckoutItem>
+                                <CheckoutItem {...item}></CheckoutItem>
                             </div>
                         ))}
                     </tbody>
                 </table>
-                <Card cartCosts={cartAmouts}></Card>
+                <Card subTotal={20000} shipCost={3230} serviceTax={300}></Card>
                 <PaymentCard></PaymentCard>
                 <div className="font-thin">
                     Tu información personal será utilizada para procesar tu pedido y apoyar tu experiencia en este sitio web. 

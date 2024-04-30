@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import {PlusIcon, MinusIcon, TrashIcon} from "lucide-react";
 import producQuantity from "../../pages/ShoppingCart"
 
-export default function (props){
+interface ShoppingItemProps{
+  id: number;
+  name: string;
+  size: string;
+  quantity: number;
+  price: number;
+}
 
-    let {id, name, size, quantity, price} = props.productData;
+export default function ShoppingItem({id, name, size, quantity, price} : ShoppingItemProps){
 
-    const sumarProducto = (id) => {
-        quantity = quantity + 1;
+    let [countQuantity, setQuantity] = useState(quantity);
+
+    const sumarProducto = (id: number) => {
+      setQuantity(countQuantity + 1);
       };
     
-    const restarProducto = (id) => {
-        if (quantity > 0){
-            quantity = quantity + 1;
+    const restarProducto = (id: number) => {
+        if (countQuantity > 0){
+          setQuantity(countQuantity - 1);
         }
     };
     
@@ -36,7 +44,7 @@ export default function (props){
               <button className="flex items-center justify-center content-start w-6 h-6 hover:bg-gray-200 rounded-full" onClick={() => sumarProducto(id)}>
                 <PlusIcon className="w-4 h-4 text-black-900" /> 
               </button>
-              <input readOnly type="text" className="w-14 outline-none ml-2 mr-2 text-center rounded-md text-black" placeholder={quantity.toString()} />
+              <input readOnly type="text" className="w-14 outline-none ml-2 mr-2 text-center rounded-md text-black" placeholder={countQuantity.toString()} />
               <button className="flex items-center justify-center w-6 h-6 hover:bg-gray-200 rounded-full" onClick={() => restarProducto(id)}>
                 <MinusIcon className="w-4 h-4 text-black-900" /> 
               </button> 
@@ -44,7 +52,7 @@ export default function (props){
           </div>
         </td>
         <td className=" h-40 text-center align-top flex justify-center items-center text-center">
-          <p className="text-3xl" ><b>$ {(price * quantity).toFixed(2)}</b></p>
+          <p className="text-3xl" ><b>$ {(price * countQuantity).toFixed(2)}</b></p>
         </td>
         <td className=" text-center">
             <button>

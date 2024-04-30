@@ -2,15 +2,19 @@ import { Card } from "../ui/card";
 import { Separator } from "../ui/separator";
 import React from "react";
 
-export default function(props){
+interface CardProps{
+    subTotal: number;
+    shipCost: number;
+    serviceTax: number;
+}
 
-    let {sub, shipCost, serviceTax} = props.cartCosts;
+export default function CardCart({subTotal, shipCost, serviceTax}: CardProps){
 
     return (
         <Card className="bg-gray-100 border-solid border-gray-300 mb-20 mt-20 pl-6 pr-6">
             <div className="h-20 w-full flex items-center"> 
                 <span className="w-3/4">Subtotal</span>
-                <span className="w-1/4 flex justify-end">${sub}</span>
+                <span className="w-1/4 flex justify-end">${subTotal}</span>
             </div>
             <Separator className="bg-gray-300"></Separator> 
             <div>
@@ -26,7 +30,7 @@ export default function(props){
             <Separator className="bg-gray-300"></Separator> 
             <div className="h-20 w-full flex items-center"> 
                 <span className="w-3/4"><b>Total</b></span>
-                <span className="w-1/4 flex justify-end"><b>${sub+shipCost+serviceTax}</b></span>
+                <span className="w-1/4 flex justify-end"><b>${subTotal+shipCost+serviceTax}</b></span>
             </div>
         </Card>
     );
