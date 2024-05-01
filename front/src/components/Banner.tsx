@@ -1,5 +1,3 @@
-
-
 interface BannerProps {
   text: string;
   size? : string;
