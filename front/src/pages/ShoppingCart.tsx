@@ -3,7 +3,7 @@ import ShoppingItem from "@/components/ShoppingCart/ShoppingItem";
 import { Button } from "@/components/ui/button";
 import  Card  from "@/components/ShoppingCart/CardCart";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, CircleX, Save, ShoppingBag } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
 
 export default function(){
@@ -60,7 +60,7 @@ export default function(){
         <div className=" w-1/3 font-roboto h-full p-10 pl-20 pr-20 flex flex-col justify-start">
           <h1 className="font-semibold text-4xl">Resumen de la compra</h1>  
           <Card {...cartAmouts}></Card>
-          <span>Al hacer click en Finalizar compra, estás aceptando nuestros <b>Términos y condiciones</b>. </span>
+          <span>Al hacer click en Finalizar compra, estás aceptando nuestros <b>Términos y condiciones</b></span>
           <Button className="bg-black border-silk border-2 text-black w-full h-16 text-2xl text-white mt-5">
             Finalizar Compra 
           </Button>

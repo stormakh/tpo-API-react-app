@@ -6,7 +6,7 @@ interface HeaderProps{
     width?: string;
 }
 
-export default function Header({text, height, width} : HeaderProps){
+export default function SectionTitle({text, height, width} : HeaderProps){
     return (
         <div className={` text-4xl font-medium flex justify-center h-${height} w-${width}`} >
             <div className="content-center text-nowrap pr-12">

@@ -1,7 +1,7 @@
 import { CreditCard } from "lucide-react";
 import CardAdded from "./CardAdded";
 import DefaultButton from "../DefaultButton";
-import Header from "../Header";
+import SectionTitle from "../SectionTitle";
 
 
 export default function (){
@@ -16,7 +16,7 @@ export default function (){
     return (
         <div className="bg-white w-4/5 h-full flex flex-col pl-32 pr-32"> 
             <div className="h-5/6 h-full ">
-                <Header text={"Orders"} height={"1/6"} width={"full"}></Header>  
+                <SectionTitle text={"Orders"} height={"1/6"} width={"full"}></SectionTitle>  
                 <div className="flex pb-12 flex-wrap">
                     {cards.map(card => ( 
                         <CardAdded {...card}></CardAdded>

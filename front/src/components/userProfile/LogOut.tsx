@@ -1,5 +1,5 @@
 import { AlertTriangle, LogOut } from "lucide-react";
-import Header from "../Header";
+import SectionTitle from "../SectionTitle";
 import DefaultButton from "../DefaultButton";
 
 export default function (){
@@ -7,7 +7,7 @@ export default function (){
     return (
         <div className="bg-white w-4/5 h-full flex flex-col pl-32 pr-32"> 
             <div className="h-5/6 h-full ">
-                <Header text={"log Out"} height={"1/6"} width={"full"}></Header>  
+                <SectionTitle text={"log Out"} height={"1/6"} width={"full"}></SectionTitle>  
                 <div className="flex justify-center flex-col items-center">
                     <AlertTriangle className="w-36 h-36"></AlertTriangle>
                     <p className="m-36 text-4xl">VAS A CERRAR LA SESIÓN DE TU CUENTA</p>

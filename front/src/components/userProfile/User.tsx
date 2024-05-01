@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/input";
 import {Pencil } from "lucide-react";
-import Header from "../Header";
+import SectionTitle from "../SectionTitle";
 import DefaultButton from "../DefaultButton";
 
 export default function (){
@@ -8,7 +8,7 @@ export default function (){
     return (
         <div className="bg-white w-4/5 h-full flex flex-col pl-32 pr-32"> 
             <div className="h-5/6 h-full">
-                <Header text={"User Profile"} height={"1/6"} width={"full"}></Header>    
+                <SectionTitle text={"User Profile"} height={"1/6"} width={"full"}></SectionTitle>    
                 <div className="flex pb-12">
                     <div className="w-full flex flex-col text-left">
                         <h2 className="my-4 font-bold place-items-start text-4xl pt-9 pb-3">Nombre</h2>
