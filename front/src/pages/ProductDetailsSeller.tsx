@@ -1,6 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import Footer from "@/components/Footer";
-import NavBarSeller from "@/components/NavBarSeller";
 import { Save, CircleXIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -59,9 +57,11 @@ export default function ProductDetailsSeller() {
   }
 
   const handleClickOutside = useCallback((event: MouseEvent) => {
-    if (pickerRef.current && !pickerRef.current.contains(event.target as Node)) {
+    if (
+      pickerRef.current &&
+      !pickerRef.current.contains(event.target as Node)
+    ) {
       setShowPicker(false);
-      
     }
   }, []);
 
@@ -72,10 +72,8 @@ export default function ProductDetailsSeller() {
     };
   }, [handleClickOutside]);
 
- 
   return (
     <>
-      <NavBarSeller></NavBarSeller>
       <Banner text="Mis Productos"></Banner>
       <section className="flex flex-col mx-12 md:my-8 my-4 md:p-4">
         <h1 className=" pb-5 font-roboto  underline italic">
@@ -156,17 +154,21 @@ export default function ProductDetailsSeller() {
                     <PopoverContent>Color palette goes here</PopoverContent>
                   </Popover>
                   <div className="relative">
-                    {<div style={{background : color?.hex}}></div> && (<img
-                      src={ColorAdd}
-                      className="cursor-pointer"
-                      alt="Open color picker"
-                      onClick={toggleColorPicker}
-                      style={{ userSelect: "none" }}
-                    />)
-                      }
-                    
+                    {<div style={{ background: color?.hex }}></div> && (
+                      <img
+                        src={ColorAdd}
+                        className="cursor-pointer"
+                        alt="Open color picker"
+                        onClick={toggleColorPicker}
+                        style={{ userSelect: "none" }}
+                      />
+                    )}
+
                     {showPicker && (
-                      <div ref={pickerRef} style={{ position: "absolute", zIndex: 2 }}>
+                      <div
+                        ref={pickerRef}
+                        style={{ position: "absolute", zIndex: 2 }}
+                      >
                         <SketchPicker
                           color={color?.hex}
                           onChangeComplete={handleColorChange}
@@ -190,8 +192,6 @@ export default function ProductDetailsSeller() {
           </Card>
         </section>
       </section>
-
-      <Footer></Footer>
     </>
   );
 }

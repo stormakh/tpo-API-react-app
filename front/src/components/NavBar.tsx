@@ -24,7 +24,7 @@ export default function NavBar() {
           <Search color="black" />
         </Button>
         <Button size="icon" className="bg-transparent hover:bg-slate-50">
-          <Link to="/LogIn">
+          <Link to="/login">
             <UserRound color="black" />
           </Link>
         </Button>

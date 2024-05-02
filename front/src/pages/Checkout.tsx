@@ -19,7 +19,7 @@ export default function(){
     
     return(
         <div className="flex flex-col">
-            <NavBar></NavBar>
+          
             <Banner text="Checkout"></Banner>
             <button className="flex pt-12">
             <ArrowLeft></ArrowLeft>

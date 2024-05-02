@@ -20,7 +20,7 @@ export default function(){
 
   return (
     <>
-      <NavBar></NavBar>
+      
       <div className="flex justify-center mt-24 h-screen">
         <div className="p-10 pl-30 w-2/3 text-2xl ">
           
