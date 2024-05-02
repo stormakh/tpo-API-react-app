@@ -1,5 +1,4 @@
-import Footer from "@/components/Footer";
-import NavBarSeller from "@/components/NavBarSeller";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Save, CircleXIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,6 +18,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import ColorAdd from "../assets/ColorAdd.svg";
 
 const imageSources = [
   "src/assets/Sample_1.svg",
@@ -36,20 +36,52 @@ const sizeSources = [
   "src/assets/Size_6.svg",
   "src/assets/Size_7.svg",
 ];
-
 import { Camera, Pencil } from "lucide-react";
-export default function () {
+import { ColorResult, SketchPicker } from "react-color";
+
+export default function ProductDetailsSeller() {
+  const [color, setColor] = useState<ColorResult>();
+  const [showPicker, setShowPicker] = useState<boolean>(false);
+  const pickerRef = useRef<HTMLDivElement>(null);
+
+  const handleColorChange = (colorResult: ColorResult): void => {
+    setColor(colorResult); // Update the color in state
+  };
+
+  const toggleColorPicker = (): void => {
+    setShowPicker(!showPicker); // Toggle visibility of the color picker
+  };
+
+  interface ColorPickerRef {
+    current: HTMLDivElement | null;
+  }
+
+  const handleClickOutside = useCallback((event: MouseEvent) => {
+    if (
+      pickerRef.current &&
+      !pickerRef.current.contains(event.target as Node)
+    ) {
+      setShowPicker(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [handleClickOutside]);
+
   return (
     <>
-      <NavBarSeller></NavBarSeller>
       <Banner text="Mis Productos"></Banner>
-      <section className="flex flex-col m-8">
+      <section className="flex flex-col mx-12 md:my-8 my-4 md:p-4">
         <h1 className=" pb-5 font-roboto  underline italic">
           Mis Productos / Editar
         </h1>
-        <section className="w-svw h-auto flex sm:flex-row flex-col gap-8 items-start justify-center">
-          <div className="flex flex-col">
-            <img src="src/assets/Sample_Big.svg" className=""></img>
+        <section className="w-full max-w-full h-auto flex sm:flex-row flex-col gap-8 items-start justify-between">
+          <div className="flex flex-col basis-5/12">
+            <img src="src/assets/Sample_Big.svg" className=" w-full"></img>
             <Carousel
               opts={{
                 align: "start",
@@ -57,7 +89,7 @@ export default function () {
               }}
               className="w-fit"
             >
-              <CarouselContent className="-mt-1">
+              <CarouselContent className="">
                 {imageSources.map((source, index) => (
                   <CarouselItem key={index} className="pt-1 md:basis-1/4 mt-6">
                     <div className="p-1">
@@ -72,82 +104,94 @@ export default function () {
             </a>
           </div>
 
-          <Card className="max-w-96">
-            <CardContent>
+          <Card className="w-full h-[450px] ">
+            <CardContent className="flex flex-col gap-y-2">
               <CardHeader>
                 <h2 className="text-5xl font-bold">Jean Iron washed</h2>
                 <h3 className=" font-roboto font-semibold my-5 text-3xl">
                   Precio
                 </h3>
-                <a className="pt-4 flex font-semibold">
+                <a className=" flex font-semibold">
                   $150.000 <Pencil className="mx-5 size-8" />
                 </a>
               </CardHeader>
-              <h3 className="font-roboto font-semibold my-5 text-3xl pl-5">
-                Descripción
-              </h3>
-              <p className="pl-5 text-2xl">
-                Sumérgete en un estilo casual con nuestro jean azul desgastado.
-                Su corte holgado y detalles de costuras visibles ofrecen
-                comodidad y estilo. Combínalo con una camiseta simple o una
-                camisa para cualquier ocasión.
-              </p>
-              <h2 className="font-roboto font-semibold my-5 text-3xl pl-5">
+              <div>
+                <h3 className="font-roboto font-semibold  text-3xl pl-5">
+                  Descripción
+                </h3>
+                <p className="pl-5 text-2xl">
+                  Sumérgete en un estilo casual con nuestro jean azul
+                  desgastado. Su corte holgado y detalles de costuras visibles
+                  ofrecen comodidad y estilo. Combínalo con una camiseta simple
+                  o una camisa para cualquier ocasión.
+                </p>
+              </div>
+
+              <h2 className="font-roboto font-semibold text-3xl pl-5">
                 Talles
               </h2>
-              <div className="my-5">
-                <Carousel
-                  opts={{
-                    align: "start",
-                  }}
-                  className="w-full"
-                >
-                  <CarouselContent className="-mt-1 h-fill w-52 pl-4">
-                    {sizeSources.map((source, index) => (
-                      <CarouselItem key={index} className="pt-1 md:basis-1/2">
-                        <div className="p-1">
-                          <img src={source} className="mb-5"></img>
-                        </div>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                </Carousel>
+              <div className="flex flex-row">
+                {sizeSources.map((source, index) => (
+                  <img
+                    key={index}
+                    src={source}
+                    className="w-20 h-auto aspect-square pl-4"
+                  ></img>
+                ))}
               </div>
-              <h2 className="font-roboto font-semibold my-5 text-3xl pl-4">
-                Color
-              </h2>
-              <Popover>
-                <PopoverTrigger>
-                  <img
-                    src="src/assets/ColorPicker.svg"
-                    className="size-3/5 pl-4"
-                  ></img>
-                </PopoverTrigger>
-                <PopoverContent>Color palette goes here</PopoverContent>
-              </Popover>
-              <Popover>
-                <PopoverTrigger>
-                  <img
-                    src="src/assets/ColorAdd.svg"
-                    className="size-3/5 pl-4"
-                  ></img>
-                </PopoverTrigger>
-                <PopoverContent>Color palette goes here</PopoverContent>
-              </Popover>
+              <div>
+                <h2 className="font-roboto font-semibold  text-3xl pl-4">
+                  Color
+                </h2>
+                <div className="flex flex-row w-full h-8">
+                  <Popover>
+                    <PopoverTrigger>
+                      <img
+                        src="src/assets/ColorPicker.svg"
+                        className=" pl-4"
+                      ></img>
+                    </PopoverTrigger>
+                    <PopoverContent>Color palette goes here</PopoverContent>
+                  </Popover>
+                  <div className="relative">
+                    {<div style={{ background: color?.hex }}></div> && (
+                      <img
+                        src={ColorAdd}
+                        className="cursor-pointer"
+                        alt="Open color picker"
+                        onClick={toggleColorPicker}
+                        style={{ userSelect: "none" }}
+                      />
+                    )}
+
+                    {showPicker && (
+                      <div
+                        ref={pickerRef}
+                        style={{ position: "absolute", zIndex: 2 }}
+                      >
+                        <SketchPicker
+                          color={color?.hex}
+                          onChangeComplete={handleColorChange}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
             </CardContent>
             <CardFooter className="justify-center">
-              <Button className="my-5 w-96 h-20 text-xl mx-5">
-                <Save className="mr-2" /> Save Changes
-              </Button>
-              <Button className="my-5 w-96 h-20 text-xl mx-5">
-                <CircleXIcon className="mr-2" /> Cancel
-              </Button>
+              <div className="flex flex-row gap-4">
+                <Button className=" w-auto h-20 text-xl ">
+                  <Save className="mr-2" /> Save Changes
+                </Button>
+                <Button className=" w-auto px-4 h-20 text-xl ">
+                  <CircleXIcon className="mr-2" /> Cancel
+                </Button>
+              </div>
             </CardFooter>
           </Card>
         </section>
       </section>
-
-      <Footer></Footer>
     </>
   );
 }

@@ -1,5 +1,4 @@
-import Footer from "@/components/Footer";
-import NavBar from "@/components/NavBar";
+
 import Banner from "@/components/Banner";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Separator } from "@/components/ui/separator";
@@ -42,7 +41,7 @@ const sizeSources = [
 export default function () {
   return (
     <>
-      <NavBar />
+      
       <Banner text="Jeans" />
       <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
         Ropa / Pantalones / Jeans
@@ -146,7 +145,7 @@ export default function () {
           </div>
         </div>
       </div>
-      <Footer />
+      
     </>
   );
 }

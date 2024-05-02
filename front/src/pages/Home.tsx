@@ -1,5 +1,5 @@
-import Footer from "@/components/Footer";
-import NavBar from "@/components/NavBar";
+
+
 import {
   Carousel,
   CarouselContent,
@@ -11,7 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 export default function () {
   return (
     <>
-      <NavBar></NavBar>
+      
       <Carousel className="w-screen">
         <CarouselContent>
           <CarouselItem>
@@ -40,7 +40,7 @@ export default function () {
           </div>
         </CardContent>
       </Card>
-      <Footer></Footer>
+     
     </>
   );
 }

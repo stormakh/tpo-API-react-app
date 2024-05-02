@@ -35,9 +35,7 @@ const categories = [
 export default function Catalog() {
   return (
     <>
-      <NavBar></NavBar>
       <Banner text="Upper"></Banner>
-
       <div className="w-2/5 flex flex-row items-baseline m-4 justify-between gap-4 text-xl h-auto">
         <div className="stroke-0">
           <CatalogFilter categories={categories} />
