@@ -1,5 +1,3 @@
-
-
 import {
   Carousel,
   CarouselContent,
@@ -7,18 +5,25 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
-
+import nopay from "@/assets/nopay.svg";
+import nopay2 from "@/assets/nopay2.svg";
+import loginBack from "@/assets/LogIn_Back.svg";
+import carousel2 from "@/assets/Carousel_2.svg";
+import { Link } from "react-router-dom";
 export default function () {
+  
+
   return (
     <>
-      
       <Carousel className="w-screen">
         <CarouselContent>
           <CarouselItem>
-            <img src="src/assets/LogIn_Back.svg" className="object-fill"></img>
+            <Link to={'catalog'}>
+              <img src={loginBack} className="object-fill"></img>
+            </Link>
           </CarouselItem>
           <CarouselItem>
-            <img src="src/assets/Carousel_2.svg" className="object-fill"></img>
+            <img src={carousel2} className="object-fill"></img>
           </CarouselItem>
         </CarouselContent>
         <CarouselPrevious />
@@ -26,7 +31,8 @@ export default function () {
       <Card className="w-screen">
         <CardContent className="flex justify-center pt-36">
           <div className="flex flex-col justify-center items-center">
-            <img src="src/assets/nopay.svg" className="w-54 pb-12"></img>
+            <img src={nopay} className="w-54 pb-12"></img>
+
             <p className="text-left px-56 text-xl">
               Somos una marca nueva que promueve la excelencia en el diseño. Nos
               identificamos con las personas que nos eligen a través de
@@ -36,11 +42,10 @@ export default function () {
             </p>
           </div>
           <div className="flex-none pr-16">
-            <img src="src/assets/nopay2.svg" className="w-96"></img>
+            <img src={nopay2} className="w-96"></img>
           </div>
         </CardContent>
       </Card>
-     
     </>
   );
 }

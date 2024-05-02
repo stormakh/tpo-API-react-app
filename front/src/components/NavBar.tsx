@@ -8,7 +8,24 @@ import {
 import { Link } from "react-router-dom";
 import NavSheet from "./NavSheet";
 
-export default function NavBar() {
+import { UserSession } from "@/models/users";
+import { useDispatch } from "react-redux";
+import { clearUserSession } from "@/store/store";
+
+interface NavBarProps  {
+  user : UserSession | null;
+}
+
+export default function NavBar({user} : NavBarProps) {
+
+  
+  const dispatch = useDispatch();
+
+  function handleLogOutUser(){
+    dispatch(clearUserSession());
+  }
+
+
   return (
     <nav className="static top-0 w-screen h-auto  grid grid-cols-3 items-center px-4">
       <NavSheet />
@@ -26,14 +43,16 @@ export default function NavBar() {
         <Button size="icon" className="bg-transparent hover:bg-slate-50">
           <Link to="/login">
             <UserRound color="black" />
+            
           </Link>
         </Button>
+        {user !== null ? <Button onClick={handleLogOutUser}>{user?.username}</Button> : null}
         <Button size="icon" className="bg-transparent hover:bg-slate-50">
           <Heart color="black" />
         </Button>
         <Button size="icon" className="bg-transparent hover:bg-slate-50">
           <ShoppingBag className="mr-1" color="black" />
-          {/*implement UseState here to track products in cart */}
+          
         </Button>
       </div>
     </nav>

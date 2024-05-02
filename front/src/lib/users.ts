@@ -3,13 +3,13 @@ import { UserSession, UserType } from "@/models/users";
 import { NavigateFunction } from "react-router-dom";
 
 
-export async function checkCorrectPath(userType : UserType | undefined , expected: UserType, navigate : NavigateFunction){
+export async function checkCorrectPath(userType : UserType | null , expected: UserType, navigate : NavigateFunction){
   if(!userType){
     // Redirect to the correct route
-    navigate('/login');
+    navigate('/');
   }else if(userType !== expected){
     // Redirect to the correct route
-    navigate('/')
+    navigate(`/${userType}`)
   }
 }
 

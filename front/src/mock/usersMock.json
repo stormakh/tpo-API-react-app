@@ -3,21 +3,21 @@
         "id": 1,
         "username": "santi",
         "password": "re capo",
-        "type": "customer",
+        "type": "seller",
         "email": "user1@example.com"
     },
     {
         "id": 2,
-        "username": "user2",
-        "password": "password2",
-        "type": "admin",
+        "username": "roco",
+        "password": "roco1234",
+        "type": "seller",
         "email": "user2@example.com"
     },
     {
         "id": 3,
-        "username": "user3",
-        "password": "password3",
-        "type": "seller",
+        "username": "tutu",
+        "password": "tutu123!",
+        "type": "customer",
         "email": "user3@example.com"
     },
     {

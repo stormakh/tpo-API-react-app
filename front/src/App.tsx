@@ -19,31 +19,30 @@ import UserProfile from "./pages/UserProfile";
 import Checkout from "./pages/Checkout";
 
 export default function App() {
-  const userType = useSelector((state: AppState) => state.userSession?.type);
+  const user = useSelector((state: AppState) => state.userSession);
 
   const router = useMemo(
     () =>
       createBrowserRouter([
         {
           path: "/",
-          element: userType ? (
-            <Navigate to={`/${userType}`} replace />
-          ) : (
-            <CustomerLayout />
-          ),
-          children: [
-            { path: "", element: <Home /> },
-            { path: "login", element: <LogIn /> },
-          ],
-        },
-
-        {
-          path: "/customer",
-          element: <CustomerLayout />,
+          element: <CustomerLayout user={user} />,
           children: [
             { path: "", element: <Home /> },
             { path: "catalog", element: <Catalog /> },
-            { path: "product-details-client", element: <ProductDetailsClient /> },
+          ],
+        },
+        { path: "login", element: <LogIn /> },
+        {
+          path: "/customer",
+          element: <CustomerLayout user={user} />,
+          children: [
+            { path: "", element: <Home /> },
+            { path: "catalog", element: <Catalog /> },
+            {
+              path: "product-details-client",
+              element: <ProductDetailsClient />,
+            },
             { path: "shopping-cart", element: <ShoppingCart /> },
             { path: "user-profile", element: <UserProfile /> },
             { path: "checkout", element: <Checkout /> },
@@ -51,15 +50,16 @@ export default function App() {
         },
         {
           path: "/seller",
-          element: <SellerLayout />,
+          element: <SellerLayout user={user} />,
           children: [
             { path: "", element: <Home /> },
+            {path : "catalog" , element : <Catalog/>}
             // Define additional routes for sellers here
           ],
         },
       ]),
-    [userType]
-  ); 
+    [user]
+  );
 
   return <RouterProvider router={router} />;
 }
