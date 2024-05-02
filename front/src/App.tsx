@@ -1,11 +1,10 @@
 // src/App.tsx
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import {
   createBrowserRouter,
   RouterProvider,
-  Navigate,
-  useNavigate,
+  Navigate
 } from "react-router-dom";
 import { AppState } from "@/store/store";
 import CustomerLayout from "@/pages/layouts/CustomerLayout";
