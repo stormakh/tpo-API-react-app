@@ -1,8 +1,7 @@
 import NavBar from "@/components/NavBar";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+
 import { Separator } from "@/components/ui/separator";
-import { CircleX, Save } from "lucide-react";
+
 import {PlusIcon, MinusIcon} from "lucide-react";
 import { useState } from "react";
 
