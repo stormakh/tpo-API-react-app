@@ -11,14 +11,12 @@ import loginBack from "@/assets/LogIn_Back.svg";
 import carousel2 from "@/assets/Carousel_2.svg";
 import { Link } from "react-router-dom";
 export default function () {
-  
-
   return (
     <>
       <Carousel className="w-screen">
         <CarouselContent>
           <CarouselItem>
-            <Link to={'catalog'}>
+            <Link to={"catalog"}>
               <img src={loginBack} className="object-fill"></img>
             </Link>
           </CarouselItem>
@@ -28,12 +26,11 @@ export default function () {
         </CarouselContent>
         <CarouselPrevious />
       </Carousel>
-      <Card className="w-screen">
-        <CardContent className="flex justify-center pt-36">
-          <div className="flex flex-col justify-center items-center">
-            <img src={nopay} className="w-54 pb-12"></img>
-
-            <p className="text-left px-56 text-xl">
+      <Card className="w-screen py-12">
+        <CardContent className="flex justify-center gap-8 ">
+          <div className="flex flex-col  justify-evenly items-center">
+            <img src={nopay} className="w-54" alt="Logo"></img>
+            <p className="text-left text-3xl px-48">
               Somos una marca nueva que promueve la excelencia en el diseño. Nos
               identificamos con las personas que nos eligen a través de
               experiencias de un sentido de pertenencia, de un estilo de vida,
@@ -41,9 +38,7 @@ export default function () {
               de nuestras prendas.
             </p>
           </div>
-          <div className="flex-none pr-16">
-            <img src={nopay2} className="w-96"></img>
-          </div>
+          <img src={nopay2} className="w-96" alt="Image"></img>
         </CardContent>
       </Card>
     </>

@@ -20,7 +20,7 @@ export default function NavSheet() {
         <SheetHeader className="">
           <SheetTitle className="flex items-center justify-center ">
             <img
-              src="./src/assets/nopay.svg"
+              src="src/assets/nopay.svg"
               alt="Nopay Logo"
               className="size-40"
             />

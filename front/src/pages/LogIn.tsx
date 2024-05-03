@@ -67,16 +67,17 @@ export default function LogIn() {
             placeholder="Username"
           />
           <div className="relative w-80 flex flex-col items-center justify-center mx-auto">
-          <img
+            <img
               src={`/src/assets/${showPassword ? "eye-off.svg" : "eye.svg"}`}
               onClick={togglePasswordVisibility}
               className="absolute right-0 top-1/2 transform -translate-y-1/2 mr-2 h-6 w-6 cursor-pointer"
               alt={showPassword ? "Hide Password" : "Show Password"}
-          />
-          <Input 
-              ref={passwordRef} 
+            />
+            <Input
+              ref={passwordRef}
               type={showPassword ? "text" : "password"}
-              placeholder="Password" />
+              placeholder="Password"
+            />
           </div>
 
           <Button

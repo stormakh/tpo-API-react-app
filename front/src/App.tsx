@@ -17,6 +17,7 @@ import ProductDetailsClient from "./pages/ProductDetailsClient";
 import ShoppingCart from "./pages/ShoppingCart";
 import UserProfile from "./pages/UserProfile";
 import Checkout from "./pages/Checkout";
+import ProductDetailsSeller from "./pages/ProductDetailsSeller";
 
 export default function App() {
   const user = useSelector((state: AppState) => state.userSession);
@@ -53,8 +54,11 @@ export default function App() {
           element: <SellerLayout user={user} />,
           children: [
             { path: "", element: <Home /> },
-            {path : "catalog" , element : <Catalog/>}
-            // Define additional routes for sellers here
+            { path: "catalog", element: <Catalog /> },
+            {
+              path: "product-details-sellers",
+              element: <ProductDetailsSeller />,
+            },
           ],
         },
       ]),

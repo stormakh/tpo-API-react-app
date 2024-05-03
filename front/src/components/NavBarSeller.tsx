@@ -36,7 +36,9 @@ export default function NavBar({ user }: NavBarProps) {
             <UserRound color="black" />
           </Link>
         </Button>
-        {user !== null ? <Button onClick={handleLogOutUser}>{user?.username}</Button> : null}
+        {user !== null ? (
+          <Button onClick={handleLogOutUser}>{user?.username}</Button>
+        ) : null}
 
         <Button size="icon" className="bg-transparent hover:bg-slate-50">
           <Heart color="black" />
