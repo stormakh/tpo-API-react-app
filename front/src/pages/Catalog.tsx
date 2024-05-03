@@ -8,7 +8,7 @@ import CatalogMenu from "@/components/catalog/CatalogMenu";
 import Eye from "../assets/Eye.svg";
 
 import CatalogFilter from "@/components/catalog/CatalogFilter";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchAllProducts, filterByCategorie } from "@/lib/products";
 import { Product } from "@/models/products";
 import CatalogSkeleton from "@/components/catalog/CatalogSkeleton";
@@ -19,13 +19,15 @@ const categories = [
 ];
 
 export default  function  Catalog() {
-  const [currentProds, setCurrentProds] = useState<Product[]>([]);
+  const currentProdsRef = useRef<Product[]>([]);
+  const [filteredProds, setFilteredProds] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   
 
   useEffect(() => {
     fetchAllProducts().then((prods) => {
-      setCurrentProds(prods);
+      currentProdsRef.current = prods;
+      setFilteredProds(prods);
       setTimeout(() => {
         setIsLoading(false);
       }, 2000);
@@ -56,13 +58,13 @@ if(isLoading){
       <Banner text="Upper"></Banner>
       <div className="w-2/5 flex flex-row items-baseline m-4 justify-between gap-4 text-xl h-auto">
         <div className="stroke-0">
-          <CatalogFilter categories={categories} action={setCurrentProds} currentProds={currentProds} />
+          <CatalogFilter categories={categories} action={setFilteredProds} currentProds={currentProdsRef.current} />
         </div>
         <CatalogMenu />
       </div>
 
       <div className="grid  gap-4 mt-8 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-        {currentProds.map((prod) => (
+        {filteredProds.map((prod) => (
           <div>
             <CarouselWrapper
               ratio={9 / 16}
