@@ -1,3 +1,0 @@
-{
-  /* Selling Screen goes here */
-}

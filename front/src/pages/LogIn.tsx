@@ -77,24 +77,7 @@ export default function LogIn() {
             <b className="font-semibold text-black">Recupérala</b>
           </h3>
           {errorMessage ? errorMessage : null}
-        </div>
-        <div>
-          <Separator className="w-80 justify-center mx-auto bg-chiro-nopay" />
-          <div className=" flex justify-center space-x-4 mt-5">
-            <Button variant="outline" size="icon">
-              <img src="/src/assets/devicon_google.svg" alt="Google Icon"></img>
-            </Button>
-            <Button variant="outline" size="icon">
-              <img src="/src/assets/logos_apple.svg" alt="Apple Icon"></img>
-            </Button>
-            <Button variant="outline" className="" size="icon">
-              <img
-                src="/src/assets/logos_facebook.svg"
-                alt="Facebook Icon"
-              ></img>
-            </Button>
-          </div>
-        </div>
+        </div>{" "}
       </div>
     </div>
   );

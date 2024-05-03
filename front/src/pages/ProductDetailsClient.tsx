@@ -1,4 +1,3 @@
-
 import Banner from "@/components/Banner";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Separator } from "@/components/ui/separator";
@@ -20,6 +19,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 const imageSources = [
   "src/assets/Sample_1.svg",
@@ -41,7 +41,113 @@ const sizeSources = [
 export default function () {
   return (
     <>
-      
+      <Banner text="Jeans" />
+      <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
+        Ropa / Pantalones / Jeans
+      </h1>
+      <section className="font-roboto w-auto flex flex-row items-center gap-8 h-fit">
+        <section className="flex justify-around">
+          <Carousel
+            opts={{
+              align: "start",
+            }}
+            orientation="vertical"
+            className="flex max-w-xs mx-24"
+          >
+            <CarouselContent className="-mt-1 h-fill ">
+              {imageSources.map((source, index) => (
+                <CarouselItem key={index} className="pt-1 md:basis-1/2">
+                  <div className="p-1">
+                    <img src={source} className="mb-5"></img>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+          <img src="src/assets/Sample_Big.svg" className="size-4/6"></img>
+        </section>
+        <Card>
+          <CardContent className="self-start pt-8">
+            <CardHeader className="font-bold font-roboto text-5xl">
+              Jeans Iron washed
+            </CardHeader>
+            <div className="flex justify-between">
+              <h3 className="font-roboto text-4xl">$150.000</h3>
+              <h3 className="font-roboto"> 3 Cuotas sin interés de $50.000</h3>
+            </div>
+            <Separator className="mx-auto bg-silk my-7" />
+            <p className="font-roboto text-2xl">
+              Sumérgete en un estilo casual con nuestro jean azul desgastado. Su
+              corte holgado y detalles de costuras visibles ofrecen comodidad y
+              estilo. Combínalo con una camiseta simple o una camisa para
+              cualquier ocasión.
+            </p>
+            <h2 className="font-roboto font-semibold my-5 text-3xl">Size</h2>
+            <Carousel
+              opts={{
+                align: "start",
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-mt-1 h-fill w-52 ">
+                {sizeSources.map((source, index) => (
+                  <CarouselItem key={index} className="pt-1 md:basis-1/2">
+                    <div className="p-1">
+                      <img src={source} className="mb-5"></img>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
+            <h2 className="font-roboto font-semibold my-5 text-3xl">Colour</h2>
+            <Popover>
+              <PopoverTrigger>
+                <img
+                  src="src/assets/ColorPicker.svg"
+                  className="size-3/5"
+                ></img>
+              </PopoverTrigger>
+              <PopoverContent>Color palette goes here</PopoverContent>
+            </Popover>
+            <section className="flex flex-col font-roboto">
+              <a className="underline text-2xl mt-20">Ver Guía de talles</a>
+              <Button className="my-5 w-96 h-20 text-xl">
+                <ShoppingBag className="mr-2" /> Add to Cart
+              </Button>
+              <div className="flex items-center text-xl">
+                <MapPin className="size-auto" />
+                <a className="my-5 ml-2 font-roboto font-semibold">
+                  Métodos de Envío
+                </a>
+              </div>
+              <div className="flex items-center text-xl">
+                <CreditCard className="size-auto" />
+                <a className="my-5 ml-2 font-roboto font-semibold">
+                  Hasta 6 cuotas sin interés
+                </a>
+              </div>
+              <div className="flex items-center text-xl">
+                <RefreshCcw className="size-auto" />
+                <a className="my-5 ml-2 font-roboto font-semibold">
+                  Cambios y devoluciones
+                </a>
+              </div>
+              <div className="flex items-center text-xl">
+                <Store className="size-auto" />
+                <a className="my-5 ml-2 font-roboto font-semibold">
+                  Pick up en tienda
+                </a>
+              </div>
+            </section>
+          </CardContent>
+        </Card>
+      </section>
+    </>
+  );
+}
+
+/*
+
       <Banner text="Jeans" />
       <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
         Ropa / Pantalones / Jeans
@@ -146,15 +252,4 @@ export default function () {
         </div>
       </div>
       
-    </>
-  );
-}
-
-/*
-<div className="mx-5 ml-12 h-fit w-fit">
-            <img src="src/assets/Sample_1.svg" className="mb-5"></img>
-            <img src="src/assets/Sample_2.svg" className="mb-5"></img>
-            <img src="src/assets/Sample_4.svg" className="mb-5"></img>
-            <img src="src/assets/Sample_3.svg" className=""></img>
-          </div>
 */
