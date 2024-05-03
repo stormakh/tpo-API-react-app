@@ -6,6 +6,7 @@ export interface UserSession {
     type: UserType;
     password: string;
     email: string;
+    dni: string;
     
 }
 

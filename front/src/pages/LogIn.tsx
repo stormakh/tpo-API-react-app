@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 import { fetchUserByNameAndPassword } from "@/lib/users";
 import { setUserTypeSession } from "@/store/store";
 import { useDispatch } from "react-redux";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function LogIn() {
   const userNameRef = useRef<HTMLInputElement>(null);
@@ -55,11 +55,12 @@ export default function LogIn() {
           className="size-32 "
         ></img>
         <h1 className="text-3xl font-semibold text-silk">Bienvenido</h1>
-        <h2 className=" text-silk">
-          ¿No tenes una cuenta?{" "}
-          <b className="font-semibold text-black">Crea una aquí</b>
-        </h2>
+        <h2 className="text-silk" >
+              ¿No tenes una cuenta?{' '}
+              <Link to="/register" className="font-semibold text-black">Crea una aquí</Link>
+          </h2>
         <div className="relative w-80 flex flex-col items-center justify-center mx-auto">
+
           <Input
             ref={userNameRef}
             type="username"

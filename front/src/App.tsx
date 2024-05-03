@@ -17,6 +17,7 @@ import ProductDetailsClient from "./pages/ProductDetailsClient";
 import ShoppingCart from "./pages/ShoppingCart";
 import UserProfile from "./pages/UserProfile";
 import Checkout from "./pages/Checkout";
+import Register from "./pages/Register";
 
 export default function App() {
   const user = useSelector((state: AppState) => state.userSession);
@@ -33,6 +34,7 @@ export default function App() {
           ],
         },
         { path: "login", element: <LogIn /> },
+        { path: "register", element: <Register /> },
         {
           path: "/customer",
           element: <CustomerLayout user={user} />,
