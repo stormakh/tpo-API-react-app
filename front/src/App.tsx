@@ -1,12 +1,7 @@
 // src/App.tsx
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AppState } from "@/store/store";
 import CustomerLayout from "@/pages/layouts/CustomerLayout";
 import SellerLayout from "@/pages/layouts/SellerLayout";
@@ -17,6 +12,7 @@ import ProductDetailsClient from "./pages/ProductDetailsClient";
 import ShoppingCart from "./pages/ShoppingCart";
 import UserProfile from "./pages/UserProfile";
 import Checkout from "./pages/Checkout";
+import Register from "./pages/Register";
 import ProductDetailsSeller from "./pages/ProductDetailsSeller";
 
 export default function App() {
@@ -34,6 +30,7 @@ export default function App() {
           ],
         },
         { path: "login", element: <LogIn /> },
+        { path: "register", element: <Register /> },
         {
           path: "/customer",
           element: <CustomerLayout user={user} />,
