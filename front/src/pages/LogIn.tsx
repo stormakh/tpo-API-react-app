@@ -22,12 +22,6 @@ export default function LogIn() {
     setShowPassword(!showPassword);
   };
 
-  const [showPassword, setShowPassword] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
   const handleLogin = async () => {
     if (userNameRef.current && passwordRef.current) {
       fetchUserByNameAndPassword(
