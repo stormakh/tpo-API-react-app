@@ -51,66 +51,77 @@ export default function Register() {
   };
 
 
-    return (
-        <div
-          style={{ backgroundImage: `url(${image})`, backgroundSize: "cover" }}
-          className="w-screen h-screen"
-        >
-          <div className="flex flex-col gap-4 items-center justify-center bg-white/70 h-screen">
-            <img
-              src="./src/assets/nopay.svg"
-              alt="Nopay logo"
-              className="size-32 "
-            ></img>
-            <h1 className="text-3xl font-semibold text-silk">Crea tu cuenta</h1>
-            <p><Link to="/login" className="font-semibold text-black">Volver al Log In</Link></p>   
-            <div 
-        
-    className="relative w-80 flex flex-col items-center justify-center mx-auto">
-        <Input
-            type="username"
-            value={newUser.username}
-            onChange={(e) => setNewUser({ ...newUser, username: e.target.value })}
-            placeholder="Username"
-            className="my-6"
-        />
-        <Input
-            type="dni"
-            value={newUser.dni}
-            onChange={(e) => setNewUser({ ...newUser, dni: e.target.value })}
-            placeholder= "DNI"
-            className="my-6"
-        />
-        <div className="relative w-80 flex flex-col items-center justify-center mx-auto">
-            <img
-            src={`/src/assets/${showPassword ? "eye-off.svg" : "eye.svg"}`}
-            onClick={togglePasswordVisibility}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 mr-2 h-6 w-6 cursor-pointer"
-            alt={showPassword ? "Hide Password" : "Show Password"}
+  return (
+    <div
+      className="flex items-center justify-center h-screen"
+      style={{ backgroundImage: `url(${image})`, backgroundSize: "cover" }}
+    >
+      <div className="relative bg-white bg-opacity-90 w-96 p-8 rounded-lg border border-cbcbcb">
+        <div className="flex flex-col gap-4 items-center justify-center">
+          <img
+            src="./src/assets/nopay.svg"
+            alt="Nopay logo"
+            className="size-32"
+          />
+          <h1 className="text-3xl font-semibold text-silk">Crea tu cuenta</h1>
+          <h2 className="text-center text-silk text-sm font-light">
+              <Link to="/login" className="font-light text-black">
+                  Volver al Log In
+               </Link>
+          </h2>
+          <div className="relative w-full flex flex-col items-center justify-center">
+            <Input
+              type="username"
+              value={newUser.username}
+              onChange={(e) =>
+                setNewUser({ ...newUser, username: e.target.value })
+              }
+              placeholder="Username"
+              className="my-6 w-full"
             />
             <Input
-            type={showPassword ? "text" : "password"}
-            value={newUser.password}
-            onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
-            placeholder="Password"
-            className="my-6"
+              type="dni"
+              value={newUser.dni}
+              onChange={(e) => setNewUser({ ...newUser, dni: e.target.value })}
+              placeholder="DNI"
+              className="my-6 w-full"
             />
-        </div>
-            <Input
-                className="my-6 relative w-80 flex flex-col items-center justify-center mx-auto"
-                type="email"
-                value={newUser.email}
-                onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-                placeholder="Email"
-        />
-        <Button
-            onClick={handleRegistration}
-            className="my-6 w-80 mt-6 font-semibold text-lg bg-chiro-nopay"
-        >
-            Registrarse
-        </Button>
+            <div className="relative w-full flex flex-col items-center justify-center">
+              <img
+                src={`/src/assets/${showPassword ? "eye-off.svg" : "eye.svg"}`}
+                onClick={togglePasswordVisibility}
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 mr-2 h-6 w-6 cursor-pointer"
+                alt={showPassword ? "Hide Password" : "Show Password"}
+              />
+              <Input
+                type={showPassword ? "text" : "password"}
+                value={newUser.password}
+                onChange={(e) =>
+                  setNewUser({ ...newUser, password: e.target.value })
+                }
+                placeholder="Password"
+                className="my-6 w-full"
+              />
             </div>
+            <Input
+              className="my-6 w-full"
+              type="email"
+              value={newUser.email}
+              onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+              placeholder="Email"
+            />
+            <Button
+              onClick={handleRegistration}
+              className="my-6 w-full font-semibold text-lg bg-chiro-nopay"
+            >
+              Registrarse
+            </Button>
+          </div>
         </div>
+      </div>
     </div>
-    );
+  );
+  
+  
+  
 }
