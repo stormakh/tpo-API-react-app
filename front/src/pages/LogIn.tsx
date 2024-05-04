@@ -1,6 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+
 import image from "/src/assets/LogIn_Back.svg";
 import { useRef, useState } from "react";
 import { fetchUserByNameAndPassword } from "@/lib/users";
@@ -14,6 +15,12 @@ export default function LogIn() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const [showPassword, setShowPassword] = useState(false);
 

@@ -1,68 +1,67 @@
 import Banner from "@/components/Banner";
-
-import NavBar from "@/components/NavBar";
-
 import CarouselWrapper from "@/components/carousel/CarouselWrapper";
 import ImageSlide from "@/components/carousel/ImageSlide";
 import CatalogMenu from "@/components/catalog/CatalogMenu";
 import Eye from "../assets/Eye.svg";
 
 import CatalogFilter from "@/components/catalog/CatalogFilter";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchAllProducts, filterByCategorie } from "@/lib/products";
 import { Product } from "@/models/products";
 import CatalogSkeleton from "@/components/catalog/CatalogSkeleton";
 import { Skeleton } from "@/components/ui/skeleton";
 
-const categories = [
-  "Men", "Casual", "Women", "Formal"
-];
+const categories = ["Men", "Casual", "Women", "Formal"];
 
-export default  function  Catalog() {
-  const [currentProds, setCurrentProds] = useState<Product[]>([]);
+export default function Catalog() {
+  const currentProdsRef = useRef<Product[]>([]);
+  const [filteredProds, setFilteredProds] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  
 
   useEffect(() => {
     fetchAllProducts().then((prods) => {
-      setCurrentProds(prods);
+      currentProdsRef.current = prods;
+      setFilteredProds(prods);
       setTimeout(() => {
         setIsLoading(false);
       }, 2000);
-      
     });
   }, []);
 
-if(isLoading){
+  if (isLoading) {
+    return (
+      <>
+        <Banner text="Upper"></Banner>
+        <div className="w-2/5 flex flex-row items-baseline m-4 justify-between gap-4 text-xl h-auto">
+          <div className="stroke-0">
+            <Skeleton className="w-full " />
+          </div>
+          <CatalogMenu />
+        </div>
+
+        <div className="grid  gap-4 mt-8 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+          <CatalogSkeleton />
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <Banner text="Upper"></Banner>
       <div className="w-2/5 flex flex-row items-baseline m-4 justify-between gap-4 text-xl h-auto">
         <div className="stroke-0">
-          <Skeleton className="w-full "/>
+          <CatalogFilter
+            categories={categories}
+            action={setFilteredProds}
+            currentProds={currentProdsRef.current}
+          />
         </div>
         <CatalogMenu />
       </div>
 
       <div className="grid  gap-4 mt-8 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-        <CatalogSkeleton/>
-      </div>
-    </>
-  )
-}
-
-  return (
-    <>
-      <Banner text="Upper"></Banner>
-      <div className="w-2/5 flex flex-row items-baseline m-4 justify-between gap-4 text-xl h-auto">
-        <div className="stroke-0">
-          <CatalogFilter categories={categories} action={setCurrentProds} currentProds={currentProds} />
-        </div>
-        <CatalogMenu />
-      </div>
-
-      <div className="grid  gap-4 mt-8 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-        {currentProds.map((prod) => (
+        {filteredProds.map((prod) => (
           <div>
             <CarouselWrapper
               ratio={9 / 16}

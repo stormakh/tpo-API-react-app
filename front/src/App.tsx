@@ -1,12 +1,7 @@
 // src/App.tsx
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AppState } from "@/store/store";
 import CustomerLayout from "@/pages/layouts/CustomerLayout";
 import SellerLayout from "@/pages/layouts/SellerLayout";
@@ -18,6 +13,7 @@ import ShoppingCart from "./pages/ShoppingCart";
 import UserProfile from "./pages/UserProfile";
 import Checkout from "./pages/Checkout";
 import Register from "./pages/Register";
+import ProductDetailsSeller from "./pages/ProductDetailsSeller";
 
 export default function App() {
   const user = useSelector((state: AppState) => state.userSession);
@@ -55,8 +51,11 @@ export default function App() {
           element: <SellerLayout user={user} />,
           children: [
             { path: "", element: <Home /> },
-            {path : "catalog" , element : <Catalog/>}
-            // Define additional routes for sellers here
+            { path: "catalog", element: <Catalog /> },
+            {
+              path: "product-details-sellers",
+              element: <ProductDetailsSeller />,
+            },
           ],
         },
       ]),

@@ -22,8 +22,8 @@
     },
     {
         "id": 4,
-        "username": "user4",
-        "password": "password4",
+        "username": "Harry",
+        "password": "0612",
         "type": "customer",
         "email": "user4@example.com"
     },
