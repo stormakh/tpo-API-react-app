@@ -19,18 +19,18 @@ export default function CustomerLayout ({} : CustomerLayoutProps)  {
   
   const user  = useSelector((state: { userSession: UserSession }) => state.userSession);
 
-  useEffect(() => {
-    if (user !== null) {
-      checkCorrectPath(user.type, expectedUserType, navigate);
-      console.log("user.userType", user.type);
-    }else{
-      checkCorrectPath(null,expectedUserType,navigate)
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user !== null) {
+  //     checkCorrectPath(user.type, expectedUserType, navigate);
+  //     console.log("user.userType", user.type);
+  //   }else{
+  //     checkCorrectPath(null,expectedUserType,navigate)
+  //   }
+  // }, [user]);
 
   return (
     <>
-      <Navbar user={user} />
+      <Navbar user={user}/>
       <main>
         <Outlet />
       </main>
