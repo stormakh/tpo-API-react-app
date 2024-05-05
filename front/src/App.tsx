@@ -16,51 +16,45 @@ import Register from "./pages/Register";
 import ProductDetailsSeller from "./pages/ProductDetailsSeller";
 
 export default function App() {
-  const user = useSelector((state: AppState) => state.userSession);
-
-  const router = useMemo(
-    () =>
-      createBrowserRouter([
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <CustomerLayout />,
+      children: [
+        { path: "", element: <Home /> },
+        { path: "catalog", element: <Catalog /> },
+      ],
+    },
+    { path: "login", element: <LogIn /> },
+    { path: "register", element: <Register /> },
+    {
+      path: "/customer",
+      element: <CustomerLayout />,
+      children: [
+        { path: "", element: <Home /> },
+        { path: "catalog", element: <Catalog /> },
         {
-          path: "/",
-          element: <CustomerLayout user={user} />,
-          children: [
-            { path: "", element: <Home /> },
-            { path: "catalog", element: <Catalog /> },
-          ],
+          path: "product-details-client",
+          element: <ProductDetailsClient />,
         },
-        { path: "login", element: <LogIn /> },
-        { path: "register", element: <Register /> },
+        { path: "shopping-cart", element: <ShoppingCart /> },
+        { path: "user-profile", element: <UserProfile /> },
+        { path: "checkout", element: <Checkout /> },
+      ],
+    },
+    {
+      path: "/seller",
+      element: <SellerLayout />,
+      children: [
+        { path: "", element: <Home /> },
+        { path: "catalog", element: <Catalog /> },
         {
-          path: "/customer",
-          element: <CustomerLayout user={user} />,
-          children: [
-            { path: "", element: <Home /> },
-            { path: "catalog", element: <Catalog /> },
-            {
-              path: "product-details-client",
-              element: <ProductDetailsClient />,
-            },
-            { path: "shopping-cart", element: <ShoppingCart /> },
-            { path: "user-profile", element: <UserProfile /> },
-            { path: "checkout", element: <Checkout /> },
-          ],
+          path: "product-details-sellers",
+          element: <ProductDetailsSeller />,
         },
-        {
-          path: "/seller",
-          element: <SellerLayout user={user} />,
-          children: [
-            { path: "", element: <Home /> },
-            { path: "catalog", element: <Catalog /> },
-            {
-              path: "product-details-sellers",
-              element: <ProductDetailsSeller />,
-            },
-          ],
-        },
-      ]),
-    [user]
-  );
+      ],
+    },
+  ]);
 
   return <RouterProvider router={router} />;
 }

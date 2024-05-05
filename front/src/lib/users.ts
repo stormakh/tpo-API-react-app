@@ -19,9 +19,10 @@ export async function createUser(user: UserSession): Promise<UserSession> {
     const newUser = {
       ...user,
       id: usersMock.length + 1,
-      type: user.type as UserType,
+      type: 'customer' as UserType,
     };
 
+    console.log("New user created", newUser)
     // Add the new user to the mock
     usersMock.push(newUser);
 

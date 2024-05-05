@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import image from "/src/assets/LogIn_Back.svg";
 import { useRef, useState } from "react";
 import { fetchUserByNameAndPassword } from "@/lib/users";
-import { setUserTypeSession } from "@/store/store";
+import { setUserSession } from "@/store/store";
 import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -30,8 +30,7 @@ export default function LogIn() {
       )
         .then((user) => {
           if (user !== null) {
-            console.log("asi es se cargo el usuario y que?");
-            dispatch(setUserTypeSession(user));
+            dispatch(setUserSession(user));
             setErrorMessage(null);
             navigate(`/${user.type}`);
           } else {
@@ -63,11 +62,11 @@ export default function LogIn() {
                   Crea una aquí
                </Link>
           </h2>
-          <div className="relative w-full flex flex-col items-center justify-center">
+          <div className="relative w-full flex flex-col items-center justify-center space-y-4">
             <Input
               ref={userNameRef}
               type="username"
-              className="my-6 w-full"
+              className=" w-full"
               placeholder="Username"
             />
             <div className="relative w-full flex flex-col items-center justify-center">
@@ -81,7 +80,7 @@ export default function LogIn() {
                 ref={passwordRef}
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
-                className="my-6 w-full"
+                className=" w-full"
               />
             </div>
   

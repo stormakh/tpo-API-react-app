@@ -10,6 +10,9 @@ export function filterByCategorie(
   products: Product[],
   categorie: string
 ): Product[] {
-    
-return products.filter((product) => product.categories.includes(categorie));
+  if (categorie === "None") {
+    return products;
+  } else {
+    return products.filter((product) => product.categories.includes(categorie));
+  }
 }

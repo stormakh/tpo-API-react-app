@@ -6,15 +6,18 @@ import Footer from "../../components/Footer"; // Assume you have a Footer compon
 
 import { UserSession, UserType } from "@/models/users";
 import { checkCorrectPath } from "@/lib/users";
+import { useSelector } from "react-redux";
 
 interface CustomerLayoutProps {
-  user : UserSession | null;
+  
 }
 
-export default function CustomerLayout ({user} : CustomerLayoutProps)  {
+export default function CustomerLayout ({} : CustomerLayoutProps)  {
   
   const navigate = useNavigate();
   const expectedUserType = "customer" as UserType;
+  
+  const user  = useSelector((state: { userSession: UserSession }) => state.userSession);
 
   useEffect(() => {
     if (user !== null) {

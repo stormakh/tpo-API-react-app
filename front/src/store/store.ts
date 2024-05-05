@@ -52,7 +52,7 @@ const userSessionSlice = createSlice({
     name: 'userSession',
     initialState: null as UserSession | null,
     reducers: {
-        setUserTypeSession: (_state, action: PayloadAction<UserSession>) => {
+        setUserSession: (_state, action: PayloadAction<UserSession>) => {
             console.log('user updated in store')
             return action.payload;
         },
@@ -79,4 +79,4 @@ export default store;
 
 // Export the action creators
 export const { addProduct, removeProduct } = productsSlice.actions;
-export const { setUserTypeSession, clearUserSession } = userSessionSlice.actions;
+export const { setUserSession, clearUserSession } = userSessionSlice.actions;

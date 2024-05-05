@@ -6,12 +6,12 @@ import Eye from "../assets/Eye.svg";
 
 import CatalogFilter from "@/components/catalog/CatalogFilter";
 import { useEffect, useRef, useState } from "react";
-import { fetchAllProducts, filterByCategorie } from "@/lib/products";
+import { fetchAllProducts } from "@/lib/products";
 import { Product } from "@/models/products";
 import CatalogSkeleton from "@/components/catalog/CatalogSkeleton";
 import { Skeleton } from "@/components/ui/skeleton";
 
-const categories = ["Men", "Casual", "Women", "Formal"];
+const categories = ["Men", "Casual", "Women", "Formal",'None'];
 
 export default function Catalog() {
   const currentProdsRef = useRef<Product[]>([]);
@@ -24,7 +24,7 @@ export default function Catalog() {
       setFilteredProds(prods);
       setTimeout(() => {
         setIsLoading(false);
-      }, 2000);
+      }, 1000);
     });
   }, []);
 
@@ -32,15 +32,15 @@ export default function Catalog() {
     return (
       <>
         <Banner text="Upper"></Banner>
-        <div className="w-2/5 flex flex-row items-baseline m-4 justify-between gap-4 text-xl h-auto">
-          <div className="stroke-0">
-            <Skeleton className="w-full " />
-          </div>
-          <CatalogMenu />
+        <div className="w-2/5 flex flex-row items-center m-4 justify-between gap-4 text-xl h-auto">
+          <Skeleton className="w-full min-h-10" />
+          <Skeleton className="w-1/3 min-h-10" />
         </div>
 
-        <div className="grid  gap-4 mt-8 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-          <CatalogSkeleton />
+        <div className="grid  gap-4 mt-8 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 min-h-svh">
+          {Array.from({ length: 10 }).map((_, index) => (
+            <CatalogSkeleton key={index} />
+          ))}
         </div>
       </>
     );
@@ -62,7 +62,7 @@ export default function Catalog() {
 
       <div className="grid  gap-4 mt-8 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
         {filteredProds.map((prod) => (
-          <div>
+          <div className="flex flex-col gap-2">
             <CarouselWrapper
               ratio={9 / 16}
               slides={[<ImageSlide src={Eye} />, "text", 5, 3, 4]}
