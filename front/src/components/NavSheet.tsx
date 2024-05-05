@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "./ui/button";
 import { AlignJustify } from "lucide-react";
+import noPayLogo from "@/assets/nopay.svg";
 
 export default function NavSheet() {
   return (
@@ -20,7 +21,7 @@ export default function NavSheet() {
         <SheetHeader className="">
           <SheetTitle className="flex items-center justify-center ">
             <img
-              src="src/assets/nopay.svg"
+              src={noPayLogo}
               alt="Nopay Logo"
               className="size-40"
             />
