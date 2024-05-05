@@ -72,7 +72,7 @@ export default function Catalog() {
       <div className="grid  gap-4 mt-8 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
         {filteredProds.map((prod) => (
           <div className="flex flex-col gap-2">
-            <Link to={`/catalog/product-details-client?${prod.id}`}>
+            <Link to={`/product-details-client/${prod.id}`} replace>
               <CarouselWrapper
                 ratio={9 / 16}
                 slides={[<ImageSlide src={Eye} />, "text", 5, 3, 4]}

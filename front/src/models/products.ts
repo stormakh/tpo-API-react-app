@@ -10,4 +10,5 @@ export interface Product {
     categories: string[];
     material : string[];
     imgs?: string[];
+    parentCategories: string[];
 }
