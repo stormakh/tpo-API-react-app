@@ -1,8 +1,5 @@
 // src/App.tsx
-import { useMemo } from "react";
-import { useSelector } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { AppState } from "@/store/store";
 import CustomerLayout from "@/pages/layouts/CustomerLayout";
 import SellerLayout from "@/pages/layouts/SellerLayout";
 import Home from "./pages/Home";
