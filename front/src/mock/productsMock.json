@@ -3,6 +3,7 @@
         "id": 1,
         "name": "T-Shirt",
         "price": 19.99,
+        "description": "bla bla bla bla",
         "colors": ["Red", "Blue", "Green"],
         "sizes": ["S", "M", "L"],
         "stock": 50,
@@ -12,6 +13,7 @@
     {
         "id": 2,
         "name": "Jeans",
+        "description": "bla bla bla bla",
         "price": 49.99,
         "colors": ["Black", "Blue"],
         "sizes": ["S", "M", "L", "XL"],
@@ -22,6 +24,7 @@
     {
         "id": 3,
         "name": "Dress",
+        "description": "bla bla bla bla",
         "price": 79.99,
         "colors": ["Red", "Black"],
         "sizes": ["S", "M", "L"],
@@ -32,6 +35,7 @@
     {
         "id": 4,
         "name": "Sweater",
+        "description": "bla bla bla bla",
         "price": 39.99,
         "colors": ["Gray", "Navy"],
         "sizes": ["S", "M", "L"],
@@ -42,6 +46,7 @@
     {
         "id": 5,
         "name": "Shorts",
+        "description": "bla bla bla bla",
         "price": 29.99,
         "colors": ["Khaki", "Black"],
         "sizes": ["S", "M", "L"],
@@ -52,6 +57,7 @@
     {
         "id": 6,
         "name": "Blouse",
+        "description": "bla bla bla bla",
         "price": 34.99,
         "colors": ["White", "Pink"],
         "sizes": ["S", "M", "L"],
@@ -62,6 +68,7 @@
     {
         "id": 7,
         "name": "Jacket",
+        "description": "bla bla bla bla",
         "price": 89.99,
         "colors": ["Black", "Brown"],
         "sizes": ["S", "M", "L", "XL"],
@@ -72,6 +79,7 @@
     {
         "id": 8,
         "name": "Skirt",
+        "description": "bla bla bla bla",
         "price": 49.99,
         "colors": ["Black", "Gray"],
         "sizes": ["S", "M", "L"],
@@ -82,6 +90,7 @@
     {
         "id": 9,
         "name": "Hoodie",
+        "description": "bla bla bla bla",
         "price": 44.99,
         "colors": ["Gray", "Blue"],
         "sizes": ["S", "M", "L", "XL"],
@@ -92,6 +101,7 @@
     {
         "id": 10,
         "name": "Pants",
+        "description": "bla bla bla bla",
         "price": 59.99,
         "colors": ["Black", "Navy"],
         "sizes": ["S", "M", "L", "XL"],

@@ -1,8 +1,5 @@
 // src/App.tsx
-import { useMemo } from "react";
-import { useSelector } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { AppState } from "@/store/store";
 import CustomerLayout from "@/pages/layouts/CustomerLayout";
 import SellerLayout from "@/pages/layouts/SellerLayout";
 import Home from "./pages/Home";
@@ -34,7 +31,7 @@ export default function App() {
         { path: "", element: <Home /> },
         { path: "catalog", element: <Catalog /> },
         {
-          path: "product-details-client",
+          path: "product-details-client/:id",
           element: <ProductDetailsClient />,
         },
         { path: "shopping-cart", element: <ShoppingCart /> },

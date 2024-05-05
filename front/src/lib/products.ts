@@ -16,3 +16,7 @@ export function filterByCategorie(
     return products.filter((product) => product.categories.includes(categorie));
   }
 }
+
+export async function fetchById(id: number){
+  return productsMock.find((prod) => prod.id = id);
+} ;
