@@ -1,3 +1,5 @@
+import BannerSvg from '@/assets/Banner.svg'
+
 interface BannerProps {
   text: string;
   size? : string;
@@ -8,7 +10,7 @@ export default function Banner({ text, size = '60px' }: BannerProps) {
     <>
       <div className="relative" style={{height : `${size}`}}>
         <img
-          src="src/assets/Banner.svg"
+          src={BannerSvg}
           alt="Banner"
           className="w-full h-full object-cover"
         />

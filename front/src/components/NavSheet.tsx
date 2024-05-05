@@ -20,7 +20,7 @@ export default function NavSheet() {
         <SheetHeader className="">
           <SheetTitle className="flex items-center justify-center ">
             <img
-              src="./src/assets/nopay.svg"
+              src="src/assets/nopay.svg"
               alt="Nopay Logo"
               className="size-40"
             />
@@ -29,32 +29,9 @@ export default function NavSheet() {
         <div className="border-b border-line pb-2 flex-grow">
           <h3 className="text-4xl font-roboto font-extrabold my-4">Upper</h3>
           <ul>
-            <li>Buzos</li>
-            <li>Remeras</li>
-            <li>Tops</li>
-            <li>Abrigos</li>
-          </ul>
-        </div>
-        <div className="border-b border-line pb-2 flex-grow">
-          <h3 className="text-4xl font-roboto font-extrabold my-4 mx-2">
-            Lower
-          </h3>
-          <ul>
-            <li>Pantalones</li>
-            <li>Shorts</li>
-            <li>Minis</li>
-            <li>Jeans</li>
-          </ul>
-        </div>
-        <div className="pb-2 flex-grow">
-          <h3 className="text-4xl font-roboto font-extrabold my-4">
-            Accesorios
-          </h3>
-          <ul>
-            <li>Mochilas</li>
-            <li>Cintos</li>
-            <li>Anillos</li>
-            <li>Aros</li>
+            <li>Upper</li>
+            <li>Lower</li>
+            <li>Accesories</li>
           </ul>
         </div>
       </SheetContent>

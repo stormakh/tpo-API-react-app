@@ -3,14 +3,32 @@ import { UserSession, UserType } from "@/models/users";
 import { NavigateFunction } from "react-router-dom";
 
 
-export async function checkCorrectPath(userType : UserType | undefined , expected: UserType, navigate : NavigateFunction){
+export async function checkCorrectPath(userType : UserType | null , expected: UserType, navigate : NavigateFunction){
   if(!userType){
     // Redirect to the correct route
-    navigate('/login');
+    navigate('/');
   }else if(userType !== expected){
     // Redirect to the correct route
-    navigate('/')
+    navigate(`/${userType}`)
   }
+}
+
+export async function createUser(user: UserSession): Promise<UserSession> {
+  return new Promise((resolve) => {
+    // Create a new user with the given data
+    const newUser = {
+      ...user,
+      id: usersMock.length + 1,
+      type: 'customer' as UserType,
+    };
+
+    console.log("New user created", newUser)
+    // Add the new user to the mock
+    usersMock.push(newUser);
+
+    // Resolve the new user
+    resolve(newUser);
+  });
 }
 
 export function fetchUserById(id: number): UserSession | null {

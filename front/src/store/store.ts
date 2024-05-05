@@ -1,19 +1,12 @@
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserSession } from '@/models/users';
+import { Product } from '@/models/products';
 // Define the initial state interface
 export interface AppState {
     products: Product[];
     userSession: UserSession | null;
 }
 
-// Define the product interface
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    colors ?: string[];
-    sizes ?: string[];
-}
 
 
 // Create a products slice
@@ -59,12 +52,12 @@ const userSessionSlice = createSlice({
     name: 'userSession',
     initialState: null as UserSession | null,
     reducers: {
-        setUserTypeSession: (state, action: PayloadAction<UserSession>) => {
+        setUserSession: (_state, action: PayloadAction<UserSession>) => {
             console.log('user updated in store')
             return action.payload;
         },
-        clearUserSession: (state) => {
-            state = null;
+        clearUserSession: (_state) => {
+            return null
         },
     },
 });
@@ -86,4 +79,4 @@ export default store;
 
 // Export the action creators
 export const { addProduct, removeProduct } = productsSlice.actions;
-export const { setUserTypeSession, clearUserSession } = userSessionSlice.actions;
+export const { setUserSession, clearUserSession } = userSessionSlice.actions;
