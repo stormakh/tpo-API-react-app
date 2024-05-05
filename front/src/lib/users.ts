@@ -13,6 +13,23 @@ export async function checkCorrectPath(userType : UserType | null , expected: Us
   }
 }
 
+export async function createUser(user: UserSession): Promise<UserSession> {
+  return new Promise((resolve) => {
+    // Create a new user with the given data
+    const newUser = {
+      ...user,
+      id: usersMock.length + 1,
+      type: user.type as UserType,
+    };
+
+    // Add the new user to the mock
+    usersMock.push(newUser);
+
+    // Resolve the new user
+    resolve(newUser);
+  });
+}
+
 export function fetchUserById(id: number): UserSession | null {
   const users: UserSession[] = usersMock.map((user) => ({
     ...user,

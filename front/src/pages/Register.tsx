@@ -2,54 +2,33 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import image from "/src/assets/LogIn_Back.svg";
-import { UserSession } from "@/models/users"
-import {Link } from "react-router-dom";
-
-
+import { UserSession } from "@/models/users";
+import { Link } from "react-router-dom";
+import { createUser } from "@/lib/users";
 
 export default function Register() {
-    //tor no tengo ni idea de lo q estoy haciendo, ayuda 
-    const [newUser, setNewUser] = useState<UserSession>({
-        id: 0,
-        username: "",
-        type: "customer", // Por defecto
-        password: "",
-        email: "",
-        dni: "",
-  });
+  const initialUser : UserSession= {
+    id: 0,
+    username: "",
+    type: "customer", // Por defecto
+    password: "",
+    email: "",
+    dni: "",
+  };
 
   const [showPassword, setShowPassword] = useState(false);
-  const [users, setUsers] = useState<UserSession[]>([]); //// It's for keeping the array of users and being able to grab the ID, not sure if it works like this thb
-
-
+  const [user, setUser] = useState<UserSession>(initialUser); //// It's for keeping the array of users and being able to grab the ID, not sure if it works like this thb
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
   const handleRegistration = () => {
-
-    if (!newUser.username || !newUser.dni || !newUser.password || !newUser.email) { //In case they don't fill in all the fields
-        console.log("Por favor, complete todos los campos");
-        return;
-      }
-    else{   
-        const newId = users.length > 0 ? users[users.length - 1].id + 1 : 1;
-        const newUserData: UserSession = { ...newUser, id: newId };
-        const updatedUsers = [...users, newUserData];
-        setUsers(updatedUsers);
-        setNewUser({
-            id: 0,
-            username: "",
-            dni: "",
-            password: "",
-            email: "",
-            type: "customer"
-    
-          })}
-
+    createUser(user).then((newUser: UserSession) => {
+      console.log("New user created", newUser);
+      setUser(initialUser);
+    });
   };
-
 
   return (
     <div
@@ -65,24 +44,24 @@ export default function Register() {
           />
           <h1 className="text-3xl font-semibold text-silk">Crea tu cuenta</h1>
           <h2 className="text-center text-silk text-sm font-light">
-              <Link to="/login" className="font-light text-black">
-                  Volver al Log In
-               </Link>
+            <Link to="/login" className="font-light text-black">
+              Volver al Log In
+            </Link>
           </h2>
           <div className="relative w-full flex flex-col items-center justify-center">
             <Input
               type="username"
-              value={newUser.username}
+              value={user.username}
               onChange={(e) =>
-                setNewUser({ ...newUser, username: e.target.value })
+                setUser({ ...user, username: e.target.value })
               }
               placeholder="Username"
               className="my-6 w-full"
             />
             <Input
               type="dni"
-              value={newUser.dni}
-              onChange={(e) => setNewUser({ ...newUser, dni: e.target.value })}
+              value={user.dni}
+              onChange={(e) => setUser({ ...user, dni: e.target.value })}
               placeholder="DNI"
               className="my-6 w-full"
             />
@@ -95,9 +74,9 @@ export default function Register() {
               />
               <Input
                 type={showPassword ? "text" : "password"}
-                value={newUser.password}
+                value={user.password}
                 onChange={(e) =>
-                  setNewUser({ ...newUser, password: e.target.value })
+                  setUser({ ...user, password: e.target.value })
                 }
                 placeholder="Password"
                 className="my-6 w-full"
@@ -106,8 +85,10 @@ export default function Register() {
             <Input
               className="my-6 w-full"
               type="email"
-              value={newUser.email}
-              onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+              value={user.email}
+              onChange={(e) =>
+                setUser({ ...user, email: e.target.value })
+              }
               placeholder="Email"
             />
             <Button
@@ -121,7 +102,4 @@ export default function Register() {
       </div>
     </div>
   );
-  
-  
-  
 }
