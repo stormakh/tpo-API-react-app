@@ -31,7 +31,7 @@ export default function App() {
         { path: "", element: <Home /> },
         { path: "catalog", element: <Catalog /> },
         {
-          path: "product-details-client",
+          path: "product-details-client/:id",
           element: <ProductDetailsClient />,
         },
         { path: "shopping-cart", element: <ShoppingCart /> },
