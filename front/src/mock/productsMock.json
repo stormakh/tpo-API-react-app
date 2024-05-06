@@ -11,10 +11,10 @@
     "material": ["Cotton"],
     "parentCategories": ["Clothes", "Upper"],
     "images": [
-      "src/assets/T-Shirt-Blue-1.svg",
-      "src/assets/T-Shirt-Blue-2.svg",
-      "src/assets/T-Shirt-Blue-3.svg",
-      "src/assets/T-Shirt-Blue-4.svg"
+      "/src/assets/T-Shirt-Blue-1.svg",
+      "/src/assets/T-Shirt-Blue-2.svg",
+      "/src/assets/T-Shirt-Blue-3.svg",
+      "/src/assets/T-Shirt-Blue-4.svg"
     ]
   },
   {
@@ -29,10 +29,10 @@
     "material": ["Denim"],
     "parentCategories": ["Clothes", "Lower"],
     "images": [
-      "src/assets/Jeans-Black-1.svg",
-      "src/assets/Jeans-Black-2.svg",
-      "src/assets/Jeans-Black-3.svg",
-      "src/assets/Jeans-Black-4.svg"
+      "/src/assets/Jeans-Black-1.svg",
+      "/src/assets/Jeans-Black-2.svg",
+      "/src/assets/Jeans-Black-3.svg",
+      "/src/assets/Jeans-Black-4.svg"
     ]
   },
   {
@@ -47,10 +47,10 @@
     "material": ["Silk"],
     "parentCategories": ["Clothes", "Lower"],
     "images": [
-      "src/assets/Dress-Black-1.svg",
-      "src/assets/Dress-Black-2.svg",
-      "src/assets/Dress-Black-3.svg",
-      "src/assets/Dress-Black-4.svg"
+      "/src/assets/Dress-Black-1.svg",
+      "/src/assets/Dress-Black-2.svg",
+      "/src/assets/Dress-Black-3.svg",
+      "/src/assets/Dress-Black-4.svg"
     ]
   },
   {

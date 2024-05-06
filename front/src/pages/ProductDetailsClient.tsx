@@ -24,6 +24,10 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchById } from "@/lib/products";
 import { Product } from "@/models/products";
+import { useDispatch } from "react-redux";
+import { addProduct } from "@/store/store";
+import CarouselThumbsWrapper from "@/components/carouselThumbNails/CarouselThumbsWrapper";
+import ImageSlide from "@/components/carousel/ImageSlide";
 
 const imageSources = [
   "/src/assets/Sample_1.svg",
@@ -45,7 +49,8 @@ const sizeSources = [
 export default function () {
   const { id } = useParams<{ id: string }>();
   const [prod, setProd] = useState<Product | undefined>();
-
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const dispatch = useDispatch();
   useEffect(() => {
     if (!id) return;
     const parsedId = parseInt(id);
@@ -54,34 +59,29 @@ export default function () {
     });
   }, []);
 
+  function handleAddToCart() {
+    if (prod === undefined) return;
+    setIsLoading(true);
+    dispatch(addProduct(prod));
+  }
+
   return (
     <>
       <Banner text="Jeans" />
       <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
         {prod?.categories?.join(" / ")}
       </h1>
-      <section className="font-roboto w-auto flex flex-row items-center gap-8 h-fit m-8">
-        <section className="flex justify-around">
-          <Carousel
-            opts={{
-              align: "start",
-            }}
-            orientation="vertical"
-            className="flex max-w-xs mx-24"
-          >
-            <CarouselContent className="-mt-1 h-fill ">
-              {imageSources.map((source, index) => (
-                <CarouselItem key={index} className="pt-1 md:basis-1/2">
-                  <div className="p-1">
-                    <img src={source} className="mb-5"></img>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-          <img src="src/assets/Sample_Big.svg" className="size-4/6"></img>
+      <section className="font-roboto flex flex-row items-center gap-8 m-8">
+        <section className="h-full w-1/2">
+          <CarouselThumbsWrapper
+            slides={imageSources.map((image, index) => {
+              return <ImageSlide key={index} src={image} />;
+            })}
+            ratio={9 / 16}
+            options={{ loop: true }}
+          />
         </section>
-        <Card className="min-w-0 flex-grow">
+        <Card className="min-w-0 flex-grow max-w-xl">
           <CardContent className="">
             <CardHeader className="font-bold font-roboto text-5xl">
               {prod?.name}
@@ -127,7 +127,15 @@ export default function () {
             </Popover>
             <section className="flex flex-col font-roboto">
               <a className="underline text-2xl mt-20">Ver Guía de talles</a>
-              <Button className="my-5 w-96 h-20 text-xl">
+              {prod?.stock ? (
+                <p className="text-xl">Stock: {prod.stock}</p>
+              ) : null}
+
+              <Button
+                disabled={!isLoading}
+                className="my-5 w-96 h-20 text-xl"
+                onClick={handleAddToCart}
+              >
                 <ShoppingBag className="mr-2" /> Add to Cart
               </Button>
               <div className="flex items-center text-xl">
