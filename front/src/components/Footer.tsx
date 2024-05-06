@@ -1,5 +1,10 @@
 import { Phone, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
+
+
 import React from "react";
+
+
 
 const Footer: React.FC = () => {
   return (
@@ -20,10 +25,9 @@ const Footer: React.FC = () => {
           </div>
           <div className="w-1/4 text-letters">
             <h3 className="font-semibold ">Productos</h3>
-            <p>Tops</p>
-            <p>Jeans</p>
-            <p>Remeras</p>
-            <p>Buzos</p>
+            <p><Link to="/catalog?type=Upper">Upper</Link></p>
+            <p><Link to="/catalog?type=Lower">Lower</Link></p>
+            <p><Link to="/catalog?type=Accessories">Accessories</Link></p>
           </div>
           <div className="w-1/4 text-letters">
             <h3 className="font-semibold ">Nuestros servicios</h3>
