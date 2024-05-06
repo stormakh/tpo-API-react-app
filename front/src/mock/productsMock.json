@@ -65,10 +65,10 @@
     "material": ["Wool"],
     "parentCategories": ["Clothes", "Upper"],
     "images": [
-      "src/assets/Sweater-Black-1.svg",
-      "src/assets/Sweater-Black-2.svg",
-      "src/assets/Sweater-Black-3.svg",
-      "src/assets/Sweater-Black-4.svg"
+      "/src/assets/Sweater-Black-1.svg",
+      "/src/assets/Sweater-Black-2.svg",
+      "/src/assets/Sweater-Black-3.svg",
+      "/src/assets/Sweater-Black-4.svg"
     ]
   },
   {
@@ -83,10 +83,10 @@
     "material": ["Cotton"],
     "parentCategories": ["Clothes", "Lower"],
     "images": [
-      "src/assets/Shorts-Kaki-1.svg",
-      "src/assets/Shorts-Kaki-2.svg",
-      "src/assets/Shorts-Kaki-3.svg",
-      "src/assets/Shorts-Kaki-4.svg"
+      "/src/assets/Shorts-Kaki-1.svg",
+      "/src/assets/Shorts-Kaki-2.svg",
+      "/src/assets/Shorts-Kaki-3.svg",
+      "/src/assets/Shorts-Kaki-4.svg"
     ]
   },
   {
@@ -101,10 +101,10 @@
     "material": ["Polyester"],
     "parentCategories": ["Clothes", "Upper"],
     "images": [
-      "src/assets/Vest-Black-1.svg",
-      "src/assets/Vest-Black-2.svg",
-      "src/assets/Vest-Black-3.svg",
-      "src/assets/Vest-Black-4.svg"
+      "/src/assets/Vest-Black-1.svg",
+      "/src/assets/Vest-Black-2.svg",
+      "/src/assets/Vest-Black-3.svg",
+      "/src/assets/Vest-Black-4.svg"
     ]
   },
   {
@@ -119,10 +119,10 @@
     "material": ["Leather"],
     "parentCategories": ["Clothes", "Upper"],
     "images": [
-      "src/assets/Jacket-Brown-1.svg",
-      "src/assets/Jacket-Brown-2.svg",
-      "src/assets/Jacket-Brown-3.svg",
-      "src/assets/Jacket-Brown-4.svg"
+      "/src/assets/Jacket-Brown-1.svg",
+      "/src/assets/Jacket-Brown-2.svg",
+      "/src/assets/Jacket-Brown-3.svg",
+      "/src/assets/Jacket-Brown-4.svg"
     ]
   },
   {
@@ -137,10 +137,10 @@
     "material": ["Cotton"],
     "parentCategories": ["Clothes", "Lower"],
     "images": [
-      "src/assets/Skirt-Black-1.svg",
-      "src/assets/Skirt-Black-2.svg",
-      "src/assets/Skirt-Black-3.svg",
-      "src/assets/Skirt-Black-4.svg"
+      "/src/assets/Skirt-Black-1.svg",
+      "/src/assets/Skirt-Black-2.svg",
+      "/src/assets/Skirt-Black-3.svg",
+      "/src/assets/Skirt-Black-4.svg"
     ]
   },
   {
@@ -155,10 +155,10 @@
     "material": ["Cotton", "Polyester"],
     "parentCategories": ["Clothes", "Upper"],
     "images": [
-      "src/assets/Hoodie-Gray-1.svg",
-      "src/assets/Hoodie-Gray-2.svg",
-      "src/assets/Hoodie-Gray-3.svg",
-      "src/assets/Hoodie-Gray-4.svg"
+      "/src/assets/Hoodie-Gray-1.svg",
+      "/src/assets/Hoodie-Gray-2.svg",
+      "/src/assets/Hoodie-Gray-3.svg",
+      "/src/assets/Hoodie-Gray-4.svg"
     ]
   },
   {
@@ -173,9 +173,9 @@
     "material": ["Cotton"],
     "parentCategories": ["Clothes", "Lower"],
     "images": [
-      "src/assets/Pants-Black-1.svg",
-      "src/assets/Pants-Black-2.svg",
-      "src/assets/Pants-Black-3.svg"
+      "/src/assets/Pants-Black-1.svg",
+      "/src/assets/Pants-Black-2.svg",
+      "/src/assets/Pants-Black-3.svg"
     ]
   }
 ]

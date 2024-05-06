@@ -29,13 +29,6 @@ import { addProduct } from "@/store/store";
 import CarouselThumbsWrapper from "@/components/carouselThumbNails/CarouselThumbsWrapper";
 import ImageSlide from "@/components/carousel/ImageSlide";
 
-const imageSources = [
-  "/src/assets/Sample_1.svg",
-  "/src/assets/Sample_2.svg",
-  "/src/assets/Sample_4.svg",
-  "/src/assets/Sample_3.svg",
-];
-
 const sizeSources = [
   "/src/assets/Size_1.svg",
   "/src/assets/Size_2.svg",
@@ -46,15 +39,32 @@ const sizeSources = [
   "/src/assets/Size_7.svg",
 ];
 
+const initialState: Product = {
+  id: 0,
+  name: "",
+  description: "",
+  price: 0,
+  colors: [],
+  sizes: [],
+  stock: 0,
+  categories: [],
+  material: [],
+  images: [],
+  parentCategories: [],
+};
+
+
+
 export default function () {
   const { id } = useParams<{ id: string }>();
-  const [prod, setProd] = useState<Product | undefined>();
+  const [prod, setProd] = useState<Product>(initialState);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const dispatch = useDispatch();
   useEffect(() => {
     if (!id) return;
     const parsedId = parseInt(id);
     fetchById(parsedId).then((prod) => {
+      if(prod === undefined) return;
       setProd(prod);
     });
   }, []);
@@ -71,17 +81,18 @@ export default function () {
       <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
         {prod?.categories?.join(" / ")}
       </h1>
-      <section className="font-roboto flex flex-row items-center gap-8 m-8">
-        <section className="h-full w-1/2">
+      <section className="font-roboto flex flex-row items-stretch justify-stretch gap-8 m-8">
+        <section className=" h-full w-5/12">
           <CarouselThumbsWrapper
-            slides={imageSources.map((image, index) => {
-              return <ImageSlide key={index} src={image} />;
+            slides={prod.images.map((image, index) => {
+              return <img key={index} src={image} />;
             })}
             ratio={9 / 16}
             options={{ loop: true }}
+            className="w-full h-full"
           />
         </section>
-        <Card className="min-w-0 flex-grow max-w-xl">
+        <Card className="min-w-0 flex-grow ">
           <CardContent className="">
             <CardHeader className="font-bold font-roboto text-5xl">
               {prod?.name}

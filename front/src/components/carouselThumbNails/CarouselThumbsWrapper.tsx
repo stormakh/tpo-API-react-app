@@ -14,7 +14,7 @@ interface CarouselWrapperProps {
 
 const CarouselThumbsWrapper: React.FC<CarouselWrapperProps> = ({ children,slides,options,ratio ,className}: CarouselWrapperProps) => {
     return (
-        <AspectRatio className={cn("relative bg-stone-300", className)} ratio={ratio}>
+        <AspectRatio className={cn("relative h-full", className)} ratio={ratio}>
             {children}
             <EmblaCarousel slides={slides} options={options} />
         </AspectRatio>
