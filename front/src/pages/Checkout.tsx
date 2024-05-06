@@ -4,36 +4,13 @@ import CheckoutItem from "@/components/ShoppingCart/CheckoutItem";
 import PaymentCard from "@/components/ShoppingCart/PaymentCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import store from "@/store/store";
 import { ArrowLeft } from "lucide-react";
 import React, { useState } from "react";
 
 export default function () {
-  const [products, setProducts] = useState([
-    {
-      imgUrl:
-        "https://acdn.mitiendanube.com/stores/001/126/411/products/img_6410-45e22b7745aa8ecce417076008276388-1024-1024.webp",
-      description: "Producto 1",
-      price: 200.23,
-      size: "xs",
-      quantity: 1,
-    },
-    {
-      imgUrl:
-        "https://acdn.mitiendanube.com/stores/001/126/411/products/img_6410-45e22b7745aa8ecce417076008276388-1024-1024.webp",
-      description: "Producto 2",
-      price: 300.44,
-      size: "m",
-      quantity: 2,
-    },
-    {
-      imgUrl:
-        "https://acdn.mitiendanube.com/stores/001/126/411/products/img_6410-45e22b7745aa8ecce417076008276388-1024-1024.webp",
-      description: "Producto 3",
-      price: 250.66,
-      size: "L",
-      quantity: 1,
-    },
-  ]);
+
+  const products = store.getState().products;
 
   return (
     <>
@@ -118,9 +95,9 @@ export default function () {
             <h1 className="text-4xl  font-medium">Tu pedido</h1>
             <table className="w-full">
               <tbody className="">
-                {products.map((item) => (
+                {products.map((product) => (
                   <div>
-                    <CheckoutItem {...item}></CheckoutItem>
+                    <CheckoutItem description={product.description} price={product.price} size={product.sizes[0]} quantity={1}></CheckoutItem>
                   </div>
                 ))}
               </tbody>

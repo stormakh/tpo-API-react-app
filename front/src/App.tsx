@@ -27,9 +27,15 @@ export default function App() {
           path: "product-details-client/:id",
           element: <ProductDetailsClient />,
         },
-        { path: "shopping-cart", element: <ShoppingCart /> },
-        { path: "user-profile", element: <UserProfile /> },
+        { 
+          path: "shopping-cart", 
+          element: <ShoppingCart />, 
+          children: [
+            { path: "checkout", element: <Checkout /> }
+          ],
+        },
         { path: "checkout", element: <Checkout /> },
+        { path: "user-profile", element: <UserProfile /> },
       ],
     },
     {

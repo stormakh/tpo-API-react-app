@@ -8,7 +8,6 @@ export interface AppState {
 }
 
 
-
 // Create a products slice
 const productsSlice = createSlice({
     name: 'products',
@@ -43,7 +42,7 @@ const productsSlice = createSlice({
         },
         clearProducts: (state) => {
             state = [];
-        },
+        }
     },
 });
 

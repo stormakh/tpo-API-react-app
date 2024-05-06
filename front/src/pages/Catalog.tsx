@@ -21,7 +21,6 @@ export default function Catalog() {
   const currentProdsRef = useRef<Product[]>([]);
   const [filteredProds, setFilteredProds] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const dispatch = useDispatch(); 
 
   useEffect(() => {
     fetchAllProducts().then((prods) => {
@@ -32,10 +31,6 @@ export default function Catalog() {
       }, 1000);
     });
   }, []);
-
-  function handleAddProductToCart(prod: Product){
-    dispatch(addProduct(prod));
-  }
 
   if (isLoading) {
     return (

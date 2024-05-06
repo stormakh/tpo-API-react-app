@@ -3,21 +3,15 @@ import { Button } from "@/components/ui/button";
 import Card from "@/components/ShoppingCart/CardCart";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft } from "lucide-react";
-import { useState } from "react";
+import {Product} from "@/models/products"
+import store from "@/store/store";
+import { Link } from "react-router-dom";
 
 export default function () {
-  const [products, setProducts] = useState([
-    { id: 1, name: "Producto 1", price: 200.23, size: "xs", quantity: 1 },
-    { id: 2, name: "Producto 2", price: 300.44, size: "m", quantity: 2 },
-    { id: 3, name: "Producto 3", price: 250.66, size: "L", quantity: 1 },
-  ]);
-
+ 
   const cartAmouts = { subTotal: 1000, shipCost: 300, serviceTax: 20 };
-
-  const [productsQuantity, setQuantity] = useState(
-    products.reduce((total, element) => total + element.quantity, 0)
-  );
-
+  const currentProdsRef = store.getState().products;  
+  
   return (
     <>
       <div className="flex justify-center mt-24 h-screen">
@@ -27,7 +21,7 @@ export default function () {
               Carrito de Compras
             </h1>
             <h1 className="pb-5 pr-24 font-roboto font-semibold w-1/4 text-right text-3xl">
-              {productsQuantity} Items
+              {currentProdsRef.length} Items
             </h1>
           </div>
 
@@ -54,15 +48,17 @@ export default function () {
               </tr>
             </thead>
             <tbody>
-              {products.map((item) => (
+              {currentProdsRef.map((item) => (
                 <ShoppingItem {...item}></ShoppingItem>
               ))}
             </tbody>
           </table>
-          <button className="flex pt-12">
-            <ArrowLeft></ArrowLeft>
-            <p className="pl-3">Seguir Comprando</p>
-          </button>
+          <Link to={"../catalog"}>
+            <button className="flex pt-12">
+              <ArrowLeft></ArrowLeft>
+              <p className="pl-3">Seguir Comprando</p>
+            </button>
+          </Link>
         </section>
 
         <section className=" w-1/3 font-roboto h-full p-10 pl-20 pr-20 flex flex-col justify-start">
@@ -72,11 +68,22 @@ export default function () {
             Al hacer click en Finalizar compra, estás aceptando nuestros{" "}
             <b>Términos y condiciones</b>
           </span>
-          <Button className="bg-black border-silk border-2 text-black w-full h-16 text-2xl text-white mt-5">
-            Finalizar Compra
-          </Button>
+          <Link to={"/checkout"}>
+            <Button className="bg-black border-silk border-2 text-black w-full h-16 text-2xl text-white mt-5">
+                Finalizar Compra
+            </Button>
+          </Link>
         </section>
       </div>
     </>
   );
 }
+
+function setIsLoading(arg0: boolean) {
+  throw new Error("Function not implemented.");
+}
+
+function dispatch(arg0: { payload: Product; type: "products/addProduct"; }) {
+  throw new Error("Function not implemented.");
+}
+

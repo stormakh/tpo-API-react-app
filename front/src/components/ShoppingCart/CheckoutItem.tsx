@@ -3,14 +3,14 @@ import { Separator } from "../ui/separator";
 
 interface CheckoutItemProps{
 
-        imgUrl: string; 
+        imgUrl?: string; 
         description: string;
         price: number;
         quantity: number;
         size: string;
 }
 
-export default function CheckoutItem({imgUrl, description, price, quantity, size} : CheckoutItemProps){
+export default function CheckoutItem({imgUrl="https://acdn.mitiendanube.com/stores/001/126/411/products/img_6410-45e22b7745aa8ecce417076008276388-1024-1024.webp", description, price, quantity, size} : CheckoutItemProps){
 
     return (
         <tr className="flex justify-between mt-6">
