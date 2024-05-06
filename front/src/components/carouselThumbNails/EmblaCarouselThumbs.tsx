@@ -41,7 +41,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
   return (
     <section className="embla h-full relative">
-      <div className="embla__viewport h-5/6" ref={emblaMainRef}>
+      <div className="embla__viewport min-w-0 " ref={emblaMainRef}>
         <div className="embla__container h-full">
           {slides.map((slide,index) => (
             <div className="embla__slide h-full" key={index}>
@@ -51,9 +51,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         </div>
       </div>
 
-      <div className="embla-thumbs absolute w-full">
+      <div className="embla-thumbs h-full w-full">
         <div className="embla-thumbs__viewport h-full" ref={emblaThumbsRef}>
-          <div className="embla-thumbs__container h-full flex flex-row justify-center items-center">
+          <div className="embla-thumbs__container h-full flex flex-row gap-2">
             {slides.map((slide,index) => (
               <Thumb
                 slide={slide}

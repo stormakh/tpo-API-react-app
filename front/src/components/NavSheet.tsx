@@ -20,11 +20,7 @@ export default function NavSheet() {
       <SheetContent className="rounded-md rounded-t-none " side={"left"}>
         <SheetHeader className="">
           <SheetTitle className="flex items-center justify-center ">
-            <img
-              src={noPayLogo}
-              alt="Nopay Logo"
-              className="size-40"
-            />
+            <img src={noPayLogo} alt="Nopay Logo" className="size-40" />
           </SheetTitle>
         </SheetHeader>
         <div className="border-b border-line pb-2 flex-grow">

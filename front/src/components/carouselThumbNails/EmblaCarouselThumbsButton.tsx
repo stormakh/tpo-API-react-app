@@ -1,19 +1,21 @@
-import React, { ReactNode } from 'react'
+import { cn } from "@/lib/utils";
+import React, { ReactNode } from "react";
 
 type PropType = {
-  selected: boolean
-  index: number
-  onClick: () => void
-  slide: ReactNode
-}
+  selected: boolean;
+  index: number;
+  onClick: () => void;
+  slide: ReactNode;
+};
 
 export const Thumb: React.FC<PropType> = (props) => {
-  const { selected, index, onClick, slide } = props
+  const { selected, index, onClick, slide } = props;
 
   return (
     <div
-      className={'embla-thumbs__slide'.concat(
-        selected ? ' embla-thumbs__slide--selected' : ''
+      className={cn(
+        "embla-thumbs__slide flex-1 min-w-0 aspect-square overflow-hidden ",
+        selected ? " embla-thumbs__slide--selected" : ""
       )}
     >
       <button
@@ -24,5 +26,5 @@ export const Thumb: React.FC<PropType> = (props) => {
         {slide}
       </button>
     </div>
-  )
-}
+  );
+};
