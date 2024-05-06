@@ -10,6 +10,10 @@ import { fetchAllProducts } from "@/lib/products";
 import { Product } from "@/models/products";
 import CatalogSkeleton from "@/components/catalog/CatalogSkeleton";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Link } from "react-router-dom";
+
+import { UseDispatch, useDispatch } from "react-redux"; 
+import { addProduct } from "@/store/store";
 
 const categories = ["Men", "Casual", "Women", "Formal",'None'];
 
@@ -17,6 +21,7 @@ export default function Catalog() {
   const currentProdsRef = useRef<Product[]>([]);
   const [filteredProds, setFilteredProds] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const dispatch = useDispatch(); 
 
   useEffect(() => {
     fetchAllProducts().then((prods) => {
@@ -27,6 +32,10 @@ export default function Catalog() {
       }, 1000);
     });
   }, []);
+
+  function handleAddProductToCart(prod: Product){
+    dispatch(addProduct(prod));
+  }
 
   if (isLoading) {
     return (
@@ -63,17 +72,19 @@ export default function Catalog() {
       <div className="grid  gap-4 mt-8 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
         {filteredProds.map((prod) => (
           <div className="flex flex-col gap-2">
-            <CarouselWrapper
-              ratio={9 / 16}
-              slides={[<ImageSlide src={Eye} />, "text", 5, 3, 4]}
-              options={{ loop: true }}
-              className="min-w-[200px] "
-              key={prod.id}
-            >
-              <p className="  text-zinc-950 absolute top-0 left-0 transform -rotate-90 -translate-x-2 translate-y-12 antialiased opacity-65 z-10">
-                <b>NEW</b> IN
-              </p>
-            </CarouselWrapper>
+            <Link to={`/product-details-client/${prod.id}`} replace>
+              <CarouselWrapper
+                ratio={9 / 16}
+                slides={[<ImageSlide src={Eye} />, "text", 5, 3, 4]}
+                options={{ loop: true }}
+                className="min-w-[200px] "
+                key={prod.id}
+              >
+                <p className="  text-zinc-950 absolute top-0 left-0 transform -rotate-90 -translate-x-2 translate-y-12 antialiased opacity-65 z-10">
+                  <b>NEW</b> IN
+                </p>
+              </CarouselWrapper>
+            </Link>
             <p className="text-start z-10">
               {prod.name.toUpperCase()} <b>${prod.price}</b>
             </p>

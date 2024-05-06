@@ -2,6 +2,7 @@
 export interface Product {
     id: number;
     name: string;
+    description: string;
     price: number;
     colors : string[];
     sizes : string[];
@@ -9,4 +10,5 @@ export interface Product {
     categories: string[];
     material : string[];
     imgs?: string[];
+    parentCategories: string[];
 }

@@ -12,9 +12,9 @@ import NavSheet from "./NavSheet";
 import { UserSession } from "@/models/users";
 import { useDispatch } from "react-redux";
 import { clearUserSession } from "@/store/store";
-
+import noPayLogo from "@/assets/nopay.svg";
 interface NavBarProps  {
-  user : UserSession | null;
+  user? : UserSession | null;
 }
 
 export default function NavBar({user} : NavBarProps) {
@@ -33,7 +33,7 @@ export default function NavBar({user} : NavBarProps) {
       <div className="justify-self-center">
         <Link to="/">
         <img
-          src="./src/assets/nopay.svg"
+          src={noPayLogo}
           alt="Nopay Logo"
           className="size-40"
         />

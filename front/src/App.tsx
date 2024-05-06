@@ -1,8 +1,5 @@
 // src/App.tsx
-import { useMemo } from "react";
-import { useSelector } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { AppState } from "@/store/store";
 import CustomerLayout from "@/pages/layouts/CustomerLayout";
 import SellerLayout from "@/pages/layouts/SellerLayout";
 import Home from "./pages/Home";
@@ -18,23 +15,16 @@ import ProductDetailsSeller from "./pages/ProductDetailsSeller";
 export default function App() {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "",
       element: <CustomerLayout />,
+      errorElement: <h1>Not Found</h1>,
       children: [
         { path: "", element: <Home /> },
         { path: "catalog", element: <Catalog /> },
-      ],
-    },
-    { path: "login", element: <LogIn /> },
-    { path: "register", element: <Register /> },
-    {
-      path: "/customer",
-      element: <CustomerLayout />,
-      children: [
-        { path: "", element: <Home /> },
-        { path: "catalog", element: <Catalog /> },
+        { path: "login", element: <LogIn /> },
+        { path: "register", element: <Register /> },
         {
-          path: "product-details-client",
+          path: "product-details-client/:id",
           element: <ProductDetailsClient />,
         },
         { path: "shopping-cart", element: <ShoppingCart /> },
