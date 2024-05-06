@@ -20,32 +20,47 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { fetchById } from "@/lib/products";
+import { Product } from "@/models/products";
 
 const imageSources = [
-  "src/assets/Sample_1.svg",
-  "src/assets/Sample_2.svg",
-  "src/assets/Sample_4.svg",
-  "src/assets/Sample_3.svg",
+  "/src/assets/Sample_1.svg",
+  "/src/assets/Sample_2.svg",
+  "/src/assets/Sample_4.svg",
+  "/src/assets/Sample_3.svg",
 ];
 
 const sizeSources = [
-  "src/assets/Size_1.svg",
-  "src/assets/Size_2.svg",
-  "src/assets/Size_3.svg",
-  "src/assets/Size_4.svg",
-  "src/assets/Size_5.svg",
-  "src/assets/Size_6.svg",
-  "src/assets/Size_7.svg",
+  "/src/assets/Size_1.svg",
+  "/src/assets/Size_2.svg",
+  "/src/assets/Size_3.svg",
+  "/src/assets/Size_4.svg",
+  "/src/assets/Size_5.svg",
+  "/src/assets/Size_6.svg",
+  "/src/assets/Size_7.svg",
 ];
 
 export default function () {
+  const { id } = useParams<{ id: string }>();
+  const [prod, setProd] = useState<Product | undefined>();
+
+  useEffect(() => {
+    if (!id) return;
+    const parsedId = parseInt(id);
+    fetchById(parsedId).then((prod) => {
+      setProd(prod);
+    });
+  }, []);
+
   return (
     <>
       <Banner text="Jeans" />
       <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
-        Ropa / Pantalones / Jeans
+        {prod?.categories?.join(" / ")}
       </h1>
-      <section className="font-roboto w-auto flex flex-row items-center gap-8 h-fit">
+      <section className="font-roboto w-auto flex flex-row items-center gap-8 h-fit m-8">
         <section className="flex justify-around">
           <Carousel
             opts={{
@@ -66,22 +81,21 @@ export default function () {
           </Carousel>
           <img src="src/assets/Sample_Big.svg" className="size-4/6"></img>
         </section>
-        <Card>
-          <CardContent className="self-start pt-8">
+        <Card className="min-w-0 flex-grow">
+          <CardContent className="">
             <CardHeader className="font-bold font-roboto text-5xl">
-              Jeans Iron washed
+              {prod?.name}
             </CardHeader>
             <div className="flex justify-between">
-              <h3 className="font-roboto text-4xl">$150.000</h3>
-              <h3 className="font-roboto"> 3 Cuotas sin interés de $50.000</h3>
+              <h3 className="font-roboto text-4xl">${prod?.price}</h3>
+              <h3 className="font-roboto">
+                {" "}
+                3 Cuotas sin interés de $
+                {prod ? (prod.price / 3).toFixed(2) : null}
+              </h3>
             </div>
             <Separator className="mx-auto bg-silk my-7" />
-            <p className="font-roboto text-2xl">
-              Sumérgete en un estilo casual con nuestro jean azul desgastado. Su
-              corte holgado y detalles de costuras visibles ofrecen comodidad y
-              estilo. Combínalo con una camiseta simple o una camisa para
-              cualquier ocasión.
-            </p>
+            <p className="font-roboto text-2xl">{prod?.description}</p>
             <h2 className="font-roboto font-semibold my-5 text-3xl">Size</h2>
             <Carousel
               opts={{
@@ -99,7 +113,9 @@ export default function () {
                 ))}
               </CarouselContent>
             </Carousel>
-            <h2 className="font-roboto font-semibold my-5 text-3xl">Colour</h2>
+            <h2 className="font-roboto font-semibold my-5 text-3xl">
+              {prod?.colors}
+            </h2>
             <Popover>
               <PopoverTrigger>
                 <img

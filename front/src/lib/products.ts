@@ -10,6 +10,14 @@ export function filterByCategorie(
   products: Product[],
   categorie: string
 ): Product[] {
-    
-return products.filter((product) => product.categories.includes(categorie));
+  if (categorie === "None") {
+    return products;
+  } else {
+    return products.filter((product) => product.categories.includes(categorie));
+  }
 }
+
+export async function fetchById(id: number){
+  const prod = productsMock.find((prod) => prod.id === id);
+  return prod;
+} ;

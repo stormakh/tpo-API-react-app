@@ -6,14 +6,14 @@ import Footer from "@/components/Footer"; // Shared footer
 
 import { checkCorrectPath } from "@/lib/users";
 import { UserSession, UserType } from "@/models/users";
+import { useSelector } from "react-redux";
 
-interface SellerLayoutProps {
-  user : UserSession | null;
-}
+interface SellerLayoutProps {}
 
-
-export default function SellerLayout ({user} : SellerLayoutProps){
-  
+export default function SellerLayout({}: SellerLayoutProps) {
+  const user = useSelector(
+    (state: { userSession: UserSession }) => state.userSession
+  );
   const navigate = useNavigate();
   const expectedUserType = "seller" as UserType;
 
@@ -21,8 +21,8 @@ export default function SellerLayout ({user} : SellerLayoutProps){
     if (user !== null) {
       checkCorrectPath(user?.type, expectedUserType, navigate);
       console.log("userType", user);
-    }else{
-      checkCorrectPath(null,expectedUserType,navigate)
+    } else {
+      checkCorrectPath(null, expectedUserType, navigate);
     }
   }, [user]);
 
@@ -35,6 +35,4 @@ export default function SellerLayout ({user} : SellerLayoutProps){
       <Footer />
     </>
   );
-};
-
-
+}
