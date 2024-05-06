@@ -20,7 +20,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchById } from "@/lib/products";
 import { Product } from "@/models/products";
@@ -77,10 +77,13 @@ export default function () {
 
   return (
     <>
-      <Banner text="Jeans" />
-      <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
+      <Banner text={prod?.parentCategories?.[1]} />
+      {/* <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
         {prod?.categories?.join(" / ")}
-      </h1>
+  </h1>*/}
+      <Link to = "/catalog">
+          <p className="font-roboto text-left text-m mt-5 ml-12 font-thin">Volver</p>
+      </Link>
       <section className="font-roboto flex flex-row items-stretch justify-stretch gap-8 m-8">
         <section className=" h-full w-5/12">
           <CarouselThumbsWrapper

@@ -3,7 +3,7 @@
     "id": 1,
     "name": "T-Shirt",
     "price": 19.99,
-    "description": "bla bla bla bla",
+    "description": "Eleva tu estilo casual con nuestra camiseta de algodón ultra suave. Sus colores vivos y su ajuste perfecto te harán destacar en cualquier ocasión. Combínala con unos vaqueros desgastados para un look fresco y desenfadado.",
     "colors": ["Red", "Blue", "Green"],
     "sizes": ["S", "M", "L"],
     "stock": 50,
@@ -20,7 +20,7 @@
   {
     "id": 2,
     "name": "Jeans",
-    "description": "bla bla bla bla",
+    "description": "Deslízate en el mundo del denim con nuestros jeans aspecto vintage. Su corte moderno y detalles únicos te garantizan un estilo auténtico. Perfectos para combinar con una camiseta gráfica y tus zapatillas favoritas.",
     "price": 49.99,
     "colors": ["Black", "Blue"],
     "sizes": ["S", "M", "L", "XL"],
@@ -38,7 +38,7 @@
   {
     "id": 3,
     "name": "Dress",
-    "description": "bla bla bla bla",
+    "description": "Embárcate en un viaje de elegancia con nuestro vestido de seda. Su silueta fluida y detalles delicados te harán sentir como una diva moderna. Ideal para ocasiones especiales o una noche en la ciudad.",
     "price": 79.99,
     "colors": ["Red", "Black"],
     "sizes": ["S", "M", "L"],
@@ -56,7 +56,7 @@
   {
     "id": 4,
     "name": "Sweater",
-    "description": "bla bla bla bla",
+    "description": "Envolvete en confort y estilo con nuestro suéter de lana. Su textura suave y su diseño atemporal te mantendrán abrigado con un toque de sofisticación. Combínalo con unos pantalones chinos para un look casual chic.",
     "price": 39.99,
     "colors": ["Gray", "Navy"],
     "sizes": ["S", "M", "L"],
@@ -74,7 +74,7 @@
   {
     "id": 5,
     "name": "Shorts",
-    "description": "bla bla bla bla",
+    "description": "Desata tu espíritu aventurero con nuestros shorts de algodón en tono khaki o negro. Su diseño versátil y bolsillos funcionales te acompañarán en todas tus aventuras. Perfectos para combinar con una camisa de lino y unas sandalias cómodas.",
     "price": 29.99,
     "colors": ["Khaki", "Black"],
     "sizes": ["S", "M", "L"],
@@ -92,7 +92,7 @@
   {
     "id": 6,
     "name": "Vest",
-    "description": "bla bla bla bla",
+    "description": "Añade un toque de glamour a tu outfit con nuestro chaleco de tela ligera. Sus detalles en encaje y su corte moderno lo convierten en el complemento perfecto para cualquier ocasión. Combínalo con unos pantalones de talle alto para un look elegante y sofisticado.",
     "price": 34.99,
     "colors": ["White", "Pink"],
     "sizes": ["S", "M", "L"],
@@ -110,7 +110,7 @@
   {
     "id": 7,
     "name": "Jacket",
-    "description": "bla bla bla bla",
+    "description": "Haz una declaración de estilo con nuestra chaqueta de cuero clásica. Su diseño atemporal y su calidad excepcional te garantizan un look urbano y sofisticado. Combínala con unos vaqueros ajustados y botines para un outfit de alto impacto.",
     "price": 89.99,
     "colors": ["Black", "Brown"],
     "sizes": ["S", "M", "L", "XL"],
@@ -128,7 +128,7 @@
   {
     "id": 8,
     "name": "Skirt",
-    "description": "bla bla bla bla",
+    "description": "Despierta tu lado femenino con nuestra falda corte midi. Su tejido ligero y su movimiento fluido te harán sentir cómoda y elegante a la vez. Ideal para combinar con una blusa delicada y unos tacones altos para un look chic y sofisticado.",
     "price": 49.99,
     "colors": ["Black", "Gray"],
     "sizes": ["S", "M", "L"],
@@ -146,7 +146,7 @@
   {
     "id": 9,
     "name": "Hoodie",
-    "description": "bla bla bla bla",
+    "description": "Abrígate con estilo con nuestra sudadera con capucha. Su tejido suave y su corte holgado te brindarán comodidad sin sacrificar el estilo. Perfecta para combinar con unos joggers y zapatillas deportivas para un look relajado y moderno.",
     "price": 44.99,
     "colors": ["Gray", "Blue"],
     "sizes": ["S", "M", "L", "XL"],
@@ -164,7 +164,7 @@
   {
     "id": 10,
     "name": "Pants",
-    "description": "bla bla bla bla",
+    "description": "Eleva tu estilo casual con nuestros pantalones de corte recto. Su tejido elástico y su ajuste perfecto te garantizan comodidad durante todo el día. Combínalos con una camiseta básica y unos botines para un look urbano y versátil.",
     "price": 59.99,
     "colors": ["Black", "Navy"],
     "sizes": ["S", "M", "L", "XL"],
