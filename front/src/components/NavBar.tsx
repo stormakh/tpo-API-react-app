@@ -8,6 +8,7 @@ import {
 import { Link } from "react-router-dom";
 import NavSheet from "./NavSheet";
 
+
 import { UserSession } from "@/models/users";
 import { useDispatch } from "react-redux";
 import { clearUserSession } from "@/store/store";
@@ -30,29 +31,29 @@ export default function NavBar({user} : NavBarProps) {
     <nav className="static top-0 w-screen h-auto  grid grid-cols-3 items-center px-4">
       <NavSheet />
       <div className="justify-self-center">
+        <Link to="/">
         <img
           src="./src/assets/nopay.svg"
           alt="Nopay Logo"
           className="size-40"
         />
+      </Link> 
       </div>
       <div className="flex justify-self-end gap-2 px-4">
-        <Button size="icon" className="bg-transparent hover:bg-slate-50">
+        {/*<Button size="icon" className="bg-transparent hover:bg-slate-50">
           <Search color="black" />
-        </Button>
+  </Button>*/}
         <Button size="icon" className="bg-transparent hover:bg-slate-50">
           <Link to="/login">
             <UserRound color="black" />
-            
           </Link>
         </Button>
         {user !== null ? <Button onClick={handleLogOutUser}>{user?.username}</Button> : null}
-        <Button size="icon" className="bg-transparent hover:bg-slate-50">
+        {/*<Button size="icon" className="bg-transparent hover:bg-slate-50">
           <Heart color="black" />
-        </Button>
+  </Button>*/}
         <Button size="icon" className="bg-transparent hover:bg-slate-50">
           <ShoppingBag className="mr-1" color="black" />
-          
         </Button>
       </div>
     </nav>
