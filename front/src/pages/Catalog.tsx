@@ -12,16 +12,16 @@ import CatalogSkeleton from "@/components/catalog/CatalogSkeleton";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "react-router-dom";
 
-import { UseDispatch, useDispatch } from "react-redux"; 
+import { UseDispatch, useDispatch } from "react-redux";
 import { addProduct } from "@/store/store";
 
-const categories = ["Men", "Casual", "Women", "Formal",'None'];
+const categories = ["Men", "Casual", "Women", "Formal", "None"];
 
 export default function Catalog() {
   const currentProdsRef = useRef<Product[]>([]);
   const [filteredProds, setFilteredProds] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetchAllProducts().then((prods) => {
@@ -33,7 +33,7 @@ export default function Catalog() {
     });
   }, []);
 
-  function handleAddProductToCart(prod: Product){
+  function handleAddProductToCart(prod: Product) {
     dispatch(addProduct(prod));
   }
 

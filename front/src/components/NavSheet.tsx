@@ -37,12 +37,14 @@ export default function NavSheet({ products }: NavSheetProps) {
           <AlignJustify color="black" />
         </Button>
       </SheetTrigger>
-      <SheetContent className="rounded-md rounded-t-none" side={'left'}>
-        <SheetHeader>
-          <SheetTitle className="flex items-center justify-center">
-            <Link to="/">
-              <img src={noPayLogo} alt="Nopay Logo" className="size-40" />
-            </Link>
+      <SheetContent className="rounded-md rounded-t-none " side={"left"}>
+        <SheetHeader className="">
+          <SheetTitle className="flex items-center justify-center ">
+            <img
+              src={noPayLogo}
+              alt="Nopay Logo"
+              className="size-40"
+            />
           </SheetTitle>
         </SheetHeader>
         <div className="border-b border-line pb-2 flex-grow">
