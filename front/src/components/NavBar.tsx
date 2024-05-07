@@ -19,7 +19,6 @@ interface NavBarProps  {
 
 export default function NavBar({user} : NavBarProps) {
 
-  
   const dispatch = useDispatch();
 
   function handleLogOutUser(){
