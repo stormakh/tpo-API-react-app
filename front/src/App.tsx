@@ -21,8 +21,7 @@ export default function App() {
       children: [
         { path: "", element: <Home /> },
         { path: "catalog", element: <Catalog /> },
-        { path: "login", element: <LogIn /> },
-        { path: "register", element: <Register /> },
+        { path: "catalog/:categorie", element: <Catalog />},
         {
           path: "product-details-client/:id",
           element: <ProductDetailsClient />,
@@ -32,6 +31,8 @@ export default function App() {
         { path: "checkout", element: <Checkout /> },
       ],
     },
+    { path: "login", element: <LogIn /> },
+    { path: "register", element: <Register /> },
     {
       path: "/seller",
       element: <SellerLayout />,
