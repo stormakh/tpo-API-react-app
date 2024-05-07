@@ -43,13 +43,13 @@
   /* margin-left: calc(var(--thumbs-slide-spacing) * -1); */
 }
 .embla-thumbs__slide {
-  flex: 0 0 22%;
+  flex: 0 0 25%;
   min-width: 0;
   /* margin: var(--thumbs-slide-spacing); */
 }
 @media (min-width: 576px) {
   .embla-thumbs__slide {
-    flex: 0 0 15%;
+    flex: 0 0 30%;
   }
 }
 .embla-thumbs__slide__number {
@@ -60,7 +60,6 @@
   appearance: none;
   background-color: transparent;
   touch-action: manipulation;
-  display: inline-flex;
   text-decoration: none;
   cursor: pointer;
   border: 0;

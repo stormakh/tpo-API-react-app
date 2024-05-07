@@ -1,5 +1,5 @@
 import Banner from "@/components/Banner";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
+
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import {
@@ -26,8 +26,8 @@ import { fetchById } from "@/lib/products";
 import { Product } from "@/models/products";
 import { useDispatch } from "react-redux";
 import { addProduct } from "@/store/store";
-import CarouselThumbsWrapper from "@/components/carouselThumbNails/CarouselThumbsWrapper";
-import ImageSlide from "@/components/carousel/ImageSlide";
+
+import EmblaCarouselThumbs from "@/components/carouselThumbNails/EmblaCarouselThumbs";
 
 const sizeSources = [
   "/src/assets/Size_1.svg",
@@ -53,8 +53,6 @@ const initialState: Product = {
   parentCategories: [],
 };
 
-
-
 export default function () {
   const { id } = useParams<{ id: string }>();
   const [prod, setProd] = useState<Product>(initialState);
@@ -64,7 +62,7 @@ export default function () {
     if (!id) return;
     const parsedId = parseInt(id);
     fetchById(parsedId).then((prod) => {
-      if(prod === undefined) return;
+      if (prod === undefined) return;
       setProd(prod);
     });
   }, []);
@@ -77,23 +75,20 @@ export default function () {
 
   return (
     <>
-      <Banner text="Jeans" />
+      <Banner text={prod.parentCategories[1]} />
       <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
         {prod?.categories?.join(" / ")}
       </h1>
-      <section className="font-roboto flex flex-row items-stretch justify-stretch gap-8 m-8">
-        <section className=" h-full w-5/12">
-          <CarouselThumbsWrapper
-            slides={prod.images.map((image, index) => {
-              return <img key={index} src={image} />;
-            })}
-            ratio={9 / 16}
-            options={{ loop: true }}
-            className="w-full h-full"
-          />
-        </section>
-        <Card className="min-w-0 flex-grow ">
-          <CardContent className="">
+      <section className="font-roboto grid grid-cols-1 md:grid-cols-8 gap-4 m-8 md:items-start place-items-center">
+        <EmblaCarouselThumbs
+          slides={prod?.images.map((image) => {
+            return <img src={image} className=""></img>;
+          })}
+          className="md:col-span-3 lg:col-span-3 xl:col-span-2"
+        />
+
+        <Card className=" min-w-0 w-full h-fit flex flex-col justify-center col-span-1 md:col-span-5">
+          <CardContent className=" ">
             <CardHeader className="font-bold font-roboto text-5xl">
               {prod?.name}
             </CardHeader>
@@ -129,10 +124,7 @@ export default function () {
             </h2>
             <Popover>
               <PopoverTrigger>
-                <img
-                  src="src/assets/ColorPicker.svg"
-                  className="size-3/5"
-                ></img>
+                <img src="/src/assets/ColorPicker.svg" className=""></img>
               </PopoverTrigger>
               <PopoverContent>Color palette goes here</PopoverContent>
             </Popover>
