@@ -9,10 +9,8 @@ import {  useSelector } from "react-redux";
 
 export default function ShoppingCart() {
  
-  const cartAmouts = { subTotal: 1000, shipCost: 300, serviceTax: 20 };
-  
+  const cartAmouts = { subTotal: 1000, shipCost: 5, serviceTax: 2 };
   const cart = useSelector((state: { products: cartProduct[] }) => state.products);
-  
   
   return (
     <>
@@ -53,12 +51,13 @@ export default function ShoppingCart() {
 
             </tbody>
           </table>
-          <Link to={"../catalog"}>
-            <button className="flex pt-12">
+          <button className="flex pt-12">
+            <Link to={"../catalog"}>
               <ArrowLeft></ArrowLeft>
               <p className="pl-3">Seguir Comprando</p>
-            </button>
-          </Link>
+            </Link>
+          </button>
+          
         </section>
 
         <section className=" w-1/3 font-roboto h-full p-10 pl-20 pr-20 flex flex-col justify-start">

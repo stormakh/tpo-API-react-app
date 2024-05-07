@@ -2,7 +2,6 @@ import Banner from "@/components/Banner";
 import CarouselWrapper from "@/components/carousel/CarouselWrapper";
 import ImageSlide from "@/components/carousel/ImageSlide";
 import CatalogMenu from "@/components/catalog/CatalogMenu";
-import Eye from "../assets/Eye.svg";
 import CatalogFilter from "@/components/catalog/CatalogFilter";
 import { useEffect, useRef, useState } from "react";
 import { fetchAllProducts } from "@/lib/products";

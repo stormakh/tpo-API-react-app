@@ -8,7 +8,6 @@ import {
   CreditCard,
   RefreshCcw,
   Store,
-  Terminal,
 } from "lucide-react";
 import {
   Carousel,
@@ -25,10 +24,6 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchById } from "@/lib/products";
 import { Product } from "@/models/products";
-import { useDispatch } from "react-redux";
-import { addProduct } from "@/store/store";
-import store from "@/store/store";
-import { cartProduct } from "@/models/cartProduct";
 import { useDispatch } from "react-redux";
 import { addProduct } from "@/store/store";
 
@@ -63,9 +58,6 @@ export default function () {
   const [prod, setProd] = useState<Product>(initialState);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const dispatch = useDispatch();
-  const [prod,setProd] = useState<Product>();
-  const dispatch = useDispatch(); 
-  
   useEffect(() => {
     if (!id) return;
     const parsedId = parseInt(id);
@@ -74,11 +66,6 @@ export default function () {
       setProd(prod);
     });
   }, []);
-
-  const handleAddProductToCart = () => {
-    dispatch(addProduct(prod!));
-    // add toast here
-  }
 
   function handleAddToCart() {
     if (prod === undefined) return;
@@ -104,33 +91,6 @@ export default function () {
 
         <Card className=" min-w-0 w-full h-fit flex flex-col justify-center col-span-1 md:col-span-5">
           <CardContent className=" ">
-      <Banner text="Jeans" />
-      <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
-        {prod?.categories?.join(" / ")}
-      </h1>
-      <section className="font-roboto w-auto flex flex-row items-center gap-8 h-fit m-8">
-        <section className="flex justify-around">
-          <Carousel
-            opts={{
-              align: "start",
-            }}
-            orientation="vertical"
-            className="flex max-w-xs mx-24"
-          >
-            <CarouselContent className="-mt-1 h-fill ">
-              {imageSources.map((source, index) => (
-                <CarouselItem key={index} className="pt-1 md:basis-1/2">
-                  <div className="p-1">
-                    <img src={source} className="mb-5"></img>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-          <img src="/src/assets/Sample_Big.svg" className="size-4/6"></img>
-        </section>
-        <Card className="min-w-0 flex-grow">
-          <CardContent className="">
             <CardHeader className="font-bold font-roboto text-5xl">
               {prod?.name}
             </CardHeader>
@@ -178,7 +138,7 @@ export default function () {
 
               <Button
                 disabled={!isLoading}
-                className="my-5 w-96 h-20 text-xl" onClick={() => handleAddProductToCart()}
+                className="my-5 w-96 h-20 text-xl"
                 onClick={handleAddToCart}
               >
                 <ShoppingBag className="mr-2" /> Add to Cart
@@ -215,3 +175,110 @@ export default function () {
   );
 }
 
+/*
+
+      <Banner text="Jeans" />
+      <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
+        Ropa / Pantalones / Jeans
+      </h1>
+      <div className="w-auto">
+        <div className=" flex items-center">
+          <Carousel
+            opts={{
+              align: "start",
+            }}
+            orientation="vertical"
+            className="flex-none w-full max-w-xs p-5 ml-24"
+          >
+            <CarouselContent className="-mt-1 h-fill ">
+              {imageSources.map((source, index) => (
+                <CarouselItem key={index} className="pt-1 md:basis-1/2">
+                  <div className="p-1">
+                    <img src={source} className="mb-5"></img>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+          <AspectRatio ratio={16 / 9} className="mt-9 flex-none">
+            <img src="src/assets/Sample_Big.svg" className="bg-fill"></img>
+          </AspectRatio>
+          <div className="mx-12 w-fit h-fit self-start pt-8">
+            <h2 className="font-bold font-roboto text-5xl">
+              Jeans Iron washed
+            </h2>
+            <div className="flex justify-between my-9">
+              <h3 className="font-roboto text-4xl">$150.000</h3>
+              <h3 className="font-roboto"> 3 Cuotas sin interés de $50.000</h3>
+            </div>
+            <Separator className="mx-auto bg-silk" />
+            <p className="font-roboto text-2xl">
+              Sumérgete en un estilo casual con nuestro jean azul desgastado. Su
+              corte holgado y detalles de costuras visibles ofrecen comodidad y
+              estilo. Combínalo con una camiseta simple o una camisa para
+              cualquier ocasión.
+            </p>
+            <h2 className="font-roboto font-semibold my-5 text-3xl">Size</h2>
+            <div className="my-5">
+              <Carousel
+                opts={{
+                  align: "start",
+                }}
+                className="w-full"
+              >
+                <CarouselContent className="-mt-1 h-fill w-52 ">
+                  {sizeSources.map((source, index) => (
+                    <CarouselItem key={index} className="pt-1 md:basis-1/2">
+                      <div className="p-1">
+                        <img src={source} className="mb-5"></img>
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+              </Carousel>
+            </div>
+            <h2 className="font-roboto font-semibold my-5 text-3xl">Colour</h2>
+            <Popover>
+              <PopoverTrigger>
+                <img
+                  src="src/assets/ColorPicker.svg"
+                  className="size-3/5"
+                ></img>
+              </PopoverTrigger>
+              <PopoverContent>Color palette goes here</PopoverContent>
+            </Popover>
+            <div className="flex flex-col">
+              <a className="underline text-3xl mt-20">Ver Guía de talles</a>
+              <Button className="my-5 w-96 h-20 text-xl">
+                <ShoppingBag className="mr-2" /> Add to Cart
+              </Button>
+              <div className="flex items-center text-xl">
+                <MapPin className="size-auto" />
+                <a className="my-5 ml-2 font-roboto font-semibold">
+                  Métodos de Envío
+                </a>
+              </div>
+              <div className="flex items-center text-xl">
+                <CreditCard className="size-auto" />
+                <a className="my-5 ml-2 font-roboto font-semibold">
+                  Hasta 6 cuotas sin interés
+                </a>
+              </div>
+              <div className="flex items-center text-xl">
+                <RefreshCcw className="size-auto" />
+                <a className="my-5 ml-2 font-roboto font-semibold">
+                  Cambios y devoluciones
+                </a>
+              </div>
+              <div className="flex items-center text-xl">
+                <Store className="size-auto" />
+                <a className="my-5 ml-2 font-roboto font-semibold">
+                  Pick up en tienda
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+*/

@@ -6,15 +6,15 @@ import PaymentCard from "@/components/ShoppingCart/PaymentCard";
 import { Button } from "@/components/ui/button";
 import store from "@/store/store";
 import { ArrowLeft } from "lucide-react";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {clearProducts} from "@/store/store"
+import { cartProduct } from "@/models/cartProduct";
 
-export default function () {
+export default function Checkout() {
 
-  const products = store.getState().products;
-  
+  const products = useSelector((state: { products: cartProduct[] }) => state.products);
+
   const dispatch = useDispatch();
   function handleCheckout(){
     dispatch(clearProducts());
@@ -51,12 +51,11 @@ export default function () {
               apoyar tu experiencia en este sitio web. La misma también podrá
               ser utilizada para futuras acciones de marketing.
             </div>
-            <Link to={"/"} onClick={handleCheckout}>
-              <Button className="bg-black border-silk border-2 text-black w-full h-16 text-2xl text-white mt-5" >
-                  Finalizar Compra
-              </Button>
+            <Button className="bg-black border-silk border-2 text-black w-full h-16 text-2xl text-white mt-5" onClick={handleCheckout}>
+              <Link to={"/"} >
+                Finalizar Compra
               </Link>
-            
+            </Button>
           </div>
         </div>
       </div>
