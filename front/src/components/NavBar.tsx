@@ -26,7 +26,6 @@ export default function NavBar({user} : NavBarProps) {
     dispatch(clearUserSession());
   }
 
-
   return (
     <nav className="static top-0 w-screen h-auto  grid grid-cols-3 items-center px-4">
       <NavSheet />

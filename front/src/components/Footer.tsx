@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 
 import React from "react";
 
-
-
 const Footer: React.FC = () => {
   return (
     <footer className="bg-footer p-4 sticky bottom-auto w-screen font-roboto">
