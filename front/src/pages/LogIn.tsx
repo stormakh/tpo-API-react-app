@@ -1,7 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-
 import image from "/src/assets/LogIn_Back.svg";
 import { useRef, useState } from "react";
 import { fetchUserByNameAndPassword } from "@/lib/users";
@@ -57,10 +56,10 @@ export default function LogIn() {
           />
           <h1 className="text-3lx font-semibold text-silk">Bienvenido</h1>
           <h2 className="text-center text-silk text-sm font-light">
-              ¿No tienes una cuenta?{' '}
-              <Link to="/register" className="font-semibold text-black">
-                  Crea una aquí
-               </Link>
+            ¿No tienes una cuenta?{" "}
+            <Link to="/register" className="font-semibold text-black">
+              Crea una aquí
+            </Link>
           </h2>
           <div className="relative w-full flex flex-col items-center justify-center space-y-4">
             <Input
@@ -83,7 +82,7 @@ export default function LogIn() {
                 className=" w-full"
               />
             </div>
-  
+
             <Button
               onClick={handleLogin}
               className="my-6 w-full font-semibold text-lg bg-chiro-nopay"
@@ -96,5 +95,4 @@ export default function LogIn() {
       </div>
     </div>
   );
-  
 }

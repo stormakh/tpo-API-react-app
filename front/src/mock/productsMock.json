@@ -1,132 +1,181 @@
 [
-    {
-        "id": 1,
-        "name": "T-Shirt",
-        "price": 19.99,
-        "description": "bla bla bla bla",
-        "colors": ["Red", "Blue", "Green"],
-        "sizes": ["S", "M", "L"],
-        "stock": 50,
-        "categories": ["Men", "Casual"],
-        "material": ["Cotton"],
-        "imgs":[],
-        "parentCategories": ["Clothes", "Upper"]
-    },
-    {
-        "id": 2,
-        "name": "Jeans",
-        "description": "bla bla bla bla",
-        "price": 49.99,
-        "colors": ["Black", "Blue"],
-        "sizes": ["S", "M", "L", "XL"],
-        "stock": 30,
-        "categories": ["Women", "Casual"],
-        "material": ["Denim"],
-        "imgs":[],
-        "parentCategories": ["Clothes", "Lower"]
-    },
-    {
-        "id": 3,
-        "name": "Dress",
-        "description": "bla bla bla bla",
-        "price": 79.99,
-        "colors": ["Red", "Black"],
-        "sizes": ["S", "M", "L"],
-        "stock": 20,
-        "categories": ["Women", "Formal"],
-        "material": ["Silk"],
-        "imgs":[],
-        "parentCategories": ["Clothes", "Lower"]
-    },
-    {
-        "id": 4,
-        "name": "Sweater",
-        "description": "bla bla bla bla",
-        "price": 39.99,
-        "colors": ["Gray", "Navy"],
-        "sizes": ["S", "M", "L"],
-        "stock": 40,
-        "categories": ["Men", "Women", "Casual"],
-        "material": ["Wool"],
-        "imgs":[],
-        "parentCategories": ["Clothes", "Upper"]
-    },
-    {
-        "id": 5,
-        "name": "Shorts",
-        "description": "bla bla bla bla",
-        "price": 29.99,
-        "colors": ["Khaki", "Black"],
-        "sizes": ["S", "M", "L"],
-        "stock": 60,
-        "categories": ["Men", "Casual"],
-        "material": ["Cotton"],
-        "imgs":[],
-        "parentCategories": ["Clothes", "Lower"]
-    },
-    {
-        "id": 6,
-        "name": "Blouse",
-        "description": "bla bla bla bla",
-        "price": 34.99,
-        "colors": ["White", "Pink"],
-        "sizes": ["S", "M", "L"],
-        "stock": 25,
-        "categories": ["Women", "Casual"],
-        "material": ["Polyester"],
-        "imgs":[],
-        "parentCategories": ["Clothes", "Upper"]
-    },
-    {
-        "id": 7,
-        "name": "Jacket",
-        "description": "bla bla bla bla",
-        "price": 89.99,
-        "colors": ["Black", "Brown"],
-        "sizes": ["S", "M", "L", "XL"],
-        "stock": 15,
-        "categories": ["Men", "Women", "Casual"],
-        "material": ["Leather"],
-        "imgs":[],
-        "parentCategories": ["Clothes", "Upper"]
-    },
-    {
-        "id": 8,
-        "name": "Skirt",
-        "description": "bla bla bla bla",
-        "price": 49.99,
-        "colors": ["Black", "Gray"],
-        "sizes": ["S", "M", "L"],
-        "stock": 35,
-        "categories": ["Women", "Casual"],
-        "material": ["Cotton"],
-        "imgs":[],
-        "parentCategories": ["Clothes", "Lower"]
-    },
-    {
-        "id": 9,
-        "name": "Hoodie",
-        "description": "bla bla bla bla",
-        "price": 44.99,
-        "colors": ["Gray", "Blue"],
-        "sizes": ["S", "M", "L", "XL"],
-        "stock": 45,
-        "categories": ["Men", "Casual"],
-        "material": ["Cotton", "Polyester"],
-        "imgs":[],
-        "parentCategories": ["Clothes", "Upper"]
-    },
-    {
-        "id": 10,
-        "name": "Pants",
-        "description": "bla bla bla bla",
-        "price": 59.99,
-        "colors": ["Black", "Navy"],
-        "sizes": ["S", "M", "L", "XL"],
-        "stock": 55,
-        "categories": ["Men", "Casual"],
-        "material": ["Cotton"],
-        "imgs":[],
-        "parentCategories": ["Clothes", "Lower"]
-    }
+  {
+    "id": 1,
+    "name": "T-Shirt",
+    "price": 19.99,
+    "description": "bla bla bla bla",
+    "colors": ["Red", "Blue", "Green"],
+    "sizes": ["S", "M", "L"],
+    "stock": 50,
+    "categories": ["Men", "Casual"],
+    "material": ["Cotton"],
+    "parentCategories": ["Clothes", "Upper"],
+    "images": [
+      "/src/assets/T-Shirt-Blue-1.svg",
+      "/src/assets/T-Shirt-Blue-2.svg",
+      "/src/assets/T-Shirt-Blue-3.svg",
+      "/src/assets/T-Shirt-Blue-4.svg"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Jeans",
+    "description": "bla bla bla bla",
+    "price": 49.99,
+    "colors": ["Black", "Blue"],
+    "sizes": ["S", "M", "L", "XL"],
+    "stock": 30,
+    "categories": ["Women", "Casual"],
+    "material": ["Denim"],
+    "parentCategories": ["Clothes", "Lower"],
+    "images": [
+      "/src/assets/Jeans-Black-1.svg",
+      "/src/assets/Jeans-Black-2.svg",
+      "/src/assets/Jeans-Black-3.svg",
+      "/src/assets/Jeans-Black-4.svg"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Dress",
+    "description": "bla bla bla bla",
+    "price": 79.99,
+    "colors": ["Red", "Black"],
+    "sizes": ["S", "M", "L"],
+    "stock": 20,
+    "categories": ["Women", "Formal"],
+    "material": ["Silk"],
+    "parentCategories": ["Clothes", "Lower"],
+    "images": [
+      "/src/assets/Dress-Black-1.svg",
+      "/src/assets/Dress-Black-2.svg",
+      "/src/assets/Dress-Black-3.svg",
+      "/src/assets/Dress-Black-4.svg"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Sweater",
+    "description": "bla bla bla bla",
+    "price": 39.99,
+    "colors": ["Gray", "Navy"],
+    "sizes": ["S", "M", "L"],
+    "stock": 40,
+    "categories": ["Men", "Women", "Casual"],
+    "material": ["Wool"],
+    "parentCategories": ["Clothes", "Upper"],
+    "images": [
+      "/src/assets/Sweater-Black-1.svg",
+      "/src/assets/Sweater-Black-2.svg",
+      "/src/assets/Sweater-Black-3.svg",
+      "/src/assets/Sweater-Black-4.svg"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Shorts",
+    "description": "bla bla bla bla",
+    "price": 29.99,
+    "colors": ["Khaki", "Black"],
+    "sizes": ["S", "M", "L"],
+    "stock": 60,
+    "categories": ["Men", "Casual"],
+    "material": ["Cotton"],
+    "parentCategories": ["Clothes", "Lower"],
+    "images": [
+      "/src/assets/Shorts-Kaki-1.svg",
+      "/src/assets/Shorts-Kaki-2.svg",
+      "/src/assets/Shorts-Kaki-3.svg",
+      "/src/assets/Shorts-Kaki-4.svg"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Vest",
+    "description": "bla bla bla bla",
+    "price": 34.99,
+    "colors": ["White", "Pink"],
+    "sizes": ["S", "M", "L"],
+    "stock": 25,
+    "categories": ["Women", "Casual"],
+    "material": ["Polyester"],
+    "parentCategories": ["Clothes", "Upper"],
+    "images": [
+      "/src/assets/Vest-Black-1.svg",
+      "/src/assets/Vest-Black-2.svg",
+      "/src/assets/Vest-Black-3.svg",
+      "/src/assets/Vest-Black-4.svg"
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Jacket",
+    "description": "bla bla bla bla",
+    "price": 89.99,
+    "colors": ["Black", "Brown"],
+    "sizes": ["S", "M", "L", "XL"],
+    "stock": 15,
+    "categories": ["Men", "Women", "Casual"],
+    "material": ["Leather"],
+    "parentCategories": ["Clothes", "Upper"],
+    "images": [
+      "/src/assets/Jacket-Brown-1.svg",
+      "/src/assets/Jacket-Brown-2.svg",
+      "/src/assets/Jacket-Brown-3.svg",
+      "/src/assets/Jacket-Brown-4.svg"
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Skirt",
+    "description": "bla bla bla bla",
+    "price": 49.99,
+    "colors": ["Black", "Gray"],
+    "sizes": ["S", "M", "L"],
+    "stock": 35,
+    "categories": ["Women", "Casual"],
+    "material": ["Cotton"],
+    "parentCategories": ["Clothes", "Lower"],
+    "images": [
+      "/src/assets/Skirt-Black-1.svg",
+      "/src/assets/Skirt-Black-2.svg",
+      "/src/assets/Skirt-Black-3.svg",
+      "/src/assets/Skirt-Black-4.svg"
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Hoodie",
+    "description": "bla bla bla bla",
+    "price": 44.99,
+    "colors": ["Gray", "Blue"],
+    "sizes": ["S", "M", "L", "XL"],
+    "stock": 45,
+    "categories": ["Men", "Casual"],
+    "material": ["Cotton", "Polyester"],
+    "parentCategories": ["Clothes", "Upper"],
+    "images": [
+      "/src/assets/Hoodie-Gray-1.svg",
+      "/src/assets/Hoodie-Gray-2.svg",
+      "/src/assets/Hoodie-Gray-3.svg",
+      "/src/assets/Hoodie-Gray-4.svg"
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Pants",
+    "description": "bla bla bla bla",
+    "price": 59.99,
+    "colors": ["Black", "Navy"],
+    "sizes": ["S", "M", "L", "XL"],
+    "stock": 55,
+    "categories": ["Men", "Casual"],
+    "material": ["Cotton"],
+    "parentCategories": ["Clothes", "Lower"],
+    "images": [
+      "/src/assets/Pants-Black-1.svg",
+      "/src/assets/Pants-Black-2.svg",
+      "/src/assets/Pants-Black-3.svg"
+    ]
+  }
 ]
