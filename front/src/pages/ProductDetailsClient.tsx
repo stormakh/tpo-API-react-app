@@ -1,5 +1,4 @@
 import Banner from "@/components/Banner";
-
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import {
@@ -51,6 +50,7 @@ const initialState: Product = {
   material: [],
   images: [],
   parentCategories: [],
+  sellerId: 0
 };
 
 export default function () {

@@ -5,12 +5,13 @@ import CreditCards from "@/components/userProfile/CreditCards";
 import LogOut from "@/components/userProfile/LogOut";
 import Banner from "@/components/Banner";
 import { useState } from "react";
+import ABMUsers from "@/components/userProfile/ABMUsers";
 
 export default function () {
   const [activeButton, setActiveButton] = useState("User"); // Estado para almacenar el botón activo
 
   // Función para manejar el clic en un botón
-  const handleButtonClick = (buttonId) => {
+  const handleButtonClick = (buttonId: string) => {
     setActiveButton(buttonId); // Establecer el botón activo al que se ha clicado
   };
 
@@ -27,6 +28,8 @@ export default function () {
         return <Orders />;
       case "LogOut":
         return <LogOut />;
+      case "ABM":
+        return <ABMUsers />
       default:
         return null;
     }
@@ -54,6 +57,14 @@ export default function () {
               onClick={() => handleButtonClick("CreditCard")}
             >
               Credit Cards
+            </button>
+            <button
+              className={
+                activeButton === "ABM" ? Buttonclicked : ButtonNotClicked
+              }
+              onClick={() => handleButtonClick("ABM")}
+            >
+              ABM Users
             </button>
             <button
               className={

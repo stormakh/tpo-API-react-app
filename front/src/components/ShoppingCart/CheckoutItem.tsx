@@ -1,5 +1,3 @@
-import React from "react";
-import { Separator } from "../ui/separator";
 import { shoppingItem } from "@/models/shoppingItem";
 
 export default function CheckoutItem(product: shoppingItem){

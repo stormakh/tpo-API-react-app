@@ -11,6 +11,7 @@ export interface Product {
   material: string[];
   images: string[];
   parentCategories: parentCategorie[];
+  sellerId: number;
 }
 
 export enum parentCategorie {

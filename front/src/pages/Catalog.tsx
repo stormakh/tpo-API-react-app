@@ -16,7 +16,6 @@ export default function Catalog() {
   const [filteredProds, setFilteredProds] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  
   useEffect(() => {
     fetchAllProducts().then((prods) => {
       currentProdsRef.current = prods;

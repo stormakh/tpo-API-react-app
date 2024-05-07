@@ -39,12 +39,16 @@ export default function NavBar({ user }: NavBarProps) {
         {user !== null ? (
           <Button onClick={handleLogOutUser}>{user?.username}</Button>
         ) : null}
-
         <Button size="icon" className="bg-transparent hover:bg-slate-50">
           <Heart color="black" />
         </Button>
         <Button size="icon" className="bg-transparent hover:bg-slate-50">
           <ShoppingBag className="mr-1" color="black" />
+        </Button>
+        <Button size="icon" className="bg-transparent hover:bg-slate-50">
+          <Link to={"abm-products"}>
+            <ShoppingBag className="mr-1" color="black" />
+          </Link>
         </Button>
       </div>
     </nav>

@@ -20,4 +20,9 @@ export function filterByCategorie(
 export async function fetchById(id: number){
   const prod = productsMock.find((prod) => prod.id === id) as Product;
   return prod;
-} ;
+} 
+
+export async function fetchBySellerId(id: number): Promise<Product[]> {
+  const prods = productsMock.filter((prod) => prod.sellerId === id) as Product[];
+  return prods;
+}

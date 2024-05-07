@@ -11,6 +11,7 @@ import UserProfile from "./pages/UserProfile";
 import Checkout from "./pages/Checkout";
 import Register from "./pages/Register";
 import ProductDetailsSeller from "./pages/ProductDetailsSeller";
+import AMBProducts from "./pages/AMBProducts";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -40,9 +41,13 @@ export default function App() {
         { path: "", element: <Home /> },
         { path: "catalog", element: <Catalog /> },
         {
-          path: "product-details-sellers",
+          path: "product-details-sellers/:id",
           element: <ProductDetailsSeller />,
         },
+        {
+          path: "abm-products",
+          element: <AMBProducts></AMBProducts>
+        }
       ],
     },
   ]);

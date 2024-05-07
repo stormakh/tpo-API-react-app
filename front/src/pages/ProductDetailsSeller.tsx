@@ -20,26 +20,55 @@ import {
 } from "@/components/ui/popover";
 import ColorAdd from "../assets/ColorAdd.svg";
 
-const imageSources = [
-  "src/assets/Sample_1.svg",
-  "src/assets/Sample_2.svg",
-  "src/assets/Sample_4.svg",
-  "src/assets/Sample_3.svg",
+const sizeSources = [
+  "/src/assets/Size_1.svg",
+  "/src/assets/Size_2.svg",
+  "/src/assets/Size_3.svg",
+  "/src/assets/Size_4.svg",
+  "/src/assets/Size_5.svg",
+  "/src/assets/Size_6.svg",
+  "/src/assets/Size_7.svg",
 ];
 
-const sizeSources = [
-  "src/assets/Size_1.svg",
-  "src/assets/Size_2.svg",
-  "src/assets/Size_3.svg",
-  "src/assets/Size_4.svg",
-  "src/assets/Size_5.svg",
-  "src/assets/Size_6.svg",
-  "src/assets/Size_7.svg",
-];
 import { Camera, Pencil } from "lucide-react";
 import { ColorResult, SketchPicker } from "react-color";
+import { Link, useParams } from "react-router-dom";
+import { fetchById } from "@/lib/products";
+import { Product } from "@/models/products";
+import { useDispatch } from "react-redux";
+import { Input } from "@/components/ui/input";
+
+const initialState: Product = {
+  id: 0,
+  name: "",
+  description: "",
+  price: 0,
+  colors: [],
+  sizes: [],
+  stock: 0,
+  categories: [],
+  material: [],
+  images: [],
+  parentCategories: [],
+  sellerId: 0
+};
 
 export default function ProductDetailsSeller() {
+
+  const { id } = useParams<{ id: string }>();
+  const [prod, setProd] = useState<Product>(initialState);
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    if (!id) return;
+    const parsedId = parseInt(id);
+    fetchById(parsedId).then((prod) => {
+      if (prod === undefined) return;
+      setProd(prod);
+    });
+    console.log(prod);
+  }, []);
+  
   const [color, setColor] = useState<ColorResult>();
   const [showPicker, setShowPicker] = useState<boolean>(false);
   const pickerRef = useRef<HTMLDivElement>(null);
@@ -81,7 +110,7 @@ export default function ProductDetailsSeller() {
         </h1>
         <section className="w-full max-w-full h-auto flex sm:flex-row flex-col gap-8 items-start justify-between">
           <div className="flex flex-col basis-5/12">
-            <img src="src/assets/Sample_Big.svg" className=" w-full"></img>
+            <img src={prod.images[0] ? prod.images[0] : "/src/assets/placeHolderImage.svg"} className=" w-full"></img>
             <Carousel
               opts={{
                 align: "start",
@@ -90,7 +119,7 @@ export default function ProductDetailsSeller() {
               className="w-fit"
             >
               <CarouselContent className="">
-                {imageSources.map((source, index) => (
+                {prod.images.map((source, index) => (
                   <CarouselItem key={index} className="pt-1 md:basis-1/4 mt-6">
                     <div className="p-1">
                       <img src={source} className="mb-5"></img>
@@ -107,24 +136,30 @@ export default function ProductDetailsSeller() {
           <Card className="w-full h-[450px] ">
             <CardContent className="flex flex-col gap-y-2">
               <CardHeader>
-                <h2 className="text-5xl font-bold">Jean Iron washed</h2>
+              <h3 className="font-roboto font-semibold text-3xl">
+                  Nombre
+                </h3>
+                <Input
+                  defaultValue={prod.name}
+                  className="h-16 w-2/4 border-gray-500 text-3xl rounded-xl"
+                ></Input>
                 <h3 className=" font-roboto font-semibold my-5 text-3xl">
                   Precio
                 </h3>
-                <a className=" flex font-semibold">
-                  $150.000 <Pencil className="mx-5 size-8" />
-                </a>
+                <Input
+                  placeholder={`${prod.price}`}
+                  className=" h-16 w-1/6 border-gray-500 text-3xl rounded-xl"
+                ></Input>
               </CardHeader>
-              <div>
-                <h3 className="font-roboto font-semibold  text-3xl pl-5">
+              <div className="pl-5">
+                <h3 className="font-roboto font-semibold text-3xl">
                   Descripción
                 </h3>
-                <p className="pl-5 text-2xl">
-                  Sumérgete en un estilo casual con nuestro jean azul
-                  desgastado. Su corte holgado y detalles de costuras visibles
-                  ofrecen comodidad y estilo. Combínalo con una camiseta simple
-                  o una camisa para cualquier ocasión.
-                </p>
+                <Input
+                  defaultValue={prod.description}
+                  className=" h-48 border-gray-500 text-3xl rounded-xl"
+                  style={{ overflowWrap: "break-word", wordWrap: "break-word" }}
+                ></Input>
               </div>
 
               <h2 className="font-roboto font-semibold text-3xl pl-5">
@@ -147,11 +182,11 @@ export default function ProductDetailsSeller() {
                   <Popover>
                     <PopoverTrigger>
                       <img
-                        src="src/assets/ColorPicker.svg"
+                        src="/src/assets/ColorPicker.svg"
                         className=" pl-4"
                       ></img>
                     </PopoverTrigger>
-                    <PopoverContent>Color palette goes here</PopoverContent>
+                    <PopoverContent>{prod.colors}</PopoverContent>
                   </Popover>
                   <div className="relative">
                     {<div style={{ background: color?.hex }}></div> && (
@@ -181,12 +216,16 @@ export default function ProductDetailsSeller() {
             </CardContent>
             <CardFooter className="justify-center">
               <div className="flex flex-row gap-4">
-                <Button className=" w-auto h-20 text-xl ">
-                  <Save className="mr-2" /> Save Changes
-                </Button>
-                <Button className=" w-auto px-4 h-20 text-xl ">
-                  <CircleXIcon className="mr-2" /> Cancel
-                </Button>
+                <Link to={"/seller/abm-products"}>
+                  <Button className=" w-auto h-20 text-xl ">
+                    <Save className="mr-2" /> Save Changes
+                  </Button>
+                </Link>
+                <Link to={"/seller/abm-products"}>
+                  <Button className=" w-auto px-4 h-20 text-xl ">
+                    <CircleXIcon className="mr-2" /> Cancel
+                  </Button>
+                </Link>
               </div>
             </CardFooter>
           </Card>
@@ -195,76 +234,3 @@ export default function ProductDetailsSeller() {
     </>
   );
 }
-
-/* 
-<Carousel className="w-full justify-center">
-            <CarouselContent>
-              {Array.from({ length: 5 }).map((_, index) => (
-                <CarouselItem key={index}>
-                  <div className="p-1">
-                    <Card>
-                      <CardContent className="flex aspect-square items-center justify-center p-6 bg-black">
-                        <span className="text-4xl font-semibold text-white">
-                          {index + 1}
-                        </span>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-*/
-
-/*
-<div className="mx-12">
-        <h1 className="pb-5 font-roboto font-semibold">
-          Mis Productos / Editar
-        </h1>
-      </div>
-      <div className="flex mx-24">
-        <div className="bg-slate-500 flex-row h-fit w-fit">
-          <AspectRatio ratio={16 / 9} className="">
-            <img src="src/assets/Sample_Big.svg" className=""></img>
-          </AspectRatio>
-          <Carousel
-            opts={{
-              align: "start",
-            }}
-            className="w-full"
-          >
-            <CarouselContent className="-mt-1">
-              {imageSources.map((source, index) => (
-                <CarouselItem key={index} className="pt-1 md:basis-1/2">
-                  <div className="p-1">
-                    <img src={source} className="mb-5"></img>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-        </div>
-        <div />
-        <div className="mx-12 w-5/6 justify-center font-roboto">
-          <h1 className="font-semibold">Campera de Cuero - Poco Uso</h1>
-          <h2 className="my-4 font-semibold">Precio:</h2>
-          <Input placeholder="Precio" className="w-3/4"></Input>
-          <h2 className="my-4 font-semibold">Talle:</h2>
-          <Input placeholder="Talle" className="w-3/4"></Input>
-          <h2 className="my-4 font-semibold">Descipción:</h2>
-          <Input
-            placeholder="Text informativo del producto..."
-            className="w-3/4 h-48 my-4 text-center font-semibold"
-          ></Input>
-          <div className="flex pl-40">
-            <Button className="bg-transparent border-silk border-2 text-black mx-5">
-              <Save /> Guardar Cambios
-            </Button>
-            <Button className="bg-transparent border-silk  border-2 text-black">
-              <CircleX />
-              Cancelar
-            </Button>
-          </div>
-        </div>
-      </div>
-*/
