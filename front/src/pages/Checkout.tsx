@@ -4,36 +4,21 @@ import CheckoutItem from "@/components/ShoppingCart/CheckoutItem";
 import PaymentCard from "@/components/ShoppingCart/PaymentCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { shoppingItem } from "@/models/shoppingItem";
 import { ArrowLeft } from "lucide-react";
-import React, { useState } from "react";
-
+import { useSelector } from "react-redux";
+import shoppingTaxes from "@/mock/shoppingTaxes.json"
 export default function () {
-  const [products, setProducts] = useState([
-    {
-      imgUrl:
-        "https://acdn.mitiendanube.com/stores/001/126/411/products/img_6410-45e22b7745aa8ecce417076008276388-1024-1024.webp",
-      description: "Producto 1",
-      price: 200.23,
-      size: "xs",
-      quantity: 1,
-    },
-    {
-      imgUrl:
-        "https://acdn.mitiendanube.com/stores/001/126/411/products/img_6410-45e22b7745aa8ecce417076008276388-1024-1024.webp",
-      description: "Producto 2",
-      price: 300.44,
-      size: "m",
-      quantity: 2,
-    },
-    {
-      imgUrl:
-        "https://acdn.mitiendanube.com/stores/001/126/411/products/img_6410-45e22b7745aa8ecce417076008276388-1024-1024.webp",
-      description: "Producto 3",
-      price: 250.66,
-      size: "L",
-      quantity: 1,
-    },
-  ]);
+
+  const cart = useSelector((state: { products: shoppingItem[] }) => state.products);
+  function countSubTotal(){
+    let subTotal = 0;
+    cart.forEach((prod) => {
+      subTotal+=prod.price*prod.amount;
+    });
+    return subTotal;
+  }
+
 
   return (
     <>
@@ -118,14 +103,14 @@ export default function () {
             <h1 className="text-4xl  font-medium">Tu pedido</h1>
             <table className="w-full">
               <tbody className="">
-                {products.map((item) => (
+                {cart.map((item) => (
                   <div>
                     <CheckoutItem {...item}></CheckoutItem>
                   </div>
                 ))}
               </tbody>
             </table>
-            <Card subTotal={20000} shipCost={3230} serviceTax={300}></Card>
+            <Card subTotal={countSubTotal()} serviceTax={shoppingTaxes.serviceTax} shipCost={shoppingTaxes.shipCost}></Card>
             <PaymentCard></PaymentCard>
             <div className="font-roboto font-thin">
               Tu información personal será utilizada para procesar tu pedido y
