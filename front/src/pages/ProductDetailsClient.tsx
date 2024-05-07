@@ -58,6 +58,7 @@ export default function () {
   const [prod, setProd] = useState<Product>(initialState);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const dispatch = useDispatch();
+  
   useEffect(() => {
     if (!id) return;
     const parsedId = parseInt(id);
@@ -77,9 +78,9 @@ export default function () {
     <>
       <Banner text={prod.parentCategories[1]} />
       <Link to={"/catalog"}>
-        <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
-          {prod?.categories?.join(" / ")}
-        </h1>
+      <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
+        {prod?.categories?.join(" / ")}
+      </h1>
       </Link>
       <section className="font-roboto grid grid-cols-1 md:grid-cols-8 gap-4 m-8 md:items-start place-items-center">
         <EmblaCarouselThumbs
@@ -131,9 +132,9 @@ export default function () {
               <PopoverContent>Color palette goes here</PopoverContent>
             </Popover>
             <section className="flex flex-col font-roboto">
-              <a className="underline text-2xl mt-20">Ver Guía de talles</a>
+              {/* <a className="underline text-2xl mt-20">Ver Guía de talles</a> */}
               {prod?.stock ? (
-                <p className="text-xl">Stock: {prod.stock}</p>
+                <p className="text-2xl">Stock: {prod.stock}</p>
               ) : null}
 
               <Button
