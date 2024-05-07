@@ -16,11 +16,15 @@ const productsSlice = createSlice({
     initialState: [] as shoppingItem[],
     reducers: {
         addProduct: (state, action: PayloadAction<Product>) => {
-            const product = state.find((prod) => prod.id = action.payload.id);
-            if (product){
+            console.log(action.payload.id);
+            const product = state.find((prod) => prod.id === action.payload.id);
+            console.log(product?.id);
+            if (product != null){
               product.amount+=1;  
             }
-            state.push({...action.payload,amount:1});  
+            else{
+                state.push({...action.payload,amount:1});  
+            }
         },
         removeProduct: (state, action: PayloadAction<number>) => {
             const index = state.findIndex((product) => product.id === action.payload);
@@ -58,7 +62,7 @@ const productsSlice = createSlice({
         discountAmountToProduct: (state, action: PayloadAction<{id:number, amount:number}>) =>{
             const product = state.find((prod) => prod.id = action.payload.id);
             if (product && action.payload.amount<=product.amount){
-              product.amount-=action.payload.amount;  
+              product.amount = product.amount - action.payload.amount;  
             }
         }
     },

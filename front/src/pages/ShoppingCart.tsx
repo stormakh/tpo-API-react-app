@@ -3,20 +3,14 @@ import { Button } from "@/components/ui/button";
 import Card from "@/components/ShoppingCart/CardCart";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft } from "lucide-react";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { shoppingItem } from "@/models/shoppingItem";
-import { clearProducts } from "@/store/store";
+import { Link } from "react-router-dom";
+import shoppingTaxes from "@/mock/shoppingTaxes.json"
 
 export default function ShoppingCart() {
 
   const cart = useSelector((state: { products: shoppingItem[] }) => state.products);
-  const dispatch = useDispatch();
-
-  function handleCheckout(){
-    dispatch(clearProducts());
-    console.log(cart);
-  }
 
   function countSubTotal(){
     let subTotal = 0;
@@ -33,8 +27,6 @@ export default function ShoppingCart() {
     });
     return items;
   }
-
-  const shoppingTaxes = { shipCost: 2, serviceTax: 3 };
 
 
   return (
@@ -78,10 +70,12 @@ export default function ShoppingCart() {
               ))}
             </tbody>
           </table>
-          <button className="flex pt-12">
-            <ArrowLeft></ArrowLeft>
-            <p className="pl-3">Seguir Comprando</p>
-          </button>
+          <Link to={"/catalog"}>
+            <button className="flex pt-12">
+              <ArrowLeft></ArrowLeft>
+              <p className="pl-3">Seguir Comprando</p>
+            </button>
+          </Link>
         </section>
 
         <section className=" w-1/3 font-roboto h-full p-10 pl-20 pr-20 flex flex-col justify-start">
@@ -91,9 +85,11 @@ export default function ShoppingCart() {
             Al hacer click en Finalizar compra, estás aceptando nuestros{" "}
             <b>Términos y condiciones</b>
           </span>
-          <Button className="bg-black border-silk border-2 text-black w-full h-16 text-2xl text-white mt-5">
-            Finalizar Compra
-          </Button>
+          <Link to={"/checkout"}>
+            <Button className="bg-black border-silk border-2 text-black w-full h-16 text-2xl text-white mt-5">
+              Finalizar Compra
+            </Button>
+            </Link>
         </section>
       </div>
     </>
