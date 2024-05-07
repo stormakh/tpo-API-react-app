@@ -1,6 +1,7 @@
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserSession } from '@/models/users';
 import { Product } from '@/models/products';
+import { shoppingItem } from '@/models/shoppingItem';
 // Define the initial state interface
 export interface AppState {
     products: Product[];
@@ -12,10 +13,14 @@ export interface AppState {
 // Create a products slice
 const productsSlice = createSlice({
     name: 'products',
-    initialState: [] as Product[],
+    initialState: [] as shoppingItem[],
     reducers: {
         addProduct: (state, action: PayloadAction<Product>) => {
-            state.push(action.payload);
+            const product = state.find((prod) => prod.id = action.payload.id);
+            if (product){
+              product.amount+=1;  
+            }
+            state.push({...action.payload,amount:1});  
         },
         removeProduct: (state, action: PayloadAction<number>) => {
             const index = state.findIndex((product) => product.id === action.payload);
@@ -44,6 +49,18 @@ const productsSlice = createSlice({
         clearProducts: (state) => {
             state = [];
         },
+        addAmountToProduct: (state, action: PayloadAction<{id:number,amount:number}>) =>{
+            const product = state.find((prod) => prod.id = action.payload.id);
+            if (product){
+              product.amount+=action.payload.amount;  
+            }
+        },
+        discountAmountToProduct: (state, action: PayloadAction<{id:number, amount:number}>) =>{
+            const product = state.find((prod) => prod.id = action.payload.id);
+            if (product && action.payload.amount<=product.amount){
+              product.amount-=action.payload.amount;  
+            }
+        }
     },
 });
 
@@ -78,5 +95,5 @@ const store = configureStore({
 export default store;
 
 // Export the action creators
-export const { addProduct, removeProduct } = productsSlice.actions;
+export const { addProduct, removeProduct, clearProducts, addAmountToProduct,discountAmountToProduct} = productsSlice.actions;
 export const { setUserSession, clearUserSession } = userSessionSlice.actions;

@@ -4,19 +4,38 @@ import Card from "@/components/ShoppingCart/CardCart";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { shoppingItem } from "@/models/shoppingItem";
+import { clearProducts } from "@/store/store";
 
-export default function () {
-  const [products, setProducts] = useState([
-    { id: 1, name: "Producto 1", price: 200.23, size: "xs", quantity: 1 },
-    { id: 2, name: "Producto 2", price: 300.44, size: "m", quantity: 2 },
-    { id: 3, name: "Producto 3", price: 250.66, size: "L", quantity: 1 },
-  ]);
+export default function ShoppingCart() {
 
-  const cartAmouts = { subTotal: 1000, shipCost: 300, serviceTax: 20 };
+  const cart = useSelector((state: { products: shoppingItem[] }) => state.products);
+  const dispatch = useDispatch();
 
-  const [productsQuantity, setQuantity] = useState(
-    products.reduce((total, element) => total + element.quantity, 0)
-  );
+  function handleCheckout(){
+    dispatch(clearProducts());
+    console.log(cart);
+  }
+
+  function countSubTotal(){
+    let subTotal = 0;
+    cart.forEach((prod) => {
+      subTotal+=prod.price*prod.amount;
+    });
+    return subTotal;
+  }
+
+  function countItems(){
+    let items = 0;
+    cart.forEach((prod) => {
+      items+=prod.amount;
+    });
+    return items;
+  }
+
+  const shoppingTaxes = { shipCost: 2, serviceTax: 3 };
+
 
   return (
     <>
@@ -27,7 +46,7 @@ export default function () {
               Carrito de Compras
             </h1>
             <h1 className="pb-5 pr-24 font-roboto font-semibold w-1/4 text-right text-3xl">
-              {productsQuantity} Items
+              {countItems()} Items
             </h1>
           </div>
 
@@ -54,8 +73,8 @@ export default function () {
               </tr>
             </thead>
             <tbody>
-              {products.map((item) => (
-                <ShoppingItem {...item}></ShoppingItem>
+              {cart.map((prod) => (
+                <ShoppingItem {...prod}></ShoppingItem>
               ))}
             </tbody>
           </table>
@@ -67,7 +86,7 @@ export default function () {
 
         <section className=" w-1/3 font-roboto h-full p-10 pl-20 pr-20 flex flex-col justify-start">
           <h1 className="font-semibold text-4xl">Resumen de la compra</h1>
-          <Card {...cartAmouts}></Card>
+          <Card subTotal={countSubTotal()} serviceTax={shoppingTaxes.serviceTax} shipCost={shoppingTaxes.shipCost}></Card>
           <span>
             Al hacer click en Finalizar compra, estás aceptando nuestros{" "}
             <b>Términos y condiciones</b>

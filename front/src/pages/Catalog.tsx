@@ -11,15 +11,14 @@ import { Product } from "@/models/products";
 import CatalogSkeleton from "@/components/catalog/CatalogSkeleton";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "react-router-dom";
-
 const categories = ["Men", "Casual", "Women", "Formal", "None"];
 
 export default function Catalog() {
   const currentProdsRef = useRef<Product[]>([]);
   const [filteredProds, setFilteredProds] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  
 
+  
   useEffect(() => {
     fetchAllProducts().then((prods) => {
       currentProdsRef.current = prods;
