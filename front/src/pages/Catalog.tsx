@@ -3,7 +3,6 @@ import CarouselWrapper from "@/components/carousel/CarouselWrapper";
 import ImageSlide from "@/components/carousel/ImageSlide";
 import CatalogMenu from "@/components/catalog/CatalogMenu";
 import Eye from "../assets/Eye.svg";
-
 import CatalogFilter from "@/components/catalog/CatalogFilter";
 import { useEffect, useRef, useState } from "react";
 import { fetchAllProducts } from "@/lib/products";
@@ -11,9 +10,6 @@ import { Product } from "@/models/products";
 import CatalogSkeleton from "@/components/catalog/CatalogSkeleton";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "react-router-dom";
-
-import { UseDispatch, useDispatch } from "react-redux"; 
-import { addProduct } from "@/store/store";
 
 const categories = ["Men", "Casual", "Women", "Formal",'None'];
 

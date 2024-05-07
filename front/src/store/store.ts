@@ -1,6 +1,8 @@
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserSession } from '@/models/users';
 import { Product } from '@/models/products';
+import { cartProduct } from '@/models/cartProduct';
+
 // Define the initial state interface
 export interface AppState {
     products: Product[];
@@ -11,13 +13,17 @@ export interface AppState {
 // Create a products slice
 const productsSlice = createSlice({
     name: 'products',
-    initialState: [] as Product[],
+    initialState: [] as cartProduct[],
     reducers: {
         addProduct: (state, action: PayloadAction<Product>) => {
-            state.push(action.payload);
+            const product = state.find(ShoppingItem => ShoppingItem.id === action.payload.id);
+            if(product){
+                product.quantity+=1;
+            }
+            state.push({...action.payload,quantity:1});
         },
         removeProduct: (state, action: PayloadAction<number>) => {
-            const index = state.findIndex((product) => product.id === action.payload);
+            const index = state.findIndex((ShoppingItem) => ShoppingItem.id === action.payload);
             if (index !== -1) {
                 state.splice(index, 1);
             }
@@ -77,5 +83,5 @@ const store = configureStore({
 export default store;
 
 // Export the action creators
-export const { addProduct, removeProduct } = productsSlice.actions;
+export const { addProduct, removeProduct, clearProducts } = productsSlice.actions;
 export const { setUserSession, clearUserSession } = userSessionSlice.actions;

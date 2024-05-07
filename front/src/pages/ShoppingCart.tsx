@@ -1,16 +1,18 @@
-import ShoppingItem from "@/components/ShoppingCart/ShoppingItem";
 import { Button } from "@/components/ui/button";
 import Card from "@/components/ShoppingCart/CardCart";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft } from "lucide-react";
 import {Product} from "@/models/products"
-import store from "@/store/store";
 import { Link } from "react-router-dom";
+import { cartProduct } from "@/models/cartProduct";
+import {  useSelector } from "react-redux";
 
-export default function () {
+export default function ShoppingCart() {
  
   const cartAmouts = { subTotal: 1000, shipCost: 300, serviceTax: 20 };
-  const currentProdsRef = store.getState().products;  
+  
+  const cart = useSelector((state: { products: cartProduct[] }) => state.products);
+  
   
   return (
     <>
@@ -21,7 +23,7 @@ export default function () {
               Carrito de Compras
             </h1>
             <h1 className="pb-5 pr-24 font-roboto font-semibold w-1/4 text-right text-3xl">
-              {currentProdsRef.length} Items
+              {cart.length} Items
             </h1>
           </div>
 
@@ -48,9 +50,7 @@ export default function () {
               </tr>
             </thead>
             <tbody>
-              {currentProdsRef.map((item) => (
-                <ShoppingItem {...item}></ShoppingItem>
-              ))}
+
             </tbody>
           </table>
           <Link to={"../catalog"}>
@@ -68,11 +68,12 @@ export default function () {
             Al hacer click en Finalizar compra, estás aceptando nuestros{" "}
             <b>Términos y condiciones</b>
           </span>
-          <Link to={"/checkout"}>
-            <Button className="bg-black border-silk border-2 text-black w-full h-16 text-2xl text-white mt-5">
-                Finalizar Compra
-            </Button>
-          </Link>
+          <Button className="bg-black border-silk border-2 text-black w-full h-16 text-2xl text-white mt-5">
+            <Link to={"/checkout"}>
+              Finalizar Compra
+            </Link>
+          </Button>
+          
         </section>
       </div>
     </>

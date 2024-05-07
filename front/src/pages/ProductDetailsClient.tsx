@@ -28,7 +28,7 @@ import { Product } from "@/models/products";
 import { useDispatch } from "react-redux";
 import { addProduct } from "@/store/store";
 import store from "@/store/store";
-import { toast } from "sonner";
+import { cartProduct } from "@/models/cartProduct";
 
 const imageSources = [
   "/src/assets/Sample_1.svg",
@@ -49,7 +49,7 @@ const sizeSources = [
 
 export default function ProductDetailsClient() {
   const { id } = useParams<{ id: string }>();
-  const [prod,setProd] = useState<Product | undefined>();
+  const [prod,setProd] = useState<Product>();
   const dispatch = useDispatch(); 
   
   useEffect(() => {
@@ -62,7 +62,6 @@ export default function ProductDetailsClient() {
 
   const handleAddProductToCart = () => {
     dispatch(addProduct(prod!));
-    console.log(store.getState().products);
     // add toast here
   }
 

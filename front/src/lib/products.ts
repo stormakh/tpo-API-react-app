@@ -18,6 +18,6 @@ export function filterByCategorie(
 }
 
 export async function fetchById(id: number){
-  const prod = productsMock.find((prod) => prod.id === id);
-  return prod;
-} ;
+  const products: Product[] = productsMock.map((prod) => prod);
+  return products.find((prod) => prod.id === id);
+};

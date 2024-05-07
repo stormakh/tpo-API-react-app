@@ -1,13 +1,13 @@
 import { useState } from "react";
 import {PlusIcon, MinusIcon, TrashIcon} from "lucide-react";
-import {Product} from "@/models/products"
 import { addProduct, removeProduct } from "@/store/store";
 import { useDispatch } from "react-redux";
+import { cartProduct } from "@/models/cartProduct";
 
-export default function ShoppingItem(product: Product){
+export default function ShoppingItem(product: cartProduct){
 
-    let [countQuantity, setQuantity] = useState(1);
-    const dispatch = useDispatch();
+  let [countQuantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
 
   function handleAddProductToCart(){
     dispatch(addProduct(product));
@@ -26,7 +26,7 @@ export default function ShoppingItem(product: Product){
         </td>
         <td className="justify-center text-center">
             <div className="flex flex-col justify-between">
-                <p className="text-3xl"><b>{product.name}</b></p>
+                <p className="text-3xl"><b>{product.description}</b></p>
             </div>
         </td>
         <td className="justify-center text-center">
@@ -46,7 +46,7 @@ export default function ShoppingItem(product: Product){
           </div>
         </td>
         <td className=" h-40 text-center align-top flex justify-center items-center text-center">
-          <p className="text-3xl" ><b>$ {(product.price * countQuantity).toFixed(2)}</b></p>
+          <p className="text-3xl" ><b>$ {(product.price * product.quantity).toFixed(2)}</b></p>
         </td>
         <td className=" text-center">
             <button onClick={handleRemoveProductToCart}>
