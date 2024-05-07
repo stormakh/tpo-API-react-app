@@ -22,11 +22,13 @@ export default function CatalogFilter({
   currentProds,
 }: CatalogFilterProps) {
 
-  const params = useParams<{ categorie: parentCategorie }>();
+  const params = useParams<{ categorie: categories }>();
 
   useEffect(() => {
-    if (params.categorie !== undefined) {
+    if (params.categorie !== undefined && Object.values(categories).includes(params.categorie) ) {
       action(filterByCategorie(currentProds, params.categorie));
+    } else if (params.categorie !== undefined && !Object.values(categories).includes(params.categorie)){
+      action(currentProds);
     }
   }, [params.categorie]);
 
@@ -39,7 +41,7 @@ export default function CatalogFilter({
   return (
     <Select defaultValue={params.categorie} onValueChange={(value: string) => handleFilterByCat(value)}>
       <SelectTrigger className=" border-none focus:ring-0 focus:ring-offset-0 text-2xl">
-        <SelectValue className="" placeholder={params.categorie ? params.categorie : 'FILTER'} />
+        <SelectValue className="" placeholder={params.categorie && Object.values(categories).includes(params.categorie) ? params.categorie : 'FILTER'} />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>

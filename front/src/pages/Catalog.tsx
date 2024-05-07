@@ -9,7 +9,7 @@ import { Product } from "@/models/products";
 import CatalogSkeleton from "@/components/catalog/CatalogSkeleton";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "react-router-dom";
-import { parentCategorie } from "@/models/products";
+
 
 export default function Catalog() {
   const currentProdsRef = useRef<Product[]>([]);
