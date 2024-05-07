@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
     <footer className="bg-footer p-4 sticky bottom-auto w-screen font-roboto">
       <div className="flex justify-between items-center">
         <img
-          src="./src/assets/no_pay_footer.svg"
+          src="/src/assets/no_pay_footer.svg"
           alt="Nopay Logo"
           className="size-32 mx-8"
         />
