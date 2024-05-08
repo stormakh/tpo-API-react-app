@@ -4,21 +4,14 @@ import CheckoutItem from "@/components/ShoppingCart/CheckoutItem";
 import PaymentCard from "@/components/ShoppingCart/PaymentCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { shoppingItem } from "@/models/shoppingItem";
+import { shoppingCart } from "@/models/shoppingCart";
 import { ArrowLeft } from "lucide-react";
 import { useSelector } from "react-redux";
-import shoppingTaxes from "@/mock/shoppingTaxes.json"
-export default function () {
-
-  const cart = useSelector((state: { products: shoppingItem[] }) => state.products);
-  function countSubTotal(){
-    let subTotal = 0;
-    cart.forEach((prod) => {
-      subTotal+=prod.price*prod.amount;
-    });
-    return subTotal;
-  }
-
+import shoppingTaxes from "@/mock/shoppingTaxes.json";
+export default function Checkout() {
+  const cart = useSelector(
+    (state: { shoppingCart: shoppingCart }) => state.shoppingCart
+  );
 
   return (
     <>
@@ -101,23 +94,23 @@ export default function () {
           </section>
           <div className="w-1/4 pr-12 pt-24 font-roboto">
             <h1 className="text-4xl  font-medium">Tu pedido</h1>
-            <table className="w-full">
-              <tbody className="">
-                {cart.map((item) => (
-                  <div>
-                    <CheckoutItem {...item}></CheckoutItem>
-                  </div>
-                ))}
-              </tbody>
-            </table>
-            <Card subTotal={countSubTotal()} serviceTax={shoppingTaxes.serviceTax} shipCost={shoppingTaxes.shipCost}></Card>
+
+            {cart.products.map((item) => (
+              <CheckoutItem {...item}></CheckoutItem>
+            ))}
+
+            <Card
+              subTotal={cart.totalPrice}
+              serviceTax={shoppingTaxes.serviceTax}
+              shipCost={shoppingTaxes.shipCost}
+            ></Card>
             <PaymentCard></PaymentCard>
             <div className="font-roboto font-thin">
               Tu información personal será utilizada para procesar tu pedido y
               apoyar tu experiencia en este sitio web. La misma también podrá
               ser utilizada para futuras acciones de marketing.
             </div>
-            <Button className="bg-black border-silk border-2 text-black w-full h-16 text-2xl text-white mt-5">
+            <Button className="bg-black border-silk border-2  w-full h-16 text-2xl text-white mt-5">
               Finalizar Compra
             </Button>
           </div>

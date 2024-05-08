@@ -18,7 +18,7 @@ export default function SellerLayout({}: SellerLayoutProps) {
   const expectedUserType = "seller" as UserType;
 
   useEffect(() => {
-    if (user !== null) {
+    if (user) {
       checkCorrectPath(user?.type, expectedUserType, navigate);
       console.log("userType", user);
     } else {
@@ -28,10 +28,8 @@ export default function SellerLayout({}: SellerLayoutProps) {
 
   return (
     <>
-      <NavBarSeller user={user} />
-      <main>
-        <Outlet /> {/* Renders the currently matched route's component */}
-      </main>
+      <NavBarSeller />
+      <Outlet />
       <Footer />
     </>
   );

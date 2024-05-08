@@ -1,42 +1,24 @@
 // src/components/Layout.tsx
-import { useEffect } from "react";
-import {  Outlet, useNavigate } from "react-router-dom";
+
+import { Outlet } from "react-router-dom";
 import Navbar from "../../components/NavBar"; // Assume you have a Navbar component
 import Footer from "../../components/Footer"; // Assume you have a Footer component
-
-import { UserSession, UserType } from "@/models/users";
-import { checkCorrectPath } from "@/lib/users";
 import { useSelector } from "react-redux";
+import { UserSession } from "@/models/users";
+import NavBarSeller from "@/components/NavBarSeller";
 
-interface CustomerLayoutProps {
-  
-}
-
-export default function CustomerLayout ({} : CustomerLayoutProps)  {
-  
-  const navigate = useNavigate();
-  const expectedUserType = "customer" as UserType;
-  
-  const user  = useSelector((state: { userSession: UserSession }) => state.userSession);
-
-  // useEffect(() => {
-  //   if (user !== null) {
-  //     checkCorrectPath(user.type, expectedUserType, navigate);
-  //     console.log("user.userType", user.type);
-  //   }else{
-  //     checkCorrectPath(null,expectedUserType,navigate)
-  //   }
-  // }, [user]);
+export default function Layout() {
+  const user = useSelector(
+    (state: { userSession: UserSession }) => state.userSession
+  );
 
   return (
     <>
-      <Navbar user={user}/>
-      <main>
-        <Outlet />
-      </main>
+      {user && user.type === "seller" ? <NavBarSeller /> : <Navbar />}
+
+      <Outlet />
+
       <Footer />
     </>
   );
-};
-
-
+}

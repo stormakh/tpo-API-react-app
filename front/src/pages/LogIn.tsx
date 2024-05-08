@@ -31,7 +31,7 @@ export default function LogIn() {
           if (user !== null) {
             dispatch(setUserSession(user));
             setErrorMessage(null);
-            navigate(`/${user.type}`);
+            navigate("/");
           } else {
             setErrorMessage("User could not be found");
           }

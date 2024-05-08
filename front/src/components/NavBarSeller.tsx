@@ -3,16 +3,16 @@ import { Heart, Search, ShoppingBag, UserRound } from "lucide-react";
 import { Link } from "react-router-dom";
 import NavSheet from "./NavSheet";
 import { UserSession } from "@/models/users";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearUserSession } from "@/store/store";
 import noPayLogoSellers from "@/assets/nopaySellers.svg";
 interface NavBarProps {
-  user: UserSession | null;
+  
 }
 
-export default function NavBar({ user }: NavBarProps) {
+export default function NavBar({  }: NavBarProps) {
   const dispatch = useDispatch();
-
+  const user = useSelector((state: { userSession: UserSession }) => state.userSession);
   function handleLogOutUser() {
     dispatch(clearUserSession());
   }
