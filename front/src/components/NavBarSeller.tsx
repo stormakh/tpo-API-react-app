@@ -1,80 +1,52 @@
-import { Link } from "react-router-dom";
-//import { Input } from "@/components/ui/input";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuList,
-} from "@/components/ui/navigation-menu";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { UserRound, Heart, Bell, AlignJustify, Search } from "lucide-react";
+import { Heart, Search, ShoppingBag, UserRound } from "lucide-react";
+import { Link } from "react-router-dom";
+import NavSheet from "./NavSheet";
+import { UserSession } from "@/models/users";
+import { useDispatch } from "react-redux";
+import { clearUserSession } from "@/store/store";
+import noPayLogoSellers from "@/assets/nopaySellers.svg";
+interface NavBarProps {
+  user: UserSession | null;
+}
 
-export default function NavBarSeller() {
+export default function NavBar({ user }: NavBarProps) {
+  const dispatch = useDispatch();
+
+  function handleLogOutUser() {
+    dispatch(clearUserSession());
+  }
+
   return (
-    <div>
-      <NavigationMenu className="sticky top">
-        <NavigationMenuList className="w-screen justify-between h-16">
-          <div className="flex my-3 px-5">
-            <NavigationMenuItem>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild className="mx-2">
-                  <Button
-                    size="icon"
-                    className="bg-transparent hover:bg-slate-50"
-                  >
-                    <AlignJustify color="black" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>Profile</DropdownMenuItem>
-                  <DropdownMenuItem>Billing</DropdownMenuItem>
-                  <DropdownMenuItem>Team</DropdownMenuItem>
-                  <DropdownMenuItem>Subscription</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </NavigationMenuItem>
-          </div>
-          <img
-            src="./src/assets/nopaySellers.svg"
-            alt="Nopay Sellers Logo"
-            className="size-32 justify-self-center"
-          ></img>
-          <div className="flex justify-self-end px-5">
-            <NavigationMenuItem className="mx-2">
-              <Button size="icon" className="bg-transparent hover:bg-slate-50">
-                <Search color="black" />
-              </Button>
-            </NavigationMenuItem>
-            <NavigationMenuItem className="mx-2">
-              <Button size="icon" className="bg-transparent hover:bg-slate-50">
-                <Link to="/LogIn">
-                  <UserRound color="black" />
-                </Link>
-              </Button>
-            </NavigationMenuItem>
-            <NavigationMenuItem className="mx-2">
-              <Button size="icon" className="bg-transparent hover:bg-slate-50">
-                <Heart color="black" />
-              </Button>
-            </NavigationMenuItem>
-            <NavigationMenuItem className="mx-2">
-              <Button size="icon" className="bg-transparent hover:bg-slate-50">
-                <Bell className="mr-1" color="black" />
-                <a className="text-black">0</a>
-              </Button>
-            </NavigationMenuItem>
-          </div>
-        </NavigationMenuList>
-      </NavigationMenu>
-    </div>
+    <nav className="static top-0 w-screen h-auto  grid grid-cols-3 items-center px-4">
+      <NavSheet />
+      <div className="justify-self-center">
+        <img
+          src={noPayLogoSellers}
+          alt="Nopay Logo"
+          className="size-40"
+        />
+      </div>
+      <div className="flex justify-self-end gap-2 px-4">
+        <Button size="icon" className="bg-transparent hover:bg-slate-50">
+          <Search color="black" />
+        </Button>
+        <Button size="icon" className="bg-transparent hover:bg-slate-50">
+          <Link to="/login">
+            <UserRound color="black" />
+          </Link>
+        </Button>
+        {user !== null ? (
+          <Button onClick={handleLogOutUser}>{user?.username}</Button>
+        ) : null}
+
+        <Button size="icon" className="bg-transparent hover:bg-slate-50">
+          <Heart color="black" />
+        </Button>
+        <Button size="icon" className="bg-transparent hover:bg-slate-50">
+          <ShoppingBag className="mr-1" color="black" />
+        </Button>
+      </div>
+    </nav>
   );
 }

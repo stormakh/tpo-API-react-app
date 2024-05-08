@@ -1,20 +1,23 @@
-type BannerProps = {
-  text: string;
-};
+import BannerSvg from '@/assets/Banner.svg'
 
-export default function Banner({ text }: BannerProps) {
+interface BannerProps {
+  text: string;
+  size? : string;
+}
+
+export default function Banner({ text, size = '60px' }: BannerProps) {
   return (
-    <div>
-      <div className="relative h-56">
+    <>
+      <div className="relative" style={{height : `${size}`}}>
         <img
-          src="src/assets/Banner.svg"
+          src={BannerSvg}
           alt="Banner"
           className="w-full h-full object-cover"
         />
-        <a className="absolute top-1/2 left-1/2 text-white text-7xl transform -translate-x-1/2 -translate-y-1/2 font-roboto font-semibold italic">
+        <p className="absolute top-1/2 left-1/2 text-white text-6xl transform -translate-x-1/2 -translate-y-1/2 font-roboto font-semibold italic text-nowrap">
           {text}
-        </a>
+        </p>
       </div>
-    </div>
+    </>
   );
 }

@@ -1,53 +1,51 @@
-import "./App.css";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import LogIn from "./pages/LogIn";
+// src/App.tsx
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import CustomerLayout from "@/pages/layouts/CustomerLayout";
+import SellerLayout from "@/pages/layouts/SellerLayout";
 import Home from "./pages/Home";
 import Catalog from "./pages/Catalog";
-import ProductDetailsSeller from "./pages/ProductDetailsSeller";
-import ShoppingCart from "./pages/ShoppingCart";
+import LogIn from "./pages/LogIn";
 import ProductDetailsClient from "./pages/ProductDetailsClient";
+import ShoppingCart from "./pages/ShoppingCart";
 import UserProfile from "./pages/UserProfile";
-const router = createBrowserRouter([
-  {
-    path: "/Home",
-    element: <Home />,
-  },
-  {
-    path: "/ProductDetailsSeller",
-    element: <ProductDetailsSeller />,
-  },
-  {
-    path: "/LogIn",
-    element: <LogIn />,
-  },
-  {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/Catalog",
-    element: <Catalog />,
-  },
-  {
-    path: "/ProductDetailsClient",
-    element: <ProductDetailsClient />,
-  },
-  {
-    path: "/ShoppingCart",
-    element: <ShoppingCart />,
-  },
-  {
-    path: "/UserProfile",
-    element: <UserProfile />,
-  },
-]);
+import Checkout from "./pages/Checkout";
+import Register from "./pages/Register";
+import ProductDetailsSeller from "./pages/ProductDetailsSeller";
 
-function App() {
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
+export default function App() {
+  const router = createBrowserRouter([
+    {
+      path: "",
+      element: <CustomerLayout />,
+      errorElement: <h1>Not Found</h1>,
+      children: [
+        { path: "", element: <Home /> },
+        { path: "catalog", element: <Catalog /> },
+        { path: "catalog/:categorie", element: <Catalog />},
+        {
+          path: "product-details-client/:id",
+          element: <ProductDetailsClient />,
+        },
+        { path: "shopping-cart", element: <ShoppingCart /> },
+        { path: "user-profile", element: <UserProfile /> },
+        { path: "checkout", element: <Checkout /> },
+      ],
+    },
+    { path: "login", element: <LogIn /> },
+    { path: "register", element: <Register /> },
+    {
+      path: "/seller",
+      element: <SellerLayout />,
+      children: [
+        { path: "", element: <Home /> },
+        { path: "catalog", element: <Catalog /> },
+        {
+          path: "product-details-sellers",
+          element: <ProductDetailsSeller />,
+        },
+      ],
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
-
-export default App;

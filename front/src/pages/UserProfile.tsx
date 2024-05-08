@@ -1,4 +1,3 @@
-import NavBar from "@/components/NavBar";
 import { Separator } from "@/components/ui/separator";
 import User from "@/components/userProfile/User";
 import Orders from "@/components/userProfile/Orders";
@@ -34,7 +33,6 @@ export default function () {
   };
   return (
     <>
-      <NavBar></NavBar>
       <Banner text="Account"></Banner>
       <div className="flex h-screen">
         <div className="w-1/5 h-screen pt-32 pl-12">

@@ -1,37 +1,85 @@
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import NavBar from "@/components/NavBar";
 import Banner from "@/components/Banner";
+import CarouselWrapper from "@/components/carousel/CarouselWrapper";
+import ImageSlide from "@/components/carousel/ImageSlide";
+import CatalogMenu from "@/components/catalog/CatalogMenu";
+import CatalogFilter from "@/components/catalog/CatalogFilter";
+import { useEffect, useRef, useState } from "react";
+import { fetchAllProducts } from "@/lib/products";
+import { Product } from "@/models/products";
+import CatalogSkeleton from "@/components/catalog/CatalogSkeleton";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Link } from "react-router-dom";
 
-import EmblaCarousel from "@/components/EmblaCarousel";
-
-// Assuming you have an ItemCard component
 
 export default function Catalog() {
-  const items = [
-    { id: 1, name: "Item 1", price: 10 },
-    { id: 2, name: "Item 2", price: 20 },
-    { id: 3, name: "Item 3", price: 30 },
-    { id: 4, name: "Item 4", price: 40 },
-    { id: 5, name: "Item 5", price: 50 },
-    // Add more items as needed
-  ];
+  const currentProdsRef = useRef<Product[]>([]);
+  const [filteredProds, setFilteredProds] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  
+  useEffect(() => {
+    fetchAllProducts().then((prods) => {
+      currentProdsRef.current = prods;
+      setFilteredProds(prods);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+    });
+  }, []);
+
+  if (isLoading) {
+    return (
+      <>
+        <Banner text="Upper"></Banner>
+        <div className="w-2/5 flex flex-row items-center m-4 justify-between gap-4 text-xl h-auto">
+          <Skeleton className="w-full min-h-10" />
+          <Skeleton className="w-1/3 min-h-10" />
+        </div>
+
+        <div className="grid  gap-4 mt-8 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 min-h-svh">
+          {Array.from({ length: 10 }).map((_, index) => (
+            <CatalogSkeleton key={index} />
+          ))}
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
-      <NavBar></NavBar>
       <Banner text="Upper"></Banner>
-      <div className="grid grid-flow-col-dense gap-4 mt-8 mx-4">
-        {items.map((item) => (
-          <AspectRatio
-            className="relative bg-stone-300  "
-            ratio={9 / 16}
-            key={item.id}
-          >
-            <p className="  text-zinc-950 absolute top-0 left-0 transform -rotate-90 -translate-x-2 translate-y-12 antialiased opacity-65 ">
-              <b>NEW</b> IN
+      <div className="w-2/5 flex flex-row items-baseline m-4 justify-between gap-4 text-xl h-auto">
+        <div className="stroke-0">
+          <CatalogFilter
+            action={setFilteredProds}
+            currentProds={currentProdsRef.current}
+          />
+        </div>
+        <CatalogMenu />
+      </div>
+
+      <div className="grid  gap-4 m-8 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+        {filteredProds.map((prod) => (
+          <div className="flex flex-col gap-2">
+            <Link to={`/product-details-client/${prod.id}`} replace>
+              <CarouselWrapper
+                ratio={9 / 16}
+                slides={prod.images.map((img) => (
+                  <ImageSlide src={img} />
+                ))}
+                options={{ loop: true }}
+                className="min-w-[200px] "
+                key={prod.id}
+              >
+                <p className="  text-zinc-950 absolute top-0 left-0 transform -rotate-90 -translate-x-2 translate-y-12 antialiased opacity-65 z-10">
+                  <b>NEW</b> IN
+                </p>
+              </CarouselWrapper>
+            </Link>
+            <p className="text-start z-10">
+              {prod.name.toUpperCase()} <b>${prod.price}</b>
             </p>
-            <EmblaCarousel slides={[0, 1, 2, 3, 4]} options={{ loop: true }} />
-          </AspectRatio>
+          </div>
         ))}
       </div>
     </>
