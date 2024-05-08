@@ -1,4 +1,3 @@
-// src/App.tsx
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import CustomerLayout from "@/pages/layouts/CustomerLayout";
 import SellerLayout from "@/pages/layouts/SellerLayout";
@@ -21,7 +20,7 @@ export default function App() {
       children: [
         { path: "", element: <Home /> },
         { path: "catalog", element: <Catalog /> },
-        { path: "catalog/:categorie", element: <Catalog />},
+        { path: "catalog/:categorie", element: <Catalog /> },
         {
           path: "product-details-client/:id",
           element: <ProductDetailsClient />,
