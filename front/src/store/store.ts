@@ -78,6 +78,8 @@ const shoppingCartSlice = createSlice({
     },
     clearCart: (state) => {
       state.products = [];
+      state.totalAmount = 0;
+      state.totalPrice = 0;
     },
     addAmountToProduct: (
       state,
