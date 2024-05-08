@@ -26,8 +26,8 @@ import { fetchById } from "@/lib/products";
 import { Product } from "@/models/products";
 import { useDispatch } from "react-redux";
 import { addProduct } from "@/store/store";
-
-import EmblaCarouselThumbs from "@/components/carouselThumbNails/EmblaCarouselThumbs";
+import CarouselThumbsWrapper from "@/components/carouselThumbNails/CarouselThumbsWrapper";
+import ImageSlide from "@/components/carousel/ImageSlide";
 
 const sizeSources = [
   "/src/assets/Size_1.svg",
@@ -58,7 +58,6 @@ export default function () {
   const [prod, setProd] = useState<Product>(initialState);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const dispatch = useDispatch();
-
   useEffect(() => {
     if (!id) return;
     const parsedId = parseInt(id);
@@ -76,22 +75,23 @@ export default function () {
 
   return (
     <>
-      <Banner text={prod.parentCategories[1]} />
-      <Link to={"/catalog"}>
-        <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
-          {prod?.categories?.join(" / ")}
-        </h1>
-      </Link>
-      <section className="font-roboto grid grid-cols-1 md:grid-cols-8 gap-4 m-8 md:items-start place-items-center">
-        <EmblaCarouselThumbs
-          slides={prod?.images.map((image) => {
-            return <img src={image} className=""></img>;
-          })}
-          className="md:col-span-3 lg:col-span-3 xl:col-span-2"
-        />
-
-        <Card className=" min-w-0 w-full h-fit flex flex-col justify-center col-span-1 md:col-span-5">
-          <CardContent className=" ">
+      <Banner text="Jeans" />
+      <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
+        {prod?.categories?.join(" / ")}
+      </h1>
+      <section className="font-roboto flex flex-row items-stretch justify-stretch gap-8 m-8">
+        <section className=" h-full w-5/12">
+          <CarouselThumbsWrapper
+            slides={prod.images.map((image, index) => {
+              return <img key={index} src={image} />;
+            })}
+            ratio={9 / 16}
+            options={{ loop: true }}
+            className="w-full h-full"
+          />
+        </section>
+        <Card className="min-w-0 flex-grow ">
+          <CardContent className="">
             <CardHeader className="font-bold font-roboto text-5xl">
               {prod?.name}
             </CardHeader>

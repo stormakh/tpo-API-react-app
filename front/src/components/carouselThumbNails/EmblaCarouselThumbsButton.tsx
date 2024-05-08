@@ -14,7 +14,7 @@ export const Thumb: React.FC<PropType> = (props) => {
   return (
     <div
       className={cn(
-        "embla-thumbs__slide min-w-0  overflow-hidden ",
+        "embla-thumbs__slide flex-1 min-w-0 aspect-square overflow-hidden ",
         selected ? " embla-thumbs__slide--selected" : ""
       )}
     >

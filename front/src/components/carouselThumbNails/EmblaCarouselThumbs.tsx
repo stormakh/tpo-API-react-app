@@ -5,7 +5,6 @@ import { Thumb } from "./EmblaCarouselThumbsButton";
 import "./embla.css";
 import { cn } from "@/lib/utils";
 
-
 type PropType = {
   slides: ReactNode[];
   options?: EmblaOptionsType;
@@ -44,10 +43,8 @@ const EmblaCarouselThumbs: React.FC<PropType> = (props) => {
   }, [emblaMainApi, onSelect]);
 
   return (
-    <section
-      className={cn(props.className, "embla h-full flex flex-col relative m-0")}
-    >
-      <div className="embla__viewport flex-initial " ref={emblaMainRef}>
+    <section className="embla h-full relative">
+      <div className="embla__viewport min-w-0 " ref={emblaMainRef}>
         <div className="embla__container h-full">
           {slides.map((slide, index) => (
             <div className="embla__slide h-full" key={index}>
@@ -59,9 +56,9 @@ const EmblaCarouselThumbs: React.FC<PropType> = (props) => {
         </div>
       </div>
 
-      <div className="embla-thumbs w-full flex-grow">
+      <div className="embla-thumbs h-full w-full">
         <div className="embla-thumbs__viewport h-full" ref={emblaThumbsRef}>
-          <div className="embla-thumbs__container h-full  grid grid-cols-2 lg:grid-cols-4  gap-2">
+          <div className="embla-thumbs__container h-full flex flex-row gap-2">
             {slides.map((slide, index) => (
               <Thumb
                 slide={slide}
@@ -79,5 +76,3 @@ const EmblaCarouselThumbs: React.FC<PropType> = (props) => {
 };
 
 export default EmblaCarouselThumbs;
-
-
