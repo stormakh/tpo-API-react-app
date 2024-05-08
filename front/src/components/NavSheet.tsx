@@ -8,6 +8,8 @@ import {
 import { Button } from "./ui/button";
 import { AlignJustify } from "lucide-react";
 import noPayLogo from "@/assets/nopay.svg";
+import { categories } from "@/models/products.ts";
+import { Link } from "react-router-dom";
 
 export default function NavSheet() {
   return (
@@ -24,11 +26,15 @@ export default function NavSheet() {
           </SheetTitle>
         </SheetHeader>
         <div className="border-b border-line pb-2 flex-grow">
-          <h3 className="text-4xl font-roboto font-extrabold my-4">Upper</h3>
+          <h3 className="text-4xl font-roboto font-extrabold my-4">Categories</h3>
           <ul>
-            <li>Upper</li>
-            <li>Lower</li>
-            <li>Accesories</li>
+            {Object.values(categories).map((categorie) => (
+              categorie !== 'None' && (
+                <Link to={`catalog/${categorie}`} key={categorie}>
+                  <li className="">{categorie}</li>
+                </Link>
+              )
+            ))}
           </ul>
         </div>
       </SheetContent>

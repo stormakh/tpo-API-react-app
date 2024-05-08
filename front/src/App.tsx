@@ -1,7 +1,6 @@
 // src/App.tsx
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import CustomerLayout from "@/pages/layouts/CustomerLayout";
-import SellerLayout from "@/pages/layouts/SellerLayout";
+import Layout from "@/pages/layouts/MainLayout";
 import Home from "./pages/Home";
 import Catalog from "./pages/Catalog";
 import LogIn from "./pages/LogIn";
@@ -11,18 +10,19 @@ import UserProfile from "./pages/UserProfile";
 import Checkout from "./pages/Checkout";
 import Register from "./pages/Register";
 import ProductDetailsSeller from "./pages/ProductDetailsSeller";
+import AMBProducts from "./pages/AMBProducts";
+import SellerMiddleware from "./pages/layouts/SellerMiddleware";
 
 export default function App() {
   const router = createBrowserRouter([
     {
-      path: "",
-      element: <CustomerLayout />,
+      path: "/",
+      element: <Layout />,
       errorElement: <h1>Not Found</h1>,
       children: [
-        { path: "", element: <Home /> },
+        { path: "/", element: <Home /> },
         { path: "catalog", element: <Catalog /> },
-        { path: "login", element: <LogIn /> },
-        { path: "register", element: <Register /> },
+        { path: "catalog/:categorie", element: <Catalog /> },
         {
           path: "product-details-client/:id",
           element: <ProductDetailsClient />,
@@ -30,20 +30,22 @@ export default function App() {
         { path: "shopping-cart", element: <ShoppingCart /> },
         { path: "user-profile", element: <UserProfile /> },
         { path: "checkout", element: <Checkout /> },
-      ],
-    },
-    {
-      path: "/seller",
-      element: <SellerLayout />,
-      children: [
-        { path: "", element: <Home /> },
-        { path: "catalog", element: <Catalog /> },
         {
-          path: "product-details-sellers",
-          element: <ProductDetailsSeller />,
+          path: "seller", element: <SellerMiddleware/>,
+          children: [
+            { path: '', element: <Home />},
+            { path: "product-details-seller", element: <ProductDetailsSeller />},
+            {
+              path: "product-details-seller/:id",
+              element: <ProductDetailsSeller />,
+            },
+            { path: "abm-products", element: <AMBProducts />},
+          ],
         },
       ],
     },
+    { path: "/login", element: <LogIn /> },
+    { path: "/register", element: <Register /> },
   ]);
 
   return <RouterProvider router={router} />;

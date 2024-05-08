@@ -31,9 +31,9 @@ export default function LogIn() {
           if (user !== null) {
             dispatch(setUserSession(user));
             setErrorMessage(null);
-            navigate(`/${user.type}`);
+            navigate("/");
           } else {
-            setErrorMessage("User could not be found");
+            setErrorMessage("Usuario no encontrado");
           }
         })
         .catch((error: string) => {
@@ -66,7 +66,7 @@ export default function LogIn() {
               ref={userNameRef}
               type="username"
               className=" w-full"
-              placeholder="Username"
+              placeholder="Usuario"
             />
             <div className="relative w-full flex flex-col items-center justify-center">
               <img
@@ -78,7 +78,7 @@ export default function LogIn() {
               <Input
                 ref={passwordRef}
                 type={showPassword ? "text" : "password"}
-                placeholder="Password"
+                placeholder="Contraseña"
                 className=" w-full"
               />
             </div>

@@ -3,20 +3,15 @@ import { Button } from "@/components/ui/button";
 import Card from "@/components/ShoppingCart/CardCart";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft } from "lucide-react";
-import { useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import shoppingTaxes from "@/mock/shoppingTaxes.json";
+import { shoppingCart } from "@/models/shoppingCart";
+import { AppState } from "@/store/store";
 
-export default function () {
-  const [products, setProducts] = useState([
-    { id: 1, name: "Producto 1", price: 200.23, size: "xs", quantity: 1 },
-    { id: 2, name: "Producto 2", price: 300.44, size: "m", quantity: 2 },
-    { id: 3, name: "Producto 3", price: 250.66, size: "L", quantity: 1 },
-  ]);
-
-  const cartAmouts = { subTotal: 1000, shipCost: 300, serviceTax: 20 };
-
-  const [productsQuantity, setQuantity] = useState(
-    products.reduce((total, element) => total + element.quantity, 0)
-  );
+export default function ShoppingCart() {
+  
+  const cart = useSelector((state: { shoppingCart : shoppingCart}) => state.shoppingCart);
 
   return (
     <>
@@ -27,7 +22,7 @@ export default function () {
               Carrito de Compras
             </h1>
             <h1 className="pb-5 pr-24 font-roboto font-semibold w-1/4 text-right text-3xl">
-              {productsQuantity} Items
+              {cart.totalAmount} Items
             </h1>
           </div>
 
@@ -54,27 +49,35 @@ export default function () {
               </tr>
             </thead>
             <tbody>
-              {products.map((item) => (
-                <ShoppingItem {...item}></ShoppingItem>
+              {cart.products.map((prod) => (
+                <ShoppingItem {...prod}></ShoppingItem>
               ))}
             </tbody>
           </table>
-          <button className="flex pt-12">
-            <ArrowLeft></ArrowLeft>
-            <p className="pl-3">Seguir Comprando</p>
-          </button>
+          <Link to={"/catalog"}>
+            <button className="flex pt-12">
+              <ArrowLeft></ArrowLeft>
+              <p className="pl-3">Seguir Comprando</p>
+            </button>
+          </Link>
         </section>
 
         <section className=" w-1/3 font-roboto h-full p-10 pl-20 pr-20 flex flex-col justify-start">
           <h1 className="font-semibold text-4xl">Resumen de la compra</h1>
-          <Card {...cartAmouts}></Card>
+          <Card
+            subTotal={cart.totalPrice}
+            serviceTax={shoppingTaxes.serviceTax}
+            shipCost={shoppingTaxes.shipCost}
+          ></Card>
           <span>
             Al hacer click en Finalizar compra, estás aceptando nuestros{" "}
             <b>Términos y condiciones</b>
           </span>
-          <Button className="bg-black border-silk border-2 text-black w-full h-16 text-2xl text-white mt-5">
-            Finalizar Compra
-          </Button>
+          <Link to={"/checkout"}>
+            <Button className="bg-black border-silk border-2 w-full h-16 text-2xl text-white mt-5">
+              Finalizar Compra
+            </Button>
+          </Link>
         </section>
       </div>
     </>

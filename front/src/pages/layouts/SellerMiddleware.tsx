@@ -1,16 +1,10 @@
-// src/layouts/SellerLayout.tsx
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import NavBarSeller from "@/components/NavBarSeller"; // Your seller navbar
-import Footer from "@/components/Footer"; // Shared footer
-
 import { checkCorrectPath } from "@/lib/users";
 import { UserSession, UserType } from "@/models/users";
 import { useSelector } from "react-redux";
 
-interface SellerLayoutProps {}
-
-export default function SellerLayout({}: SellerLayoutProps) {
+export default function SellerMiddleware() {
   const user = useSelector(
     (state: { userSession: UserSession }) => state.userSession
   );
@@ -18,7 +12,7 @@ export default function SellerLayout({}: SellerLayoutProps) {
   const expectedUserType = "seller" as UserType;
 
   useEffect(() => {
-    if (user !== null) {
+    if (user) {
       checkCorrectPath(user?.type, expectedUserType, navigate);
       console.log("userType", user);
     } else {
@@ -28,11 +22,7 @@ export default function SellerLayout({}: SellerLayoutProps) {
 
   return (
     <>
-      <NavBarSeller user={user} />
-      <main>
-        <Outlet /> {/* Renders the currently matched route's component */}
-      </main>
-      <Footer />
+      <Outlet />
     </>
   );
 }

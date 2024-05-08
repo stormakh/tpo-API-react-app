@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback, ReactNode } from "react";
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import { Thumb } from "./EmblaCarouselThumbsButton";
-import Autoplay from "embla-carousel-autoplay";
 import "./embla.css";
 import { cn } from "@/lib/utils";
 
@@ -16,14 +15,11 @@ const EmblaCarouselThumbs: React.FC<PropType> = (props) => {
   const { slides, options } = props;
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options);
-  const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel(
-    {
-      containScroll: "keepSnaps",
-      dragFree: true,
-      watchSlides: true,
-    },
-    [Autoplay({ playOnInit: true, delay: 10 })]
-  );
+  const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
+    containScroll: "keepSnaps",
+    dragFree: true,
+    watchSlides: true,
+  });
 
   const onThumbClick = useCallback(
     (index: number) => {
@@ -82,3 +78,5 @@ const EmblaCarouselThumbs: React.FC<PropType> = (props) => {
 };
 
 export default EmblaCarouselThumbs;
+
+

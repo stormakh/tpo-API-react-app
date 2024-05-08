@@ -17,7 +17,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     useDotButton(emblaApi)
 
   return (
-    <section className="embla h-full relative" >
+    <section className="embla h-full relative " >
       <div className="embla__viewport h-full" ref={emblaRef}>
         <div className="embla__container h-full">
           

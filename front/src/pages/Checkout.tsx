@@ -4,41 +4,35 @@ import CheckoutItem from "@/components/ShoppingCart/CheckoutItem";
 import PaymentCard from "@/components/ShoppingCart/PaymentCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { shoppingCart } from "@/models/shoppingCart";
 import { ArrowLeft } from "lucide-react";
-import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import shoppingTaxes from "@/mock/shoppingTaxes.json";
+import { Toaster } from "@/components/ui/sonner";
+import { toast } from "sonner";
+import { clearCart } from "@/store/store";
+import { useNavigate } from "react-router-dom";
+export default function Checkout() {
+  const cart = useSelector(
+    (state: { shoppingCart: shoppingCart }) => state.shoppingCart
+  );
 
-export default function () {
-  const [products, setProducts] = useState([
-    {
-      imgUrl:
-        "https://acdn.mitiendanube.com/stores/001/126/411/products/img_6410-45e22b7745aa8ecce417076008276388-1024-1024.webp",
-      description: "Producto 1",
-      price: 200.23,
-      size: "xs",
-      quantity: 1,
-    },
-    {
-      imgUrl:
-        "https://acdn.mitiendanube.com/stores/001/126/411/products/img_6410-45e22b7745aa8ecce417076008276388-1024-1024.webp",
-      description: "Producto 2",
-      price: 300.44,
-      size: "m",
-      quantity: 2,
-    },
-    {
-      imgUrl:
-        "https://acdn.mitiendanube.com/stores/001/126/411/products/img_6410-45e22b7745aa8ecce417076008276388-1024-1024.webp",
-      description: "Producto 3",
-      price: 250.66,
-      size: "L",
-      quantity: 1,
-    },
-  ]);
+ const dispatch = useDispatch();
+ const navigate = useNavigate();
+  function handleFinalizePurchase() {
+    dispatch(clearCart());
+    toast("La compra se ha realizado exitosamente!");
+
+    //set timeout for redirecting the user to home
+    setTimeout(() => {
+      navigate("/");
+    }, 3000);
+  }
 
   return (
     <>
       <Banner text="Checkout"></Banner>
-      <div className="flex flex-col">
+      <section className="flex flex-col mb-16">
         <button className="flex pt-12">
           <ArrowLeft></ArrowLeft>
           <p className="pl-3 font-roboto">Seguir comprando</p>
@@ -116,28 +110,32 @@ export default function () {
           </section>
           <div className="w-1/4 pr-12 pt-24 font-roboto">
             <h1 className="text-4xl  font-medium">Tu pedido</h1>
-            <table className="w-full">
-              <tbody className="">
-                {products.map((item) => (
-                  <div>
-                    <CheckoutItem {...item}></CheckoutItem>
-                  </div>
-                ))}
-              </tbody>
-            </table>
-            <Card subTotal={20000} shipCost={3230} serviceTax={300}></Card>
+
+            {cart.products.map((item) => (
+              <CheckoutItem {...item}></CheckoutItem>
+            ))}
+
+            <Card
+              subTotal={cart.totalPrice}
+              serviceTax={shoppingTaxes.serviceTax}
+              shipCost={shoppingTaxes.shipCost}
+            ></Card>
             <PaymentCard></PaymentCard>
             <div className="font-roboto font-thin">
               Tu información personal será utilizada para procesar tu pedido y
               apoyar tu experiencia en este sitio web. La misma también podrá
               ser utilizada para futuras acciones de marketing.
             </div>
-            <Button className="bg-black border-silk border-2 text-black w-full h-16 text-2xl text-white mt-5">
+            <Button
+              className="bg-black border-silk border-2 w-full h-16 text-2xl text-white mt-5"
+              onClick={handleFinalizePurchase}
+            >
               Finalizar Compra
             </Button>
+            <Toaster />
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }
