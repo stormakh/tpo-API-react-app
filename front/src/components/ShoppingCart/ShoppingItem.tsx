@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { PlusIcon, MinusIcon, TrashIcon } from "lucide-react";
-import { shoppingItem } from "@/models/shoppingItem";
+import { shoppingItem } from "@/models/shoppingCart";
 import { useDispatch } from "react-redux";
 import { addAmountToProduct, discountAmountToProduct, removeProduct } from "@/store/store";
 
@@ -54,12 +54,12 @@ export default function ShoppingItem(product: shoppingItem){
           </div>
         </div>
       </td>
-      <td className=" h-40 text-center align-top flex justify-center items-center text-center">
+      <td className=" h-40 text-center align-top flex justify-center items-center ">
         <p className="text-3xl"><b>$ {(product.price * countQuantity).toFixed(2)}</b></p>
       </td>
       <td className="text-center">
         <button onClick={() => deleteProduct(product.id)}>
-          <TrashIcon className="w-8 w-8" />
+          <TrashIcon className="w-8" />
         </button>
       </td>
     </tr>

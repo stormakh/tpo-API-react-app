@@ -1,18 +1,28 @@
 import { Button } from "@/components/ui/button";
-import { Heart, PackageSearch, Search, ShoppingBag, UserRound } from "lucide-react";
+import {
+  Heart,
+  PackageSearch,
+  Search,
+  ShoppingBag,
+  UserRound,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import NavSheet from "./NavSheet";
 import { UserSession } from "@/models/users";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearUserSession } from "@/store/store";
 import noPayLogoSellers from "@/assets/nopaySellers.svg";
-interface NavBarProps {
-  user: UserSession | null;
-}
+interface NavBarProps {}
 
-export default function NavBar({ user }: NavBarProps) {
+export default function NavBar({}: NavBarProps) {
   const dispatch = useDispatch();
-
+  const user = useSelector(
+    (state: { userSession: UserSession }) => state.userSession
+  );
+  const totalAmount = useSelector(
+    (state: { shoppingCart: { totalAmount: number } }) =>
+      state.shoppingCart.totalAmount
+  );
   function handleLogOutUser() {
     dispatch(clearUserSession());
   }
@@ -38,11 +48,16 @@ export default function NavBar({ user }: NavBarProps) {
         {user !== null ? (
           <Button onClick={handleLogOutUser}>{user?.username}</Button>
         ) : null}
+        <Link to={"shopping-cart"} className="relative">
+          <ShoppingBag className="z-0" color="black" />
+          <div className="bg-black p-1 px-2 rounded-full absolute -bottom-3 -right-2">
+            {totalAmount > -1 && (
+              <p className=" text-base font-bold z-10 text-white">{totalAmount}</p>
+            )}
+          </div>
+        </Link>
         <Button size="icon" className="bg-transparent hover:bg-slate-50">
-          <ShoppingBag className="mr-1" color="black" />
-        </Button>
-        <Button size="icon" className="bg-transparent hover:bg-slate-50">
-          <Link to={"abm-products"}>
+          <Link to={"seller/abm-products"}>
             <PackageSearch className="mr-1" color="black" />
           </Link>
         </Button>

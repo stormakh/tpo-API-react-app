@@ -28,7 +28,7 @@ export default function(){
                 </div>
                 <div>
                     {/*<DefaultButton text="Filtrar"></DefaultButton>*/}
-                    <Link to={`/seller/product-details-sellers/-1`}>
+                    <Link to={`/seller/product-details-seller`}>
                         <DefaultButton text="Add Product"></DefaultButton>
                     </Link>
                 </div>
