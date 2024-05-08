@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import {  Outlet, useNavigate } from "react-router-dom";
 import Navbar from "../../components/NavBar"; // Assume you have a Navbar component
 import Footer from "../../components/Footer"; // Assume you have a Footer component
-
 import { UserSession, UserType } from "@/models/users";
 import { checkCorrectPath } from "@/lib/users";
 import { useSelector } from "react-redux";

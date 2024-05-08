@@ -6,7 +6,6 @@ import { Button } from "../ui/button";
 import { Product } from "@/models/products";
 import { Link } from "react-router-dom";
 
-
 export default function CardProduct(product: Product){
     return (
         <Card className="flex flex-row justify-center items-center p-6 m-3 ">

@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-footer p-4 sticky bottom-auto w-screen font-roboto">
+    <footer className="bg-footer p-4 sticky bottom-auto w-full font-roboto">
       <div className="flex justify-between items-center">
         <img
           src="/src/assets/no_pay_footer.svg"

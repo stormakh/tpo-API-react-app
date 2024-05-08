@@ -1,4 +1,3 @@
-
 // Define the user session interface
 export interface UserSession {
     id: number;
@@ -7,7 +6,6 @@ export interface UserSession {
     password: string;
     email: string;
     dni?: string;
-    
 }
 
 export type UserType = 'admin' | 'customer' | 'seller';

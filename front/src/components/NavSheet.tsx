@@ -29,7 +29,7 @@ export default function NavSheet() {
           <ul>
             {Object.values(categories).map((categorie) => (
               categorie !== 'None' && (
-                <Link to={`/catalog/${categorie}`} key={categorie}>
+                <Link to={`catalog/${categorie}`} key={categorie}>
                   <li className="">{categorie}</li>
                 </Link>
               )

@@ -28,7 +28,7 @@ export default function SellerLayout({}: SellerLayoutProps) {
 
   return (
     <>
-      <NavBarSeller user={user} />
+      <NavBarSeller user={user}/>
       <main>
         <Outlet /> {/* Renders the currently matched route's component */}
       </main>

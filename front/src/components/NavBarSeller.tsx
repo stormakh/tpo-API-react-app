@@ -21,11 +21,13 @@ export default function NavBar({ user }: NavBarProps) {
     <nav className="static top-0 w-screen h-auto  grid grid-cols-3 items-center px-4">
       <NavSheet />
       <div className="justify-self-center">
-        <img
-          src={noPayLogoSellers}
-          alt="Nopay Logo"
-          className="size-40"
-        />
+        <Link to={"/seller"}>
+          <img
+            src={noPayLogoSellers}
+            alt="Nopay Logo"
+            className="size-40"
+          />
+        </Link>
       </div>
       <div className="flex justify-self-end gap-2 px-4">
         <Button size="icon" className="bg-transparent hover:bg-slate-50">
