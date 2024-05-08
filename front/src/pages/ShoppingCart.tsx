@@ -7,13 +7,15 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import shoppingTaxes from "@/mock/shoppingTaxes.json";
 import { shoppingCart } from "@/models/shoppingCart";
+import Banner from "@/components/Banner";
 
 export default function ShoppingCart() {
   
   const cart = useSelector((state: { shoppingCart : shoppingCart}) => state.shoppingCart);
-
+  
   return (
     <>
+      <Banner text="Shopping Cart"></Banner>
       <div className="flex justify-center mt-24 h-screen">
         <section className="p-10 pl-30 w-2/3 text-2xl font-roboto">
           <div className="flex mb-3">
@@ -82,3 +84,11 @@ export default function ShoppingCart() {
     </>
   );
 }
+function setErrorMessage(arg0: string) {
+  throw new Error("Function not implemented.");
+}
+
+function setIsLoading(arg0: boolean) {
+  throw new Error("Function not implemented.");
+}
+

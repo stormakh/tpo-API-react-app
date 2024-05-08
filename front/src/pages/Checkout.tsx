@@ -11,7 +11,7 @@ import shoppingTaxes from "@/mock/shoppingTaxes.json";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { clearCart } from "@/store/store";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export default function Checkout() {
   const cart = useSelector(
     (state: { shoppingCart: shoppingCart }) => state.shoppingCart
@@ -33,10 +33,12 @@ export default function Checkout() {
     <>
       <Banner text="Checkout"></Banner>
       <section className="flex flex-col mb-16">
-        <button className="flex pt-12">
-          <ArrowLeft></ArrowLeft>
-          <p className="pl-3 font-roboto">Seguir comprando</p>
-        </button>
+        <Link to={"/catalog"}>
+          <button className="flex pt-12">
+            <ArrowLeft></ArrowLeft>
+            <p className="pl-3 font-roboto">Seguir comprando</p>
+          </button>
+        </Link>
         <div className="flex">
           <section className="w-3/4 m-36 px-24 font-roboto">
             <h1 className="text-5xl font-medium">Datos Personales</h1>

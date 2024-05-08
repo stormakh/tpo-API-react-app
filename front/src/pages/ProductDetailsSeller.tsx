@@ -80,9 +80,11 @@ export default function ProductDetailsSeller() {
     setShowPicker(!showPicker); // Toggle visibility of the color picker
   };
 
-  interface ColorPickerRef {
-    current: HTMLDivElement | null;
-  }
+  {/* 
+    interface ColorPickerRef {
+      current: HTMLDivElement | null;
+    }
+*/}
 
   const handleClickOutside = useCallback((event: MouseEvent) => {
     if (
@@ -102,7 +104,7 @@ export default function ProductDetailsSeller() {
 
   return (
     <>
-      <Banner text="Mis Productos"></Banner>
+      <Banner text="New Product"></Banner>
       <section className="flex flex-col mx-12 md:my-8 my-4 md:p-4">
         <Link to={"/seller/abm-products"}>
           <button className="flex pb-12">

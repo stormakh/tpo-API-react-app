@@ -21,7 +21,7 @@ export default function(){
 
     return(
         <div>
-            <Banner text="Mis Productos"></Banner>
+            <Banner text="My Products"></Banner>
             <div className={"flex flex-row justify-between m-3 content-center text-center p-6"}>
                 <div>   
                     Mis Productos
