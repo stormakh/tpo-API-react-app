@@ -2,13 +2,10 @@ import { Card } from "../ui/card";
 import { Separator } from "../ui/separator";
 import React from "react";
 import CheckButton from "@/components/ShoppingCart/CheckButton"
-
+import paymentMethods from "@/mock/paymentMethods.json"
 export default function(){
 
-    const paymentMethods = [
-        {title: "Depósito / Transferencia Bancaria", description: "Realiza tu pago directamente en nuestra cuenta bancaria. Por favor, usa el número del pedido como referencia de pago. Tu pedido no se procesará hasta que se haya recibido el importe en nuestra cuenta." },
-        {title: "3 Cuotas sin interés", description: "Realiza tu pago directamente en nuestra cuenta bancaria. Por favor, usa el número del pedido como referencia de pago. Tu pedido no se procesará hasta que se haya recibido el importe en nuestra cuenta." }
-        ]
+
 
     return (
         <Card className="bg-gray-100 border-solid border-gray-300 mb-20 mt-20 ">
