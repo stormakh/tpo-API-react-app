@@ -7,6 +7,8 @@ import {
   CreditCard,
   RefreshCcw,
   Store,
+  Check,
+  Loader,
 } from "lucide-react";
 import {
   Carousel,
@@ -23,10 +25,11 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchById } from "@/lib/products";
 import { Product } from "@/models/products";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "@/store/store";
 
 import EmblaCarouselThumbs from "@/components/carouselThumbNails/EmblaCarouselThumbs";
+import { UserSession } from "@/models/users";
 
 const sizeSources = [
   "/src/assets/Size_1.svg",
@@ -56,9 +59,13 @@ const initialState: Product = {
 export default function () {
   const { id } = useParams<{ id: string }>();
   const [prod, setProd] = useState<Product>(initialState);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [addedToCart, setAddedToCart] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const dispatch = useDispatch();
-  
+  const user = useSelector((state: { userSession: UserSession }) => state.userSession);
+
+
   useEffect(() => {
     if (!id) return;
     const parsedId = parseInt(id);
@@ -70,17 +77,37 @@ export default function () {
 
   function handleAddToCart() {
     if (prod === undefined) return;
+    console.log('User', user);
+    setErrorMessage("");
+    // fake loading 😎
     setIsLoading(true);
-    dispatch(addProduct(prod));
+  
+    if(prod.stock === 0 ) {
+      setErrorMessage("No hay stock de este producto");
+      setIsLoading(false);
+      return;
+    }
+
+    if (!user) {
+      setErrorMessage("Tenes que estar logueado para comprar");
+      setIsLoading(false);
+      return;
+    }
+
+    setTimeout(() => {
+      setIsLoading(false);
+      dispatch(addProduct(prod));
+      setAddedToCart(true);
+    }, 1000);
   }
 
   return (
     <>
       <Banner text={prod.parentCategories[1]} />
       <Link to={"/catalog"}>
-      <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
-        {prod?.categories?.join(" / ")}
-      </h1>
+        <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
+          {prod?.categories?.join(" / ")}
+        </h1>
       </Link>
       <section className="font-roboto grid grid-cols-1 md:grid-cols-8 gap-4 m-8 md:items-start place-items-center">
         <EmblaCarouselThumbs
@@ -138,12 +165,22 @@ export default function () {
               ) : null}
 
               <Button
-                disabled={!isLoading}
+                disabled={isLoading || addedToCart}
                 className="my-5 w-96 h-20 text-xl"
                 onClick={handleAddToCart}
               >
-                <ShoppingBag className="mr-2" /> Add to Cart
+                {isLoading ? (
+                  <Loader className="animate-spin"/>
+                ) : addedToCart ? (
+                  <Check />
+                ) : (
+                  <>
+                    <ShoppingBag className="mr-2" />
+                    <p>Add to Cart</p>{" "}
+                  </>
+                )}
               </Button>
+              {errorMessage ? <div className="inline-flex gap-x-2"><p className="text-red-600">{errorMessage}</p><Link className=" underline" to={'/login'}>Logueate</Link></div> : null}
               <div className="flex items-center text-xl">
                 <MapPin className="size-auto" />
                 <a className="my-5 ml-2 font-roboto font-semibold">
@@ -176,110 +213,3 @@ export default function () {
   );
 }
 
-/*
-
-      <Banner text="Jeans" />
-      <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
-        Ropa / Pantalones / Jeans
-      </h1>
-      <div className="w-auto">
-        <div className=" flex items-center">
-          <Carousel
-            opts={{
-              align: "start",
-            }}
-            orientation="vertical"
-            className="flex-none w-full max-w-xs p-5 ml-24"
-          >
-            <CarouselContent className="-mt-1 h-fill ">
-              {imageSources.map((source, index) => (
-                <CarouselItem key={index} className="pt-1 md:basis-1/2">
-                  <div className="p-1">
-                    <img src={source} className="mb-5"></img>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-          <AspectRatio ratio={16 / 9} className="mt-9 flex-none">
-            <img src="src/assets/Sample_Big.svg" className="bg-fill"></img>
-          </AspectRatio>
-          <div className="mx-12 w-fit h-fit self-start pt-8">
-            <h2 className="font-bold font-roboto text-5xl">
-              Jeans Iron washed
-            </h2>
-            <div className="flex justify-between my-9">
-              <h3 className="font-roboto text-4xl">$150.000</h3>
-              <h3 className="font-roboto"> 3 Cuotas sin interés de $50.000</h3>
-            </div>
-            <Separator className="mx-auto bg-silk" />
-            <p className="font-roboto text-2xl">
-              Sumérgete en un estilo casual con nuestro jean azul desgastado. Su
-              corte holgado y detalles de costuras visibles ofrecen comodidad y
-              estilo. Combínalo con una camiseta simple o una camisa para
-              cualquier ocasión.
-            </p>
-            <h2 className="font-roboto font-semibold my-5 text-3xl">Size</h2>
-            <div className="my-5">
-              <Carousel
-                opts={{
-                  align: "start",
-                }}
-                className="w-full"
-              >
-                <CarouselContent className="-mt-1 h-fill w-52 ">
-                  {sizeSources.map((source, index) => (
-                    <CarouselItem key={index} className="pt-1 md:basis-1/2">
-                      <div className="p-1">
-                        <img src={source} className="mb-5"></img>
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-              </Carousel>
-            </div>
-            <h2 className="font-roboto font-semibold my-5 text-3xl">Colour</h2>
-            <Popover>
-              <PopoverTrigger>
-                <img
-                  src="src/assets/ColorPicker.svg"
-                  className="size-3/5"
-                ></img>
-              </PopoverTrigger>
-              <PopoverContent>Color palette goes here</PopoverContent>
-            </Popover>
-            <div className="flex flex-col">
-              <a className="underline text-3xl mt-20">Ver Guía de talles</a>
-              <Button className="my-5 w-96 h-20 text-xl">
-                <ShoppingBag className="mr-2" /> Add to Cart
-              </Button>
-              <div className="flex items-center text-xl">
-                <MapPin className="size-auto" />
-                <a className="my-5 ml-2 font-roboto font-semibold">
-                  Métodos de Envío
-                </a>
-              </div>
-              <div className="flex items-center text-xl">
-                <CreditCard className="size-auto" />
-                <a className="my-5 ml-2 font-roboto font-semibold">
-                  Hasta 6 cuotas sin interés
-                </a>
-              </div>
-              <div className="flex items-center text-xl">
-                <RefreshCcw className="size-auto" />
-                <a className="my-5 ml-2 font-roboto font-semibold">
-                  Cambios y devoluciones
-                </a>
-              </div>
-              <div className="flex items-center text-xl">
-                <Store className="size-auto" />
-                <a className="my-5 ml-2 font-roboto font-semibold">
-                  Pick up en tienda
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-*/

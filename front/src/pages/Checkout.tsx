@@ -4,28 +4,35 @@ import CheckoutItem from "@/components/ShoppingCart/CheckoutItem";
 import PaymentCard from "@/components/ShoppingCart/PaymentCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { shoppingItem } from "@/models/shoppingItem";
+import { shoppingCart } from "@/models/shoppingCart";
 import { ArrowLeft } from "lucide-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import shoppingTaxes from "@/mock/shoppingTaxes.json";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
-export default function () {
+import { clearCart } from "@/store/store";
+import { useNavigate } from "react-router-dom";
+export default function Checkout() {
   const cart = useSelector(
-    (state: { products: shoppingItem[] }) => state.products
+    (state: { shoppingCart: shoppingCart }) => state.shoppingCart
   );
-  function countSubTotal() {
-    let subTotal = 0;
-    cart.forEach((prod) => {
-      subTotal += prod.price * prod.amount;
-    });
-    return subTotal;
+
+ const dispatch = useDispatch();
+ const navigate = useNavigate();
+  function handleFinalizePurchase() {
+    dispatch(clearCart());
+    toast("La compra se ha realizado exitosamente!");
+
+    //set timeout for redirecting the user to home
+    setTimeout(() => {
+      navigate("/");
+    }, 3000);
   }
 
   return (
     <>
       <Banner text="Checkout"></Banner>
-      <div className="flex flex-col">
+      <section className="flex flex-col mb-16">
         <button className="flex pt-12">
           <ArrowLeft></ArrowLeft>
           <p className="pl-3 font-roboto">Seguir comprando</p>
@@ -103,17 +110,13 @@ export default function () {
           </section>
           <div className="w-1/4 pr-12 pt-24 font-roboto">
             <h1 className="text-4xl  font-medium">Tu pedido</h1>
-            <table className="w-full">
-              <tbody className="">
-                {cart.map((item) => (
-                  <div>
-                    <CheckoutItem {...item}></CheckoutItem>
-                  </div>
-                ))}
-              </tbody>
-            </table>
+
+            {cart.products.map((item) => (
+              <CheckoutItem {...item}></CheckoutItem>
+            ))}
+
             <Card
-              subTotal={countSubTotal()}
+              subTotal={cart.totalPrice}
               serviceTax={shoppingTaxes.serviceTax}
               shipCost={shoppingTaxes.shipCost}
             ></Card>
@@ -125,14 +128,14 @@ export default function () {
             </div>
             <Button
               className="bg-black border-silk border-2 w-full h-16 text-2xl text-white mt-5"
-              onClick={() => toast("La compra se ha realizado exitosamente!")}
+              onClick={handleFinalizePurchase}
             >
               Finalizar Compra
             </Button>
             <Toaster />
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }

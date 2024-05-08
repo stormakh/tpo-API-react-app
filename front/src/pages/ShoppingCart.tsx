@@ -4,30 +4,14 @@ import Card from "@/components/ShoppingCart/CardCart";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft } from "lucide-react";
 import { useSelector } from "react-redux";
-import { shoppingItem } from "@/models/shoppingItem";
 import { Link } from "react-router-dom";
-import shoppingTaxes from "@/mock/shoppingTaxes.json"
+import shoppingTaxes from "@/mock/shoppingTaxes.json";
+import { shoppingCart } from "@/models/shoppingCart";
+import { AppState } from "@/store/store";
 
 export default function ShoppingCart() {
-
-  const cart = useSelector((state: { products: shoppingItem[] }) => state.products);
-
-  function countSubTotal(){
-    let subTotal = 0;
-    cart.forEach((prod) => {
-      subTotal+=prod.price*prod.amount;
-    });
-    return subTotal;
-  }
-
-  function countItems(){
-    let items = 0;
-    cart.forEach((prod) => {
-      items+=prod.amount;
-    });
-    return items;
-  }
-
+  
+  const cart = useSelector((state: { shoppingCart : shoppingCart}) => state.shoppingCart);
 
   return (
     <>
@@ -38,7 +22,7 @@ export default function ShoppingCart() {
               Carrito de Compras
             </h1>
             <h1 className="pb-5 pr-24 font-roboto font-semibold w-1/4 text-right text-3xl">
-              {countItems()} Items
+              {cart.totalAmount} Items
             </h1>
           </div>
 
@@ -65,7 +49,7 @@ export default function ShoppingCart() {
               </tr>
             </thead>
             <tbody>
-              {cart.map((prod) => (
+              {cart.products.map((prod) => (
                 <ShoppingItem {...prod}></ShoppingItem>
               ))}
             </tbody>
@@ -80,16 +64,20 @@ export default function ShoppingCart() {
 
         <section className=" w-1/3 font-roboto h-full p-10 pl-20 pr-20 flex flex-col justify-start">
           <h1 className="font-semibold text-4xl">Resumen de la compra</h1>
-          <Card subTotal={countSubTotal()} serviceTax={shoppingTaxes.serviceTax} shipCost={shoppingTaxes.shipCost}></Card>
+          <Card
+            subTotal={cart.totalPrice}
+            serviceTax={shoppingTaxes.serviceTax}
+            shipCost={shoppingTaxes.shipCost}
+          ></Card>
           <span>
             Al hacer click en Finalizar compra, estás aceptando nuestros{" "}
             <b>Términos y condiciones</b>
           </span>
           <Link to={"/checkout"}>
-            <Button className="bg-black border-silk border-2 text-black w-full h-16 text-2xl text-white mt-5">
+            <Button className="bg-black border-silk border-2 w-full h-16 text-2xl text-white mt-5">
               Finalizar Compra
             </Button>
-            </Link>
+          </Link>
         </section>
       </div>
     </>
