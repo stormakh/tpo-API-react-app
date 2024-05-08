@@ -2,24 +2,23 @@ import { shoppingItem } from "@/models/shoppingCart";
 
 export default function CheckoutItem(product: shoppingItem) {
   return (
-    <div className="flex justify-stretch items-center mt-6">
-      <img
-        className="rounded-lg w-32 h-32 object-cover"
-        src={product.images[0]}
-        alt="Ejemplo"
-      />
-
-      <div className="flex flex-row flex-shrink min-w-0 max-h-32 px-2 justify-start ">
-        <p className="flex justify-start line-clamp-2">
-          {product.description}
-          {"estilo"}
-          {product.sizes[0]}
-        </p>
-      </div>
-      <div className="flex flex-col flex-grow justify-start ">
-        <p className=" font-thin">Unidades:{product.amount}</p>
+    <tr className="flex justify-between mt-6">
+      <td className="p-2 flex w-1/3">
+        <img
+          className="rounded-lg w-32 h-32 object-cover"
+          src={product.images[0]}
+          alt="Ejemplo"
+        />
+      </td>
+      <td className="flex flex-col w-1/3 justify-evenly items-start ">
+        <p className="flex justify-start">{product.name}</p>
+        <p className="flex justify-start font-thin">{product.colors[0]}</p>
+        <p className="flex justify-start font-thin">{product.sizes[0]}</p>
+      </td>
+      <td className="flex flex-col w-1/3 justify-evenly items-start">
         <p className="flex justify-end font-bold">${product.price}</p>
-      </div>
-    </div>
+        <p className="flex justify-end font-thin">Unidades: {product.amount}</p>
+      </td>
+    </tr>
   );
 }

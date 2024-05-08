@@ -8,9 +8,8 @@ import { fetchAllProducts } from "@/lib/products";
 import { Product } from "@/models/products";
 import CatalogSkeleton from "@/components/catalog/CatalogSkeleton";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { UserSession } from "@/models/users";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Catalog() {
   const currentProdsRef = useRef<Product[]>([]);

@@ -76,7 +76,7 @@ const shoppingCartSlice = createSlice({
         product.sizes = action.payload.sizes;
       }
     },
-    clearProducts: (state) => {
+    clearCart: (state) => {
       state.products = [];
     },
     addAmountToProduct: (
@@ -141,7 +141,7 @@ export default store;
 export const {
   addProduct,
   removeProduct,
-  clearProducts,
+  clearCart,
   addAmountToProduct,
   discountAmountToProduct,
 } = shoppingCartSlice.actions;

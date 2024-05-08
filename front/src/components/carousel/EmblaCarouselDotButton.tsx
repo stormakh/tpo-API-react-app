@@ -11,7 +11,6 @@ import React, {
     scrollSnaps: number[]
     onDotButtonClick: (index: number) => void
   }
-  
   export const useDotButton = (
     emblaApi: EmblaCarouselType | undefined
   ): UseDotButtonType => {

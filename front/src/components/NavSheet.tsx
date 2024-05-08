@@ -10,6 +10,7 @@ import { AlignJustify } from "lucide-react";
 import noPayLogo from "@/assets/nopay.svg";
 import { categories } from "@/models/products.ts";
 import { Link } from "react-router-dom";
+
 export default function NavSheet() {
   return (
     <Sheet>
@@ -29,7 +30,7 @@ export default function NavSheet() {
           <ul>
             {Object.values(categories).map((categorie) => (
               categorie !== 'None' && (
-                <Link to={`/catalog/${categorie}`} key={categorie}>
+                <Link to={`catalog/${categorie}`} key={categorie}>
                   <li className="">{categorie}</li>
                 </Link>
               )

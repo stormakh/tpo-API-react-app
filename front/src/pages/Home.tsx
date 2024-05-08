@@ -1,44 +1,35 @@
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
-import nopay from "@/assets/nopay.svg";
+import nopayLogo from "@/assets/nopay.svg";
 import nopay2 from "@/assets/nopay2.svg";
-import loginBack from "@/assets/LogIn_Back.svg";
-import carousel2 from "@/assets/Carousel_2.svg";
 import { Link } from "react-router-dom";
+
+const urls = [
+  "/src/assets/home-banner-1.svg",
+];
+
 export default function () {
   return (
     <>
-      <Carousel className="w-screen">
-        <CarouselContent>
-          <CarouselItem>
-            <Link to={"catalog"}>
-              <img src={loginBack} className="object-fill"></img>
-            </Link>
-          </CarouselItem>
-          <CarouselItem>
-            <img src={carousel2} className="object-fill"></img>
-          </CarouselItem>
-        </CarouselContent>
-        <CarouselPrevious />
-      </Carousel>
-      <Card className="w-screen py-12">
-        <CardContent className="flex justify-center gap-8 ">
-          <div className="flex flex-col  justify-evenly items-center">
-            <img src={nopay} className="w-54" alt="Logo"></img>
-            <p className="text-left text-3xl px-48">
-              Somos una marca nueva que promueve la excelencia en el diseño. Nos
+      <div className="relative">
+        <img src={urls[0]} alt="Descripción de la imagen" className="w-full h-auto" />
+        <Link to={"catalog/None"} className="absolute inset-0 flex items-center justify-center bg-gray-800/10 text-white font-bold py-2 px-4 rounded text-6xl">
+          SHOP NOW
+        </Link>
+      </div>
+
+      <Card className="w-screen py-24 w-full flex flex-col items-center h-1/3">
+        <CardContent className="flex justify-start gap-8 w-5/6">
+          <div className="flex flex-col items-center w-4/6">
+            <img src={nopayLogo} className="w-3/6 h-3/6" alt="Logo"></img>
+            <p className="text-center text-6xl items-start italic h-3/6 w-4/5">
+              "Somos una marca nueva que promueve la excelencia en el diseño. Nos
               identificamos con las personas que nos eligen a través de
               experiencias de un sentido de pertenencia, de un estilo de vida,
               transmitiendo la energía y el amor del proceso creativo a cada una
-              de nuestras prendas.
+              de nuestras prendas."
             </p>
           </div>
-          <img src={nopay2} className="w-96" alt="Image"></img>
+          <img src={nopay2} className="w-2/6" alt="Image"></img>
         </CardContent>
       </Card>
     </>

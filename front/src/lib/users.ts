@@ -9,7 +9,7 @@ export async function checkCorrectPath(userType : UserType | null , expected: Us
     navigate('/');
   }else if(userType !== expected){
     // Redirect to the correct route
-    navigate(`/${userType}`)
+    navigate(`/`)
   }
 }
 

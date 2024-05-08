@@ -6,17 +6,33 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { shoppingCart } from "@/models/shoppingCart";
 import { ArrowLeft } from "lucide-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import shoppingTaxes from "@/mock/shoppingTaxes.json";
+import { Toaster } from "@/components/ui/sonner";
+import { toast } from "sonner";
+import { clearCart } from "@/store/store";
+import { useNavigate } from "react-router-dom";
 export default function Checkout() {
   const cart = useSelector(
     (state: { shoppingCart: shoppingCart }) => state.shoppingCart
   );
 
+ const dispatch = useDispatch();
+ const navigate = useNavigate();
+  function handleFinalizePurchase() {
+    dispatch(clearCart());
+    toast("La compra se ha realizado exitosamente!");
+
+    //set timeout for redirecting the user to home
+    setTimeout(() => {
+      navigate("/");
+    }, 3000);
+  }
+
   return (
     <>
       <Banner text="Checkout"></Banner>
-      <div className="flex flex-col">
+      <section className="flex flex-col mb-16">
         <button className="flex pt-12">
           <ArrowLeft></ArrowLeft>
           <p className="pl-3 font-roboto">Seguir comprando</p>
@@ -110,12 +126,16 @@ export default function Checkout() {
               apoyar tu experiencia en este sitio web. La misma también podrá
               ser utilizada para futuras acciones de marketing.
             </div>
-            <Button className="bg-black border-silk border-2  w-full h-16 text-2xl text-white mt-5">
+            <Button
+              className="bg-black border-silk border-2 w-full h-16 text-2xl text-white mt-5"
+              onClick={handleFinalizePurchase}
+            >
               Finalizar Compra
             </Button>
+            <Toaster />
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }

@@ -1,6 +1,6 @@
 // src/App.tsx
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Layout from "@/pages/layouts/CustomerLayout";
+import Layout from "@/pages/layouts/MainLayout";
 import Home from "./pages/Home";
 import Catalog from "./pages/Catalog";
 import LogIn from "./pages/LogIn";
@@ -10,6 +10,8 @@ import UserProfile from "./pages/UserProfile";
 import Checkout from "./pages/Checkout";
 import Register from "./pages/Register";
 import ProductDetailsSeller from "./pages/ProductDetailsSeller";
+import AMBProducts from "./pages/AMBProducts";
+import SellerMiddleware from "./pages/layouts/SellerMiddleware";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -28,15 +30,16 @@ export default function App() {
         { path: "shopping-cart", element: <ShoppingCart /> },
         { path: "user-profile", element: <UserProfile /> },
         { path: "checkout", element: <Checkout /> },
-
         {
-          path: "seller", element: <Home/>,
+          path: "seller", element: <SellerMiddleware/>,
           children: [
+            { path: '', element: <Home />},
+            { path: "product-details-seller", element: <ProductDetailsSeller />},
             {
               path: "product-details-seller/:id",
               element: <ProductDetailsSeller />,
             },
-            { path: "abm-products", element: <h1>ABM</h1> },
+            { path: "abm-products", element: <AMBProducts />},
           ],
         },
       ],

@@ -5,7 +5,6 @@ import { Thumb } from "./EmblaCarouselThumbsButton";
 import "./embla.css";
 import { cn } from "@/lib/utils";
 
-
 type PropType = {
   slides: ReactNode[];
   options?: EmblaOptionsType;
