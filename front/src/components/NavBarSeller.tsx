@@ -28,7 +28,7 @@ export default function NavBar({}: NavBarProps) {
   }
 
   return (
-    <nav className="static top-0 w-screen h-auto  grid grid-cols-3 items-center px-12">
+    <nav className="static top-0 w-full h-auto  grid grid-cols-3 items-center px-12">
       <NavSheet />
       <div className="justify-self-center">
         <Link to={"/seller"}>
