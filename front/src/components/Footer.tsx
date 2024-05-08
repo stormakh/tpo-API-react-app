@@ -17,18 +17,18 @@ const Footer: React.FC = () => {
             <h3 className="font-semibold">Información</h3>
             <p>Sobre nosotros</p>
             <p>Blog</p>
-            <p>Eventos</p>
             <p>Terminos & condiciones</p>
           </div>
           <div className="w-1/4 text-letters">
             <h3 className="font-semibold ">Productos</h3>
-            {Object.values(categories).map((categorie) => (
-              categorie !== 'None' && (
-                <Link to={`catalog/${categorie}`} key={categorie}>
-                  <p className="">{categorie}</p>
-                </Link>
-              )
-            ))}
+            {Object.values(categories).map(
+              (categorie) =>
+                categorie !== "None" && (
+                  <Link to={`catalog/${categorie}`} key={categorie}>
+                    <p className="">{categorie}</p>
+                  </Link>
+                )
+            )}
           </div>
           <div className="w-1/4 text-letters">
             <h3 className="font-semibold ">Nuestros servicios</h3>
@@ -46,14 +46,14 @@ const Footer: React.FC = () => {
             </div>
             <div className="flex items-center">
               <Mail className=" h-4 mr-2"></Mail>
-              <p>contacto@gmail.com</p>
+              <p>Nopay@gmail.com</p>
             </div>
           </div>
         </div>
       </div>
       <hr className="border-b border-line my-4 w-full" />
       <p className="text-center text-letters font-semibold text-sm">
-        © No Pay, All rights reserved
+        © No Pay, Todos los Derechos Reservados
       </p>
     </footer>
   );

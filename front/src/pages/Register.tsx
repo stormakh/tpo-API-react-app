@@ -8,7 +8,6 @@ import { createUser } from "@/lib/users";
 import { useDispatch } from "react-redux";
 import { setUserSession } from "@/store/store";
 
-
 export default function Register() {
   const initialUser: UserSession = {
     id: 0,
@@ -22,8 +21,8 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState<UserSession>(initialUser); //// It's for keeping the array of users and being able to grab the ID, not sure if it works like this thb
   const navigate = useNavigate();
- const dispatch = useDispatch();
- 
+  const dispatch = useDispatch();
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -47,10 +46,12 @@ export default function Register() {
           className="size-32"
         />
         <div className="mb-6">
-          <h1 className="text-3xl font-semibold text-silk">Crea tu cuenta</h1>
+          <h1 className="text-3xl font-semibold text-silk text-center">
+            Crea tu cuenta
+          </h1>
           <h2 className="text-center text-silk text-2xl font-light">
             <Link to="/login" className="font-light text-black hover:underline">
-              Volver al Log In
+              Volver al Inicio de Sesión
             </Link>
           </h2>
         </div>
@@ -61,7 +62,7 @@ export default function Register() {
                 type="username"
                 value={user.username}
                 onChange={(e) => setUser({ ...user, username: e.target.value })}
-                placeholder="Username"
+                placeholder="Usuario"
               />
               <Input
                 type="dni"
@@ -87,7 +88,7 @@ export default function Register() {
                   onChange={(e) =>
                     setUser({ ...user, password: e.target.value })
                   }
-                  placeholder="Password"
+                  placeholder="Contraseña"
                 />
               </div>
               <Input
