@@ -39,7 +39,7 @@ export default function App() {
       element: <SellerLayout />,
       children: [
         { path: "", element: <Home /> },
-        { path: "catalog", element: <Catalog /> },
+        { path: "catalog/:categorie", element: <Catalog /> },
         {
           path: "product-details-sellers/:id",
           element: <ProductDetailsSeller />,
@@ -48,6 +48,23 @@ export default function App() {
           path: "abm-products",
           element: <AMBProducts></AMBProducts>
         }
+      ],
+    },
+    {
+      path: "customer",
+      element: <CustomerLayout />,
+      errorElement: <h1>Not Found</h1>,
+      children: [
+        { path: "", element: <Home /> },
+        { path: "catalog", element: <Catalog /> },
+        { path: "catalog/:categorie", element: <Catalog />},
+        {
+          path: "product-details-client/:id",
+          element: <ProductDetailsClient />,
+        },
+        { path: "shopping-cart", element: <ShoppingCart /> },
+        { path: "user-profile", element: <UserProfile /> },
+        { path: "checkout", element: <Checkout /> },
       ],
     },
   ]);

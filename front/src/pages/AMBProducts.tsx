@@ -1,4 +1,5 @@
 import CardProduct from "@/components/AMBProducts/CardProduct";
+import Banner from "@/components/Banner";
 import DefaultButton from "@/components/DefaultButton";
 import { Card, CardContent } from "@/components/ui/card";
 import { fetchBySellerId } from "@/lib/products";
@@ -20,7 +21,8 @@ export default function(){
 
     return(
         <div>
-            <div className={"flex flex-row justify-between m-3 content-center text-center"}>
+            <Banner text="Mis Productos"></Banner>
+            <div className={"flex flex-row justify-between m-3 content-center text-center p-6"}>
                 <div>   
                     Mis Productos
                 </div>

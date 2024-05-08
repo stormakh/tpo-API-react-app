@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Save, CircleXIcon } from "lucide-react";
+import { Save, CircleXIcon, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -19,6 +19,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import ColorAdd from "../assets/ColorAdd.svg";
+import { Textarea } from "@/components/ui/textarea"
 
 const sizeSources = [
   "/src/assets/Size_1.svg",
@@ -30,12 +31,11 @@ const sizeSources = [
   "/src/assets/Size_7.svg",
 ];
 
-import { Camera, Pencil } from "lucide-react";
+import { Camera} from "lucide-react";
 import { ColorResult, SketchPicker } from "react-color";
 import { Link, useParams } from "react-router-dom";
 import { fetchById } from "@/lib/products";
 import { Product } from "@/models/products";
-import { useDispatch } from "react-redux";
 import { Input } from "@/components/ui/input";
 
 const initialState: Product = {
@@ -57,7 +57,6 @@ export default function ProductDetailsSeller() {
 
   const { id } = useParams<{ id: string }>();
   const [prod, setProd] = useState<Product>(initialState);
-  const dispatch = useDispatch();
   
   useEffect(() => {
     if (!id) return;
@@ -66,7 +65,7 @@ export default function ProductDetailsSeller() {
       if (prod === undefined) return;
       setProd(prod);
     });
-    console.log(prod);
+    
   }, []);
   
   const [color, setColor] = useState<ColorResult>();
@@ -105,6 +104,12 @@ export default function ProductDetailsSeller() {
     <>
       <Banner text="Mis Productos"></Banner>
       <section className="flex flex-col mx-12 md:my-8 my-4 md:p-4">
+        <Link to={"/seller/abm-products"}>
+          <button className="flex pb-12">
+            <ArrowLeft></ArrowLeft>
+            <p className="pl-3">Volver</p>
+          </button>
+        </Link>
         <h1 className=" pb-5 font-roboto  underline italic">
           Mis Productos / Editar
         </h1>
@@ -155,11 +160,11 @@ export default function ProductDetailsSeller() {
                 <h3 className="font-roboto font-semibold text-3xl">
                   Descripción
                 </h3>
-                <Input
+                <Textarea
                   defaultValue={prod.description}
                   className=" h-48 border-gray-500 text-3xl rounded-xl"
                   style={{ overflowWrap: "break-word", wordWrap: "break-word" }}
-                ></Input>
+                ></Textarea>
               </div>
 
               <h2 className="font-roboto font-semibold text-3xl pl-5">

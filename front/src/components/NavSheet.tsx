@@ -10,6 +10,7 @@ import { AlignJustify } from "lucide-react";
 import noPayLogo from "@/assets/nopay.svg";
 import { categories } from "@/models/products.ts";
 import { Link } from "react-router-dom";
+
 export default function NavSheet() {
   return (
     <Sheet>

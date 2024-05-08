@@ -12,7 +12,7 @@ export default function () {
     <>
       <div className="relative">
         <img src={urls[0]} alt="Descripción de la imagen" className="w-full h-auto" />
-        <Link to={"/catalog"} className="absolute inset-0 flex items-center justify-center bg-gray-800/10 text-white font-bold py-2 px-4 rounded text-6xl">
+        <Link to={"catalog/None"} className="absolute inset-0 flex items-center justify-center bg-gray-800/10 text-white font-bold py-2 px-4 rounded text-6xl">
           SHOP NOW
         </Link>
       </div>

@@ -17,7 +17,7 @@ export default function CardProduct(product: Product){
                     <div className="">
                         <p className="text-4xl font-medium h-1/4">{product.name}</p>
                         <p className="text-4xl font-light h-1/4"><b>Precio: </b> ${product.price}</p>
-                        <p className="text-4xl font-light h-1/4"><b>Talle: </b> ${product.sizes[0]}</p>
+                        <p className="text-4xl font-light h-1/4"><b>Talle: </b>{product.sizes[0]}</p>
                         <div className="flex h-1/4 gap-6">
                         <Button disabled className="bg-white border-silk border-2 w-48 h-16 text-2xl text-black">
                             Sold
