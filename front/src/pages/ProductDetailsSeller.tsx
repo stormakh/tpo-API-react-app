@@ -139,8 +139,7 @@ export default function ProductDetailsSeller() {
               Añadir Fotos <Camera className="mx-5" />
             </a>
           </div>
-
-          <Card className="w-full h-[450px] ">
+          <Card className="w-full h-full ">
             <CardContent className="flex flex-col gap-y-2">
               <CardHeader>
               <h3 className="font-roboto font-semibold text-3xl">
@@ -157,6 +156,13 @@ export default function ProductDetailsSeller() {
                   placeholder={`${prod.price}`}
                   className=" h-16 w-1/6 border-gray-500 text-3xl rounded-xl"
                 ></Input>
+                <h3 className=" font-roboto font-semibold my-5 text-3xl">
+                  Stock
+                </h3>
+                <Input
+                  placeholder={`${prod.stock}`}
+                  className=" h-16 w-1/6 border-gray-500 text-3xl rounded-xl"
+                ></Input>
               </CardHeader>
               <div className="pl-5">
                 <h3 className="font-roboto font-semibold text-3xl">
@@ -164,7 +170,7 @@ export default function ProductDetailsSeller() {
                 </h3>
                 <Textarea
                   defaultValue={prod.description}
-                  className=" h-48 border-gray-500 text-3xl rounded-xl"
+                  className="h-48 w-full border-gray-500 text-3xl rounded-xl"
                   style={{ overflowWrap: "break-word", wordWrap: "break-word" }}
                 ></Textarea>
               </div>
