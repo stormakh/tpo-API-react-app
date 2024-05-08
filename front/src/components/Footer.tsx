@@ -1,5 +1,7 @@
+import { categories } from "@/models/products";
 import { Phone, Mail } from "lucide-react";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
   return (
@@ -20,10 +22,15 @@ const Footer: React.FC = () => {
           </div>
           <div className="w-1/4 text-letters">
             <h3 className="font-semibold ">Productos</h3>
-            <p>Tops</p>
-            <p>Jeans</p>
-            <p>Remeras</p>
-            <p>Buzos</p>
+            <ul>
+            {Object.values(categories).map((categorie) => (
+              categorie !== 'None' && (
+                <Link to={`/catalog/${categorie}`} key={categorie}>
+                  <li className="">{categorie}</li>
+                </Link>
+              )
+            ))}
+          </ul>
           </div>
           <div className="w-1/4 text-letters">
             <h3 className="font-semibold ">Nuestros servicios</h3>
