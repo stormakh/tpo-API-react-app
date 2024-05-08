@@ -25,7 +25,7 @@ export default function CardProduct(product: Product){
                         <Button disabled className="bg-white border-silk border-2 w-48 h-16 text-2xl text-black">
                             Shared
                         </Button>
-                        <Link to={`/seller/product-details-sellers/${product.id.toString()}`}>
+                        <Link to={`/seller/product-details-seller/${product.id.toString()}`}>
                             <Button className="bg-white border-silk border-2 w-48 h-16 text-2xl text-black">
                                 Edit  
                             </Button>
