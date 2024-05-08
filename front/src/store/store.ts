@@ -35,12 +35,12 @@ const shoppingCartSlice = createSlice({
     },
     removeProduct: (state, action: PayloadAction<number>) => {
       const index = state.products.findIndex(
-        (product) => product.id === action.payload
+        (product:shoppingItem) => product.id === action.payload
       );
       if (index !== -1) {
-        state.products.splice(index, 1);
-        state.totalAmount -= 1;
         state.totalPrice -= state.products[index].price;
+        state.products.splice(index, 1);
+        state.totalAmount -= 1; 
       }
     },
     setProductPrice: (
@@ -48,7 +48,7 @@ const shoppingCartSlice = createSlice({
       action: PayloadAction<{ id: number; price: number }>
     ) => {
       const product = state.products.find(
-        (product) => product.id === action.payload.id
+        (product:shoppingItem) => product.id === action.payload.id
       );
       if (product) {
         product.price = action.payload.price;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { PlusIcon, MinusIcon, TrashIcon } from "lucide-react";
 import { shoppingItem } from "@/models/shoppingCart";
 import { useDispatch } from "react-redux";

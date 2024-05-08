@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Heart, Search, ShoppingBag, UserRound } from "lucide-react";
+import {ShoppingBag, UserRound } from "lucide-react";
 import { Link } from "react-router-dom";
 import NavSheet from "./NavSheet";
 

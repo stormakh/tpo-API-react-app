@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import shoppingTaxes from "@/mock/shoppingTaxes.json";
 import { shoppingCart } from "@/models/shoppingCart";
-import { AppState } from "@/store/store";
 
 export default function ShoppingCart() {
   

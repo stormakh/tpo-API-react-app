@@ -34,7 +34,7 @@ export default function App() {
           path: "seller", element: <SellerMiddleware/>,
           children: [
             { path: '', element: <Home />},
-            { path: "product-details-seller", element: <ProductDetailsSeller />},
+            { path: "product-details-seller/", element: <ProductDetailsSeller />},
             {
               path: "product-details-seller/:id",
               element: <ProductDetailsSeller />,
