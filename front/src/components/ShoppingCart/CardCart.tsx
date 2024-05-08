@@ -11,7 +11,7 @@ interface CardProps{
 export default function CardCart({subTotal, shipCost, serviceTax}: CardProps){
 
     return (
-        <Card className="bg-gray-100 border-solid border-gray-300 mb-20 mt-20 pl-6 pr-6">
+        <Card className=" border-solid border-gray-300 mb-20 mt-20 pl-6 pr-6">
             <div className="h-20 w-full flex items-center"> 
                 <span className="w-3/4">Subtotal</span>
                 <span className="w-1/4 flex justify-end">${subTotal}</span>
