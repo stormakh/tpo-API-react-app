@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Table(name = "materials")
 @Entity
 @Data
 @NoArgsConstructor
@@ -16,6 +17,6 @@ public class Materials {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_material;
 
-    private String descripcion;
+    private String description;
 
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Table(name = "size")
 @Entity
 @Data
 @NoArgsConstructor
@@ -16,5 +17,5 @@ public class Size {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_size;
 
-    private String Detalle;
+    private String details;
 }

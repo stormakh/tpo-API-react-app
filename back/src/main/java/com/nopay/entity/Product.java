@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Table(name = "product")
 @Entity
 @Data
 @NoArgsConstructor
@@ -16,15 +17,15 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_product;
 
-    private String descripcion;
-    private double precio;
-    private int cantidad;
+    private String description;
+    private double price;
+    private int quantity;
 
     // Foreign Key
 
-    private int color;
-    private int talle;
-    private int categoria;
+    private int colour;
+    private int size;
+    private int category;
     private int material;
 
 }

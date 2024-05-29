@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Table(name = "product_category")
 @Entity
 @Data
 @NoArgsConstructor
@@ -12,8 +13,8 @@ import lombok.NoArgsConstructor;
 
 public class ProductCategory {
 
-    private int id_categoria;
+    private int id_category;
 
-    private int id_producto;
+    private int id_product;
 
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Table(name = "category")
 @Entity
 @Data
 @NoArgsConstructor
@@ -16,7 +17,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_category;
 
-    private String detalle;
+    private String details;
 
     private int id_parent;
 }

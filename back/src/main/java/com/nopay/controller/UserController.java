@@ -37,14 +37,14 @@ public class UserController {
         Optional<User> user = userService.findById(id);
         if (user.isPresent()) {
             User updatedUser = user.get();
-            updatedUser.setNombre(userDetails.getNombre());
-            updatedUser.setApellido(userDetails.getApellido());
+            updatedUser.setName(userDetails.getName());
+            updatedUser.setSurname(userDetails.getSurname());
             updatedUser.setEmail(userDetails.getEmail());
-            updatedUser.setCiudad(userDetails.getCiudad());
-            updatedUser.setCodigo_postal(userDetails.getCodigo_postal());
-            updatedUser.setDireccion(userDetails.getDireccion());
+            updatedUser.setCity(userDetails.getCity());
+            updatedUser.setPostal_code(userDetails.getPostal_code());
+            updatedUser.setAddress(userDetails.getAddress());
             updatedUser.setDni(userDetails.getDni());
-            updatedUser.setTelefono(userDetails.getTelefono());
+            updatedUser.setPhone(userDetails.getPhone());
 
             return ResponseEntity.ok(userService.save(updatedUser));
         } else {
