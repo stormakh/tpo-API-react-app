@@ -1,5 +1,4 @@
-// src/main/java/com/tpo/api/demo/entity/User.java
-package main.java.com.nopay.entity;
+package com.nopay.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
