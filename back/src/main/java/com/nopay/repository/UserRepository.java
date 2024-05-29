@@ -1,6 +1,6 @@
-package main.java.com.nopay.repository;
+package com.nopay.repository;
 
-import com.tpo.api.demo.entity.User;
+import com.nopay.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

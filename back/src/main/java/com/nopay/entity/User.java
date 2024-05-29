@@ -1,5 +1,5 @@
 // src/main/java/com/tpo/api/demo/entity/User.java
-package main.java.com.nopay.entity;
+package com.nopay.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,8 +14,14 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_usuario;
 
-    private String name;
+    private int dni;
+    private String nombre;
+    private String apellido;
+    private String direccion;
+    private String ciudad;
+    private String codigo_postal;
+    private String telefono;
     private String email;
 }

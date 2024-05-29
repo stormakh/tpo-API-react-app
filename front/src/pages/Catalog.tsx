@@ -10,7 +10,6 @@ import CatalogSkeleton from "@/components/catalog/CatalogSkeleton";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNavigate } from "react-router-dom";
 
-
 export default function Catalog() {
   const currentProdsRef = useRef<Product[]>([]);
   const [filteredProds, setFilteredProds] = useState<Product[]>([]);
@@ -27,7 +26,7 @@ export default function Catalog() {
     });
   }, []);
 
-  function handleNavigateToProduct(id : number) {
+  function handleNavigateToProduct(id: number) {
     navigate(`/product-details-client/${id}`);
   }
 
@@ -61,12 +60,16 @@ export default function Catalog() {
             currentProds={currentProdsRef.current}
           />
         </div>
-        <CatalogMenu />
+        {/*<CatalogMenu>*/}
       </div>
 
       <div className="grid  gap-4 m-8 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
         {filteredProds.map((prod) => (
-          <div className="flex flex-col gap-2 cursor-pointer" key={prod.id} onClick={() => handleNavigateToProduct(prod.id)}>
+          <div
+            className="flex flex-col gap-2 cursor-pointer"
+            key={prod.id}
+            onClick={() => handleNavigateToProduct(prod.id)}
+          >
             <CarouselWrapper
               ratio={9 / 16}
               slides={prod.images.map((img) => (

@@ -19,7 +19,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import ColorAdd from "../assets/ColorAdd.svg";
-import { Textarea } from "@/components/ui/textarea"
+import { Textarea } from "@/components/ui/textarea";
 
 const sizeSources = [
   "/src/assets/Size_1.svg",
@@ -31,7 +31,7 @@ const sizeSources = [
   "/src/assets/Size_7.svg",
 ];
 
-import { Camera} from "lucide-react";
+import { Camera } from "lucide-react";
 import { ColorResult, SketchPicker } from "react-color";
 import { Link, useParams } from "react-router-dom";
 import { fetchById } from "@/lib/products";
@@ -50,14 +50,13 @@ const initialState: Product = {
   material: [],
   images: [],
   parentCategories: [],
-  sellerId: 0
+  sellerId: 0,
 };
 
 export default function ProductDetailsSeller() {
-
   const { id } = useParams<{ id: string }>();
   const [prod, setProd] = useState<Product>(initialState);
-  
+
   useEffect(() => {
     if (!id) return;
     const parsedId = parseInt(id);
@@ -65,9 +64,8 @@ export default function ProductDetailsSeller() {
       if (prod === undefined) return;
       setProd(prod);
     });
-    
   }, []);
-  
+
   const [color, setColor] = useState<ColorResult>();
   const [showPicker, setShowPicker] = useState<boolean>(false);
   const pickerRef = useRef<HTMLDivElement>(null);
@@ -115,7 +113,14 @@ export default function ProductDetailsSeller() {
         </h1>
         <section className="w-full max-w-full h-auto flex sm:flex-row flex-col gap-8 items-start justify-between">
           <div className="flex flex-col basis-5/12">
-            <img src={prod.images[0] ? prod.images[0] : "/src/assets/placeHolderImage.svg"} className=" w-full"></img>
+            <img
+              src={
+                prod.images[0]
+                  ? prod.images[0]
+                  : "/src/assets/placeHolderImage.svg"
+              }
+              className=" w-full"
+            ></img>
             <Carousel
               opts={{
                 align: "start",
@@ -138,12 +143,10 @@ export default function ProductDetailsSeller() {
             </a>
           </div>
 
-          <Card className="w-full h-[450px] ">
+          <Card className="w-full h-full ">
             <CardContent className="flex flex-col gap-y-2">
               <CardHeader>
-              <h3 className="font-roboto font-semibold text-3xl">
-                  Nombre
-                </h3>
+                <h3 className="font-roboto font-semibold text-3xl">Nombre</h3>
                 <Input
                   defaultValue={prod.name}
                   className="h-16 w-2/4 border-gray-500 text-3xl rounded-xl"
