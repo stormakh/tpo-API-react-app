@@ -2,7 +2,6 @@ package com.nopay.nopayapi.controller;
 
 import com.nopay.nopayapi.entity.User;
 import com.nopay.nopayapi.service.UserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,8 +37,15 @@ public class UserController {
         Optional<User> user = userService.findById(id);
         if (user.isPresent()) {
             User updatedUser = user.get();
-            updatedUser.setNombre(userDetails.getNombre());
+            updatedUser.setName(userDetails.getName());
+            updatedUser.setSurname(userDetails.getSurname());
             updatedUser.setEmail(userDetails.getEmail());
+            updatedUser.setCity(userDetails.getCity());
+            updatedUser.setPostal_code(userDetails.getPostal_code());
+            updatedUser.setAddress(userDetails.getAddress());
+            updatedUser.setDni(userDetails.getDni());
+            updatedUser.setPhone(userDetails.getPhone());
+
             return ResponseEntity.ok(userService.save(updatedUser));
         } else {
             return ResponseEntity.notFound().build();
