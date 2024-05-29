@@ -1,5 +1,5 @@
 // src/main/java/com/tpo/api/demo/entity/User.java
-package main.java.com.nopay.entity;
+package com.nopay.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,6 +16,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String email;
+    public Object getEmail() {
+        throw new UnsupportedOperationException("Unimplemented method 'getEmail'");
+    }
+
+    public Object getName() {
+        throw new UnsupportedOperationException("Unimplemented method 'getName'");
+    }
+
+    public void setName(Object name) {
+        throw new UnsupportedOperationException("Unimplemented method 'setName'");
+    }
+
+    public void setEmail(Object email) {
+        throw new UnsupportedOperationException("Unimplemented method 'setEmail'");
+    }
 }

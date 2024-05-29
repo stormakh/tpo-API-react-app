@@ -1,8 +1,7 @@
-package main.java.com.nopay.service;
+package com.nopay.service;
 
-import com.tpo.api.demo.entity.User;
-import com.tpo.api.demo.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.nopay.entity.User;
+import com.nopay.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,8 +10,11 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public List<User> findAll() {
         return userRepository.findAll();
