@@ -1,7 +1,8 @@
-package com.nopay.service;
+package com.nopay.nopayapi.service;
 
-import com.nopay.entity.User;
-import com.nopay.repository.UserRepository;
+import com.nopay.nopayapi.entity.User;
+import com.nopay.nopayapi.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

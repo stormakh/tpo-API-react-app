@@ -1,8 +1,9 @@
-package com.nopay.repository;
+package com.nopay.nopayapi.repository;
 
-import com.nopay.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.nopay.nopayapi.entity.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {

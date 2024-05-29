@@ -1,4 +1,4 @@
-package com.nopay.entity;
+package com.nopay.nopayapi.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,12 +9,19 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    private String name;
+    private int dni;
+    private String nombre;
+    private String apellido;
+    private String direccion;
+    private String ciudad;
+    private String codigo_postal;
+    private String telefono;
     private String email;
 }
