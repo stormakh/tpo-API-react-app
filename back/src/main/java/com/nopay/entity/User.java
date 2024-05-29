@@ -1,4 +1,3 @@
-// src/main/java/com/tpo/api/demo/entity/User.java
 package com.nopay.entity;
 
 import jakarta.persistence.*;

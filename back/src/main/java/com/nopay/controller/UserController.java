@@ -1,5 +1,8 @@
-package main.java.com.nopay.controller;
+package com.nopay.controller;
 
+import com.nopay.entity.User;
+import com.nopay.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
