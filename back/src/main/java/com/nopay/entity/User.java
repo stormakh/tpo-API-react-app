@@ -1,27 +1,28 @@
-package com.nopay.nopayapi.entity;
+// src/main/java/com/tpo/api/demo/entity/User.java
+package com.nopay.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Table(name = "user")
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id_user;
 
     private int dni;
-    private String nombre;
-    private String apellido;
-    private String direccion;
-    private String ciudad;
-    private String codigo_postal;
-    private String telefono;
+    private String name;
+    private String surname;
+    private String address;
+    private String city;
+    private String postal_code;
+    private String phone;
     private String email;
 }
