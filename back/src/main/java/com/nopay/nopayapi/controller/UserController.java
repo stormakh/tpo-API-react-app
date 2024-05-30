@@ -38,7 +38,7 @@ public class UserController {
         Optional<User> user = userService.findById(id);
         if (user.isPresent()) {
             User updatedUser = user.get();
-            updatedUser.setNombre(userDetails.getNombre());
+            updatedUser.setName(userDetails.getName());
             updatedUser.setEmail(userDetails.getEmail());
             return ResponseEntity.ok(userService.save(updatedUser));
         } else {
