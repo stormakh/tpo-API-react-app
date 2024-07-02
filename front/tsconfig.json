@@ -10,9 +10,13 @@
       "@/*": [
         "./src/*"
       ]},
-
+    
+    "allowJs": true,
+    "types": ["jest", "@testing-library/jest-dom"],
+    "esModuleInterop": true,
+    
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
