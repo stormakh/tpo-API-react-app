@@ -1,6 +1,6 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserSession } from "@/models/users";
-import { Product } from "@/models/products";
+import { Product, ProductDetail } from "@/models/products";
 import { shoppingCart, shoppingItem } from "@/models/shoppingCart";
 // Define the initial state interface
 export interface AppState {
@@ -19,23 +19,26 @@ const shoppingCartSlice = createSlice({
   name: "shoppingCart",
   initialState: initialShoppingCart as shoppingCart,
   reducers: {
-    addProduct: (state, action: PayloadAction<Product>) => {
-      console.log(action.payload.id);
+    addProduct: (state, action: PayloadAction<ProductDetail>) => {
+      console.log(action.payload.idProduct);
       const product = state.products.find(
-        (prod) => prod.id === action.payload.id
+        (prod) => prod.idProduct === action.payload.idProduct
       );
 
       if (product != null) {
         product.amount += 1;
       } else {
-        state.products.push({ ...action.payload, amount: 1 });
+        state.products.push({
+          ...action.payload, amount: 1,
+          stock: 0
+        });
         state.totalAmount += 1;
         state.totalPrice += action.payload.price;
       }
     },
     removeProduct: (state, action: PayloadAction<number>) => {
       const index = state.products.findIndex(
-        (product) => product.id === action.payload
+        (product) => product.idProduct === action.payload
       );
       if (index !== -1) {
         state.products.splice(index, 1);
@@ -48,7 +51,7 @@ const shoppingCartSlice = createSlice({
       action: PayloadAction<{ id: number; price: number }>
     ) => {
       const product = state.products.find(
-        (product) => product.id === action.payload.id
+        (product) => product.idProduct === action.payload.id
       );
       if (product) {
         product.price = action.payload.price;
@@ -59,7 +62,7 @@ const shoppingCartSlice = createSlice({
       action: PayloadAction<{ id: number; colors: string[] }>
     ) => {
       const product = state.products.find(
-        (product) => product.id === action.payload.id
+        (product) => product.idProduct === action.payload.id
       );
       if (product) {
         product.colors = action.payload.colors;
@@ -70,7 +73,7 @@ const shoppingCartSlice = createSlice({
       action: PayloadAction<{ id: number; sizes: string[] }>
     ) => {
       const product = state.products.find(
-        (product) => product.id === action.payload.id
+        (product) => product.idProduct === action.payload.id
       );
       if (product) {
         product.sizes = action.payload.sizes;
@@ -86,7 +89,7 @@ const shoppingCartSlice = createSlice({
       action: PayloadAction<{ id: number; amount: number }>
     ) => {
       const product = state.products.find(
-        (prod) => (prod.id = action.payload.id)
+        (prod) => (prod.idProduct = action.payload.id)
       );
       if (product) {
         product.amount += action.payload.amount;
@@ -99,7 +102,7 @@ const shoppingCartSlice = createSlice({
       action: PayloadAction<{ id: number; amount: number }>
     ) => {
       const product = state.products.find(
-        (prod) => (prod.id === action.payload.id)
+        (prod) => (prod.idProduct === action.payload.id)
       );
       if (product && product.amount > action.payload.amount && product.amount > 0)  {
         product.amount = product.amount - action.payload.amount;

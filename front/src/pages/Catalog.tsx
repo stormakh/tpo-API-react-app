@@ -1,18 +1,18 @@
 import Banner from "@/components/Banner";
 import CarouselWrapper from "@/components/carousel/CarouselWrapper";
-import ImageSlide, { ImageSlideProps } from "@/components/carousel/ImageSlide";
+import ImageSlide from "@/components/carousel/ImageSlide";
 import CatalogMenu from "@/components/catalog/CatalogMenu";
 import CatalogFilter from "@/components/catalog/CatalogFilter";
 import { useEffect, useRef, useState } from "react";
 import { fetchAllProducts } from "@/lib/products";
-import { Product } from "@/models/products";
+import { ProductDetail } from "@/models/products";
 import CatalogSkeleton from "@/components/catalog/CatalogSkeleton";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNavigate } from "react-router-dom";
 
 export default function Catalog() {
-  const currentProdsRef = useRef<Product[]>([]);
-  const [filteredProds, setFilteredProds] = useState<Product[]>([]);
+  const currentProdsRef = useRef<ProductDetail[]>([]);
+  const [filteredProds, setFilteredProds] = useState<ProductDetail[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
   const images: string[] = [];
@@ -66,7 +66,7 @@ export default function Catalog() {
 
       <div className="grid  gap-4 m-8 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
         {filteredProds.map((prod) => (
-          <div className="flex flex-col gap-2 cursor-pointer" key={prod.idProducto} onClick={() => handleNavigateToProduct(prod.idProducto)}>
+          <div className="flex flex-col gap-2 cursor-pointer" key={prod.idProduct} onClick={() => handleNavigateToProduct(prod.idProduct)}>
             <CarouselWrapper
               ratio={9 / 16}
               slides={images.map((img) => (

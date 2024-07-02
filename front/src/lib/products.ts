@@ -1,4 +1,4 @@
-import { Product } from "@/models/products";
+import { ProductDetail } from "@/models/products";
 
 export async function createProduct(description: string, price: Float32Array, quantity: number, categories: string[] ) {
   fetch('http://localhost:8080/products', {
@@ -26,12 +26,12 @@ export async function createProduct(description: string, price: Float32Array, qu
     });
 }
 
-export async function fetchAllProducts(): Promise<Product[]> {
+export async function fetchAllProducts(): Promise<ProductDetail[]> {
   try {
     const response = await fetch('http://localhost:8080/products', {
       method: 'GET',
       headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb3F1aXNAZXhhbXBsZS5jb20iLCJpYXQiOjE3MTk4MDA3NjcsImV4cCI6MTcxOTg4NzE2N30.gb1YXRUqe_R-F0o11eTOCIq-Mp1Kct79NureKKioh6TQcxS168p8DBIeiLVOs4ZxBTND3HPoKQgFYxDfvn3WFQ '
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken') 
       }
     });
 
@@ -40,7 +40,7 @@ export async function fetchAllProducts(): Promise<Product[]> {
     }
 
     const data = await response.json();
-    return data as Product[];
+    return data as ProductDetail[];
 
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error);
@@ -49,9 +49,9 @@ export async function fetchAllProducts(): Promise<Product[]> {
 }
 
 export function filterByCategorie(
-  products: Product[],
+  products: ProductDetail[],
   categorie: string
-): Product[] {
+): ProductDetail[] {
   if (categorie === "None") {
     return products;
   } else {
@@ -59,12 +59,12 @@ export function filterByCategorie(
   }
 }
 
-export async function fetchById(productId: number): Promise<Product>{
+export async function fetchById(productId: number): Promise<ProductDetail> {
   try {
     const response = await fetch(`http://localhost:8080/products/${productId}`, {
       method: 'GET',
       headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb3F1aXNAZXhhbXBsZS5jb20iLCJpYXQiOjE3MTk4MDA3NjcsImV4cCI6MTcxOTg4NzE2N30.gb1YXRUqe_R-F0o11eTOCIq-Mp1Kct79NureKKioh6TQcxS168p8DBIeiLVOs4ZxBTND3HPoKQgFYxDfvn3WFQ '
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken') 
       }
     });
 
@@ -73,7 +73,7 @@ export async function fetchById(productId: number): Promise<Product>{
     }
 
     const data = await response.json();
-    return data as Product;
+    return data as ProductDetail;
 
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error);
@@ -81,7 +81,7 @@ export async function fetchById(productId: number): Promise<Product>{
   }
 }
 
-export async function fetchBySellerId(sellerId: number): Promise<Product[]> {
+export async function fetchBySellerId(sellerId: number): Promise<ProductDetail[]> {
   const prods = fetchAllProducts();
   return (await prods).filter((prod) => prod.seller.idSeller === sellerId)
 }

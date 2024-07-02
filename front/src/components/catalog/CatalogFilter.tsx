@@ -1,4 +1,4 @@
-import { Product, parentCategorie } from "@/models/products";
+import { Product, ProductDetail, parentCategorie } from "@/models/products";
 import {
   Select,
   SelectContent,
@@ -13,8 +13,8 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { categories } from "@/models/products";
 interface CatalogFilterProps {
-  action: React.Dispatch<React.SetStateAction<Product[]>>;
-  currentProds: Product[];
+  action: React.Dispatch<React.SetStateAction<ProductDetail[]>>;
+  currentProds: ProductDetail[];
 }
 
 export default function CatalogFilter({
@@ -35,9 +35,6 @@ export default function CatalogFilter({
   function handleFilterByCat(categorie: string) {
     action(filterByCategorie(currentProds, categorie));
   }
-
-  
-
   return (
     <Select defaultValue={params.categorie} onValueChange={(value: string) => handleFilterByCat(value)}>
       <SelectTrigger className=" border-none focus:ring-0 focus:ring-offset-0 text-2xl">

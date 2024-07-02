@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import shoppingTaxes from "@/mock/shoppingTaxes.json";
 import { shoppingCart } from "@/models/shoppingCart";
-import { AppState } from "@/store/store";
 
 export default function ShoppingCart() {
   
@@ -73,11 +72,19 @@ export default function ShoppingCart() {
             Al hacer click en Finalizar compra, estás aceptando nuestros{" "}
             <b>Términos y condiciones</b>
           </span>
-          <Link to={"/checkout"}>
-            <Button className="bg-black border-silk border-2 w-full h-16 text-2xl text-white mt-5">
-              Finalizar Compra
-            </Button>
-          </Link>
+          
+            {cart.products.length === 0 ? 
+              <Button className="bg-black border-silk border-2 w-full h-16 text-2xl text-white mt-5" disabled>
+                Finalizar Compra
+              </Button> 
+              : 
+              <Link to={"/checkout"}>
+                <Button className="bg-black border-silk border-2 w-full h-16 text-2xl text-white mt-5" >
+                  Finalizar Compra
+                </Button>
+              </Link>
+            }
+          
         </section>
       </div>
     </>

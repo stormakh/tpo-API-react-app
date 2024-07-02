@@ -1,6 +1,6 @@
-import { Product } from "./products";
+import { ProductDetail } from "./products";
 
-export interface shoppingItem extends Product{
+export interface shoppingItem extends ProductDetail{
     amount: number;
 }
 

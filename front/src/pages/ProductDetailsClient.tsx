@@ -23,8 +23,8 @@ import {
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchById } from "@/lib/products";
-import { Product } from "@/models/products";
+import { fetchAllProducts, fetchById } from "@/lib/products";
+import { Product, ProductDetail } from "@/models/products";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "@/store/store";
 
@@ -41,39 +41,48 @@ const sizeSources = [
   "/src/assets/Size_7.svg",
 ];
 
-const initialState: Product = {
-  id: 0,
-  name: "",
+const images = [
+
+  "src/assets/Hoodie-Gray-1.svg",
+  "src/assets/Dress-Black-2.svg"
+
+]
+
+
+const initialState: ProductDetail = {
+  idProduct: 0,
   description: "",
   price: 0,
-  colors: [],
-  sizes: [],
   stock: 0,
   categories: [],
-  material: [],
-  images: [],
-  parentCategories: [],
-  sellerId: 0
+  sizes: [],
+  colors: [],
+  materials: [],
+  seller: {
+    idSeller: 0,
+    name: ""
+  }
 };
 
 export default function () {
   const { id } = useParams<{ id: string }>();
-  const [prod, setProd] = useState<Product>(initialState);
+  const [prod, setProd] = useState<ProductDetail>(initialState);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [addedToCart, setAddedToCart] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const dispatch = useDispatch();
   const user = useSelector((state: { userSession: UserSession }) => state.userSession);
 
-
   useEffect(() => {
-    if (!id) return;
-    const parsedId = parseInt(id);
-    fetchById(parsedId).then((prod) => {
-      if (prod === undefined) return;
-      setProd(prod);
-    });
+    if (prod.idProduct == 0){
+      setProd(getProduct(parseInt(id)));
+    }
   }, []);
+
+  async function getProduct(idProduct: number){
+    const products = await fetchAllProducts();
+    return products.filter((product) => product.idProduct === idProduct);
+  }
 
   function handleAddToCart() {
     if (prod === undefined) return;
@@ -103,7 +112,7 @@ export default function () {
 
   return (
     <>
-      <Banner text={prod.parentCategories[1]} />
+      <Banner text={prod.categories[1]} />
       <Link to={"/catalog"}>
         <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
           {prod?.categories?.join(" / ")}
@@ -111,7 +120,8 @@ export default function () {
       </Link>
       <section className="font-roboto grid grid-cols-1 md:grid-cols-8 gap-4 m-8 md:items-start place-items-center">
         <EmblaCarouselThumbs
-          slides={prod?.images.map((image) => {
+          //slides={prod?.images.map((image) => {
+          slides={images.map((image) => {
             return <img src={image} className=""></img>;
           })}
           className="md:col-span-3 lg:col-span-3 xl:col-span-2"
@@ -120,7 +130,7 @@ export default function () {
         <Card className=" min-w-0 w-full h-fit flex flex-col justify-center col-span-1 md:col-span-5">
           <CardContent className=" ">
             <CardHeader className="font-bold font-roboto text-5xl">
-              {prod?.name}
+              {prod?.description}
             </CardHeader>
             <div className="flex justify-between">
               <h3 className="font-roboto text-4xl">${prod?.price}</h3>

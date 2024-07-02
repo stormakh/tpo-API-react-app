@@ -31,32 +31,48 @@ const sizeSources = [
   "/src/assets/Size_7.svg",
 ];
 
+const images = [
+
+  "src/assets/Hoodie-Gray-1.svg",
+  "src/assets/Dress-Black-2.svg"
+
+];
+
 import { Camera} from "lucide-react";
 import { ColorResult, SketchPicker } from "react-color";
 import { Link, useParams } from "react-router-dom";
 import { fetchById } from "@/lib/products";
-import { Product } from "@/models/products";
+import {  ProductDetail } from "@/models/products";
 import { Input } from "@/components/ui/input";
+// import {imageToBlob} from "@/helpers/imgtoblob";
 
-const initialState: Product = {
-  id: 0,
-  name: "",
+const initialState: ProductDetail = {
+  idProduct: 0,
   description: "",
   price: 0,
-  colors: [],
-  sizes: [],
   stock: 0,
   categories: [],
-  material: [],
-  images: [],
-  parentCategories: [],
-  sellerId: 0
+  sizes: [],
+  colors: [],
+  materials: [],
+  seller: {
+    idSeller: 0,
+    name: ""
+  }
 };
+
+const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  if (event.target.files && event.target.files[0]) {
+    const file = event.target.files[0];
+    const Blob = await imageToBlob(file);
+  }
+}
+
 
 export default function ProductDetailsSeller() {
 
   const { id } = useParams<{ id: string }>();
-  const [prod, setProd] = useState<Product>(initialState);
+  const [prod, setProd] = useState<ProductDetail>(initialState);
   
   useEffect(() => {
     if (!id) return;
@@ -115,7 +131,8 @@ export default function ProductDetailsSeller() {
         </h1>
         <section className="w-full max-w-full h-auto flex sm:flex-row flex-col gap-8 items-start justify-between">
           <div className="flex flex-col basis-5/12">
-            <img src={prod.images[0] ? prod.images[0] : "/src/assets/placeHolderImage.svg"} className=" w-full"></img>
+            {/*<img src={prod.images[0] ? prod.images[0] : "/src/assets/placeHolderImage.svg"} className=" w-full"></img> */}
+            <img src={images[0] ? images[0] : "/src/assets/placeHolderImage.svg"} className=" w-full"></img>
             <Carousel
               opts={{
                 align: "start",
@@ -124,7 +141,8 @@ export default function ProductDetailsSeller() {
               className="w-fit"
             >
               <CarouselContent className="">
-                {prod.images.map((source, index) => (
+              {/*{prod.images.map((source, index) => ( */ }
+                {images.map((source, index) => (
                   <CarouselItem key={index} className="pt-1 md:basis-1/4 mt-6">
                     <div className="p-1">
                       <img src={source} className="mb-5"></img>
@@ -133,9 +151,9 @@ export default function ProductDetailsSeller() {
                 ))}
               </CarouselContent>
             </Carousel>
-            <a className="flex font-semibold">
+            <input type = "file" className="flex font-semibold" accept="image/png" onChange={handleFileChange}>
               Añadir Fotos <Camera className="mx-5" />
-            </a>
+            </input>
           </div>
 
           <Card className="w-full h-[450px] ">
@@ -145,7 +163,7 @@ export default function ProductDetailsSeller() {
                   Nombre
                 </h3>
                 <Input
-                  defaultValue={prod.name}
+                  defaultValue={prod.description}
                   className="h-16 w-2/4 border-gray-500 text-3xl rounded-xl"
                 ></Input>
                 <h3 className=" font-roboto font-semibold my-5 text-3xl">
