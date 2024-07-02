@@ -13,35 +13,49 @@ export async function checkCorrectPath(userType : UserType | null , expected: Us
   }
 }
 
-export async function createUser(user: UserSession): Promise<UserSession> {
-  return new Promise((resolve) => {
-    // Create a new user with the given data
-    const newUser = {
-      ...user,
-      id: usersMock.length + 1,
-      type: 'customer' as UserType,
-    };
-
-    console.log("New user created", newUser)
-    // Add the new user to the mock
-    usersMock.push(newUser);
-
-    // Resolve the new user
-    resolve(newUser);
-  });
+async function createUser(firstName: string, lastName: string, clientEmail: string, clientPassword: string) {
+  return  fetch('http://127.0.0.1:8080/auth/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      firstname: firstName,
+      lastname: lastName,
+      email: clientEmail,
+      password: clientPassword
+    })
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data; 
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
 }
 
-export function fetchUserById(id: number): UserSession | null {
-  const users: UserSession[] = usersMock.map((user) => ({
-    ...user,
-    type: user.type as UserType,
-  }));
-
-  // Find the user with the given ID
-  const user = users.find((user) => user.id === id);
-
-  // Return the user or null if not found
-  return user || null;
+async function fetchUserById(userId: number) {
+  return  fetch(`http://localhost:8080/user/${userId}`, {
+    method: 'GET'
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data; // Devuelve el access_token
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
 }
 
 export const fetchUserByNameAndPassword = (
@@ -63,3 +77,57 @@ return new Promise((resolve) => {
     resolve(user || null);
 });
 };
+
+
+export async function login(email: string, password: string) {
+  return  fetch('http://127.0.0.1:8080/auth/authenticate', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      email: email,
+      password: password
+    })
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data; // Devuelve el access_token
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
+}
+
+export async function register(firstname: string, lastname: string, email: string, password: string) {
+  return  fetch('http://127.0.0.1:8080/auth/register', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb3F1aXNAZXhhbXBsZS5jb20iLCJpYXQiOjE3MTk4Njg0NDQsImV4cCI6MTcxOTk1NDg0NH0.vFielkg-LlSjzjQVEV_OPCfaCkUceTOuhrKY2HAe0taA4RX7pzh9OdtbCl4zkE70zYBFrVEo8Ixa3xxvhV0uow ',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      firstname: firstname,
+      lastname: lastname,
+      email: email,
+      password: password
+    })
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data; // Devuelve el access_token
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
+}
