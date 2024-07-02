@@ -1,6 +1,6 @@
 import Banner from "@/components/Banner";
 import CarouselWrapper from "@/components/carousel/CarouselWrapper";
-import ImageSlide from "@/components/carousel/ImageSlide";
+import ImageSlide, { ImageSlideProps } from "@/components/carousel/ImageSlide";
 import CatalogMenu from "@/components/catalog/CatalogMenu";
 import CatalogFilter from "@/components/catalog/CatalogFilter";
 import { useEffect, useRef, useState } from "react";
@@ -10,12 +10,12 @@ import CatalogSkeleton from "@/components/catalog/CatalogSkeleton";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNavigate } from "react-router-dom";
 
-
 export default function Catalog() {
   const currentProdsRef = useRef<Product[]>([]);
   const [filteredProds, setFilteredProds] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
+  const images: string[] = [];
 
   useEffect(() => {
     fetchAllProducts().then((prods) => {
@@ -66,10 +66,10 @@ export default function Catalog() {
 
       <div className="grid  gap-4 m-8 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
         {filteredProds.map((prod) => (
-          <div className="flex flex-col gap-2 cursor-pointer" key={prod.id} onClick={() => handleNavigateToProduct(prod.id)}>
+          <div className="flex flex-col gap-2 cursor-pointer" key={prod.idProducto} onClick={() => handleNavigateToProduct(prod.idProducto)}>
             <CarouselWrapper
               ratio={9 / 16}
-              slides={prod.images.map((img) => (
+              slides={images.map((img) => (
                 <ImageSlide src={img} />
               ))}
               options={{ loop: true }}
@@ -81,7 +81,7 @@ export default function Catalog() {
             </CarouselWrapper>
 
             <p className="text-start z-10">
-              {prod.name.toUpperCase()} <b>${prod.price}</b>
+              {prod.description.toUpperCase()} <b>${prod.price}</b>
             </p>
           </div>
         ))}

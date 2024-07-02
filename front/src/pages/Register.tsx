@@ -1,45 +1,53 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import image from "/src/assets/LogIn_Back.svg";
+import image from "@/assets/LogIn_Back.svg";
 import { UserSession } from "@/models/users";
 import { Link, useNavigate } from "react-router-dom";
-import { createUser } from "@/lib/users";
-import { useDispatch } from "react-redux";
-import { setUserSession } from "@/store/store";
+import { register } from "@/lib/auth";
 
 export default function Register() {
+
   const initialUser: UserSession = {
     id: 0,
-    username: "",
-    type: "customer", // Por defecto
+    firstname: "",
+    lastname: "",
+    type: "customer",
     password: "",
     email: "",
     dni: "",
   };
 
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [user, setUser] = useState<UserSession>(initialUser);
   const [showPassword, setShowPassword] = useState(false);
-  const [user, setUser] = useState<UserSession>(initialUser); //// It's for keeping the array of users and being able to grab the ID, not sure if it works like this thb
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
-  };
+  }
+  const navigate = useNavigate();
 
-  const handleRegistration = async () => {
-    const newUser = await createUser(user);
-    console.log("New user created", newUser);
-    dispatch(setUserSession(newUser));
+  const handleRegistration = async() => {
+    try {
+      const tokenResponse = await register(user);
+      if (tokenResponse != null){
+        localStorage.setItem('accessToken', tokenResponse);
+        navigate("/");
+      }else{
+        setErrorMessage("no se ha podido loguear");
+      }
+    }
+    catch(error) {
+      console.error(error);
+    }
     navigate("/");
-  };
+  }
 
   return (
     <div
       className="flex items-center justify-center w-full h-screen"
       style={{ backgroundImage: `url(${image})`, backgroundSize: "cover" }}
     >
-      <div className="flex flex-col gap-4 items-center justify-center bg-white bg-opacity-90 w-4/6 md:w-1/2 p-8 rounded-lg border">
+      <div className="flex flex-col gap-4 items-center justify-center bg-white bg-opacity-90 w-1/6  p-8 rounded-lg border">
         <img
           src="./src/assets/nopay.svg"
           alt="Nopay logo"
@@ -59,19 +67,23 @@ export default function Register() {
           <div className="flex flex-col md:flex-row justify-between items-stretch gap-2 w-full flex-wrap">
             <div className="flex-1 min-w-0 space-y-4">
               <Input
-                type="username"
-                value={user.username}
-                onChange={(e) => setUser({ ...user, username: e.target.value })}
-                placeholder="Usuario"
+                type="email"
+                value={user.email}
+                onChange={(e) => setUser({ ...user, email: e.target.value })}
+                placeholder="Email"
               />
               <Input
-                type="dni"
-                value={user.dni}
-                onChange={(e) => setUser({ ...user, dni: e.target.value })}
-                placeholder="DNI"
+                type="firstname"
+                value={user.firstname}
+                onChange={(e) => setUser({ ...user, firstname: e.target.value })}
+                placeholder="Firstname"
               />
-            </div>
-            <div className="flex-1 min-w-0 space-y-4">
+                            <Input
+                type="lastname"
+                value={user.lastname}
+                onChange={(e) => setUser({ ...user, lastname: e.target.value })}
+                placeholder="Lastname"
+              />
               <div className="relative w-full flex flex-col items-center justify-center">
                 <img
                   src={`/src/assets/${
@@ -91,12 +103,6 @@ export default function Register() {
                   placeholder="Contraseña"
                 />
               </div>
-              <Input
-                type="email"
-                value={user.email}
-                onChange={(e) => setUser({ ...user, email: e.target.value })}
-                placeholder="Email"
-              />
             </div>
           </div>
           <Button
@@ -105,8 +111,9 @@ export default function Register() {
           >
             Registrarse
           </Button>
+          {errorMessage ? errorMessage : null}
         </div>
       </div>
-    </div>
-  );
+    </div>
+  );
 }

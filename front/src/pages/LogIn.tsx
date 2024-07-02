@@ -1,18 +1,14 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
 import image from "/src/assets/LogIn_Back.svg";
 import { useRef, useState } from "react";
-import { fetchUserByNameAndPassword } from "@/lib/users";
-import { setUserSession } from "@/store/store";
-import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
+import { login } from "@/lib/auth";
 
 export default function LogIn() {
-  const userNameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -22,23 +18,17 @@ export default function LogIn() {
   };
 
   const handleLogin = async () => {
-    if (userNameRef.current && passwordRef.current) {
-      fetchUserByNameAndPassword(
-        userNameRef.current?.value,
+    if (emailRef.current && passwordRef.current) {
+      const tokenResponse = await login(
+        emailRef.current?.value,
         passwordRef.current?.value
       )
-        .then((user) => {
-          if (user !== null) {
-            dispatch(setUserSession(user));
-            setErrorMessage(null);
-            navigate("/");
-          } else {
-            setErrorMessage("Usuario no encontrado");
-          }
-        })
-        .catch((error: string) => {
-          setErrorMessage(error);
-        });
+      if (tokenResponse != null){
+        localStorage.setItem('accessToken', tokenResponse);
+        navigate("/");
+      }else{
+        setErrorMessage("no se ha podido loguear");
+      }
     }
   };
 
@@ -63,7 +53,7 @@ export default function LogIn() {
           </h2>
           <div className="relative w-full flex flex-col items-center justify-center space-y-4">
             <Input
-              ref={userNameRef}
+              ref={emailRef}
               type="username"
               className=" w-full"
               placeholder="Usuario"

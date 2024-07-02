@@ -1,5 +1,5 @@
 
-interface ImageSlideProps {
+export interface ImageSlideProps {
     src: string
 }
 

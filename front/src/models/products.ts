@@ -1,17 +1,27 @@
 // Define the product interface
-export interface Product {
-  id: number;
+
+interface Seller {
+  idSeller: number;
   name: string;
+}
+
+export interface Product {
+  idProducto: number;
   description: string;
   price: number;
-  colors: string[];
-  sizes: string[];
-  stock?: number;
+  quantity: number;
   categories: string[];
-  material: string[];
-  images: string[];
-  parentCategories: parentCategorie[];
-  sellerId: number;
+  seller: Seller;
+}
+
+export interface Image {
+  idImage: string;
+  image: string;
+}
+
+export interface Category{
+  id: number;
+  name: string;
 }
 
 export enum parentCategorie {
@@ -28,5 +38,5 @@ export enum categories {
   Casual = "Casual",
   Formal = "Formal",
   Women = "Women",
-  None = "None",
+  None = "None",
 }

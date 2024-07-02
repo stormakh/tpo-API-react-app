@@ -13,53 +13,66 @@ export async function checkCorrectPath(userType : UserType | null , expected: Us
   }
 }
 
-export async function createUser(user: UserSession): Promise<UserSession> {
-  return new Promise((resolve) => {
-    // Create a new user with the given data
-    const newUser = {
-      ...user,
-      id: usersMock.length + 1,
-      type: 'customer' as UserType,
-    };
-
-    console.log("New user created", newUser)
-    // Add the new user to the mock
-    usersMock.push(newUser);
-
-    // Resolve the new user
-    resolve(newUser);
-  });
+export async function fetchAllUsers(userId: number) {
+  return  fetch(`http://localhost:8080/user/${userId}`, {
+    method: 'GET'
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data; // Devuelve el access_token
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
 }
 
-export function fetchUserById(id: number): UserSession | null {
-  const users: UserSession[] = usersMock.map((user) => ({
-    ...user,
-    type: user.type as UserType,
-  }));
-
-  // Find the user with the given ID
-  const user = users.find((user) => user.id === id);
-
-  // Return the user or null if not found
-  return user || null;
+export async function createUser(user: UserSession) {
+  return  fetch('http://127.0.0.1:8080/user', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      password: user.password
+    })
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data; 
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
 }
 
-export const fetchUserByNameAndPassword = (
-  name: string,
-  password: string
-): Promise<UserSession | null> => {
-return new Promise((resolve) => {
-    const users: UserSession[] = usersMock.map((user) => ({
-        ...user,
-        type: user.type as UserType,
-    }));
 
-    // Find the user with the given name and password
-    const user = users.find(
-        (user) => user.username === name && user.password === password
-    );
-
-    // Resolve the user or null if not found
-    resolve(user || null);
-});
-};
+export async function fetchUserById(userId: number) {
+  return  fetch(`http://localhost:8080/user/${userId}`, {
+    method: 'GET'
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data; // Devuelve el access_token
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
+}
