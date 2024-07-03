@@ -1,6 +1,10 @@
 import { ProductDetail } from "@/models/products";
 
-export async function createProduct(description: string, price: Float32Array, quantity: number, categories: string[] ) {
+export type colorType = "PRIMARY"| "SECONDARY" | "TERTIARY"
+export type size = {sizeDescription: string, stock: number}
+export type colorArray = {colorDescription: string, colorHex: string, colortype: colorType}
+
+export async function createProduct(description: string, price: Float32Array, quantity: number, categories: string[]) {
   fetch('http://localhost:8080/products', {
     method: 'POST',
     headers: {
@@ -27,7 +31,7 @@ export async function createProduct(description: string, price: Float32Array, qu
 }
 
 
-export async function updateProduct(productId : number , description: string, price: Float32Array, quantity: number, categories: string[]) {
+export async function updateProduct(productId : number , description: string, price: Float32Array, quantity: number, categories: string[], sizesParam: size[], colorsArray: colorArray) {
   fetch(`http://localhost:8080/products/${productId}`, {
     method: 'PUT',
     headers: {
@@ -36,7 +40,9 @@ export async function updateProduct(productId : number , description: string, pr
       description: description,
       price: price,
       quantity: quantity,
-      categories: categories
+      categories: categories,
+      sizes: sizesParam,
+      colors: colorsArray
     })
   })
     .then(response => {

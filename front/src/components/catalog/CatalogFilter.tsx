@@ -26,14 +26,6 @@ export default function CatalogFilter({
 
   const params = useParams();
 
-  useEffect(() => {
-    if (params.categorie !== undefined && Object.values(params.categorie).includes(params.categorie) ) {
-      action(filterByCategorie(currentProds, params.categorie));
-    } else if (params.categorie !== undefined && !Object.values(params.categorie).includes(params.categorie)){
-      action(currentProds);
-    }
-  }, [params.categorie]);
-
   const [categories, setCategories] = useState<Category[] | null>(null);
 
   useEffect(() => {
@@ -48,14 +40,19 @@ export default function CatalogFilter({
 
     fetchCategories();
   }, []);
-
+  
   useEffect(() => {
-  },[]);
+    if (params.categorie !== undefined && categories!.some(category => category.name === params.categorie) ) {
+      action(filterByCategorie(currentProds, params.categorie));
+    } else if (params.categorie !== undefined && !categories!.some(category => category.name === params.categorie)){
+      action(currentProds);
+    }
+  }, [params.categorie]);
+
 
   function handleFilterByCat(categorie: string) {
     action(filterByCategorie(currentProds, categorie));
   }
-
 
   return (
     <Select defaultValue={params.categorie} onValueChange={(value: string) => handleFilterByCat(value)}>
@@ -65,9 +62,9 @@ export default function CatalogFilter({
       <SelectContent>
         <SelectGroup>
           <SelectLabel className="text-xl">Categories</SelectLabel>
-          {categories != null ? categories.map((categorie, index) => (
-            <SelectItem key={index} value={categorie.toString()} className="text-xl">
-              {categorie}
+          {categories != null ? categories.map((cat, index) => (
+            <SelectItem key={index} value={cat.toString()} className="text-xl">
+              {cat.name}
             </SelectItem>
           )) : undefined}
         </SelectGroup>

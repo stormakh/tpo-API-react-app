@@ -41,6 +41,10 @@ export interface Image {
   file: string;
 }
 
+export interface Category{
+  id: number;
+  name: string;
+}
 
 export enum parentCategorie {
   Lower = "Lower",

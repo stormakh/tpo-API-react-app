@@ -16,6 +16,7 @@ async function apiRequest(url: string, method: string, body?: any): Promise<any>
     }
 
     const data = await response.json();
+    console.log("categoriiiies: ", data);
     return data;
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error);
@@ -24,7 +25,7 @@ async function apiRequest(url: string, method: string, body?: any): Promise<any>
 }
 
 export async function fetchAllCategories(): Promise<Category[]> {
-  const url = 'http://localhost:8080/categories';
+  const url = 'http://localhost:8080/api/categories';
   return apiRequest(url, 'GET');
 }
 
