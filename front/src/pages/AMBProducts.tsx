@@ -2,6 +2,7 @@ import CardProduct from "@/components/AMBProducts/CardProduct";
 import Banner from "@/components/Banner";
 import DefaultButton from "@/components/DefaultButton";
 import { Card, CardContent } from "@/components/ui/card";
+import { getUserSession } from "@/helpers/user";
 import { fetchBySellerId } from "@/lib/products/products";
 import { ProductDetail } from "@/models/products";
 import { useEffect, useRef, useState } from "react";
@@ -11,9 +12,10 @@ export default function(){
 
     const currentProdsRef = useRef<ProductDetail[]>([]);
     const [filteredProds, setFilteredProds] = useState<ProductDetail[]>([]);
+    const user = getUserSession();
 
     useEffect(() => {
-        fetchBySellerId(1).then((prods) => {
+        fetchBySellerId(user.id).then((prods) => {
         currentProdsRef.current = prods;
         setFilteredProds(prods);
       });

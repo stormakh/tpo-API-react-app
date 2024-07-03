@@ -3,21 +3,21 @@ import {
     CardContent
   } from "@/components/ui/card"
 import { Button } from "../ui/button";
-import { Product } from "@/models/products";
+import {  ProductDetail } from "@/models/products";
 import { Link } from "react-router-dom";
 
-export default function CardProduct(product: Product){
+export default function CardProduct(product: ProductDetail){
     return (
         <Card className="flex flex-row justify-center items-center p-6 m-3 ">
             <CardContent className="items-center h-64 w-full">
                 <div className="flex h-64 w-full">
                     <div className="justify-start pr-9">
-                        <img src={product.images[0]} alt="" className="w-auto h-64 rounded"/>
+                        <img src={""} alt="" className="w-auto h-64 rounded"/>
                     </div>
                     <div className="">
-                        <p className="text-4xl font-medium h-1/4">{product.name}</p>
-                        <p className="text-4xl font-light h-1/4"><b>Precio: </b> ${product.price}</p>
-                        <p className="text-4xl font-light h-1/4"><b>Talle: </b>{product.sizes[0]}</p>
+                        <p className="text-4xl font-medium h-1/4">{product.description}</p>
+                        <p className="text-4xl font-light h-1/4"><b>Precio: </b>${product.price}</p>
+                        <p className="text-4xl font-light h-1/4"><b>Stock: </b>{product.stock}</p>
                         <div className="flex h-1/4 gap-6">
                         <Button disabled className="bg-white border-silk border-2 w-48 h-16 text-2xl text-black">
                             Sold
@@ -25,7 +25,7 @@ export default function CardProduct(product: Product){
                         <Button disabled className="bg-white border-silk border-2 w-48 h-16 text-2xl text-black">
                             Shared
                         </Button>
-                        <Link to={`/seller/product-details-seller/${product.id.toString()}`}>
+                        <Link to={`/seller/product-details-seller/${product.idProduct.toString()}`}>
                             <Button className="bg-white border-silk border-2 w-48 h-16 text-2xl text-black">
                                 Edit  
                             </Button>

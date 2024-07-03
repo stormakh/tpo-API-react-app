@@ -27,7 +27,6 @@ export default function LogIn() {
         emailRef.current?.value,
         passwordRef.current?.value
       )
-      console.log(tokenResponse);
       if (tokenResponse != null){
         localStorage.setItem('accessToken', tokenResponse);
         const userSession = await getUserSession(tokenResponse);
@@ -36,8 +35,9 @@ export default function LogIn() {
         dispatch(setUserSession(userSession));
         loadCategories();
         navigate("/");
-      }else{
-        setErrorMessage("no se ha podido loguear");
+        if (tokenResponse == ""){
+          setErrorMessage("no se ha podido loguear");
+        }
       }
     }
   };

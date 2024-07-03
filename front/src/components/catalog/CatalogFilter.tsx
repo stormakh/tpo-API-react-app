@@ -12,6 +12,7 @@ import { filterByCategorie } from "@/lib/products/products";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { categories } from "@/models/products";
+import { getCategories } from "@/helpers/product";
 interface CatalogFilterProps {
   action: React.Dispatch<React.SetStateAction<ProductDetail[]>>;
   currentProds: ProductDetail[];
@@ -36,7 +37,7 @@ export default function CatalogFilter({
     action(filterByCategorie(currentProds, categorie));
   }
 
-  
+  const categories = getCategories();
 
   return (
     <Select defaultValue={params.categorie} onValueChange={(value: string) => handleFilterByCat(value)}>
@@ -46,11 +47,11 @@ export default function CatalogFilter({
       <SelectContent>
         <SelectGroup>
           <SelectLabel className="text-xl">Categories</SelectLabel>
-          {Object.values(categories).map((categorie, index) => (
-            <SelectItem key={index} value={categorie} className="text-xl">
-              {categorie}
+          {categories != null ? categories.map((categorie, index) => (
+            <SelectItem key={index} value={categorie.id.toString()} className="text-xl">
+              {categorie.name}
             </SelectItem>
-          ))}
+          )) : undefined}
         </SelectGroup>
       </SelectContent>
     </Select>

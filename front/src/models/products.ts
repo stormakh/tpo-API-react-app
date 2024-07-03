@@ -6,7 +6,7 @@ interface Seller {
 }
 
 export interface Product {
-  idProduct: number;
+  idProducto: number;
   description: string;
   price: number;
   quantity: number;

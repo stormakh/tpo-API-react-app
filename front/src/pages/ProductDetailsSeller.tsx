@@ -83,7 +83,6 @@ export default function ProductDetailsSeller() {
       if (prod === undefined) return;
       setProd(prod);
     });
-    
   }, []);
   
   const [color, setColor] = useState<ColorResult>();
@@ -173,16 +172,18 @@ export default function ProductDetailsSeller() {
                 ))}
               </CarouselContent>
             </Carousel>
-            <input type = "file" className="flex font-semibold" accept="image/png" onChange={handleFileChange}>
-              Añadir Fotos <Camera className="mx-5" />
-            </input>
+            {/* 
+              <input type = "file" className="flex font-semibold" accept="image/png" onChange={handleFileChange}>
+                Añadir Fotos <Camera className="mx-5" />
+              </input> 
+            */}
           </div>
 
           <Card className="w-full h-[450px] ">
             <CardContent className="flex flex-col gap-y-2">
               <CardHeader>
-              <h3 className="font-roboto font-semibold text-3xl">
-                  Nombre
+                <h3 className="font-roboto font-semibold text-3xl">
+                  Descripcion
                 </h3>
                 <Input
                   defaultValue={prod.description}
@@ -196,16 +197,7 @@ export default function ProductDetailsSeller() {
                   className=" h-16 w-1/6 border-gray-500 text-3xl rounded-xl"
                 ></Input>
               </CardHeader>
-              <div className="pl-5">
-                <h3 className="font-roboto font-semibold text-3xl">
-                  Descripción
-                </h3>
-                <Textarea
-                  defaultValue={prod.description}
-                  className=" h-48 border-gray-500 text-3xl rounded-xl"
-                  style={{ overflowWrap: "break-word", wordWrap: "break-word" }}
-                ></Textarea>
-              </div>
+              
 
               <h2 className="font-roboto font-semibold text-3xl pl-5">
                 Talles

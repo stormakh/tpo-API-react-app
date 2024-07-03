@@ -6,6 +6,7 @@ import LogOut from "@/components/userProfile/LogOut";
 import Banner from "@/components/Banner";
 import { useState } from "react";
 import ABMUsers from "@/components/userProfile/ABMUsers";
+import { getUserSession } from "@/helpers/user";
 
 export default function () {
   const [activeButton, setActiveButton] = useState("User"); // Estado para almacenar el botón activo
@@ -34,6 +35,9 @@ export default function () {
         return null;
     }
   };
+
+  const user = getUserSession();
+
   return (
     <>
       <Banner text="Account"></Banner>
@@ -58,14 +62,16 @@ export default function () {
             >
               Credit Cards
             </button>
-            <button
-              className={
-                activeButton === "ABM" ? Buttonclicked : ButtonNotClicked
-              }
-              onClick={() => handleButtonClick("ABM")}
-            >
-              ABM Users
-            </button>
+            {user.role == 'ADMIN' ?
+              <button
+                className={
+                  activeButton === "ABM" ? Buttonclicked : ButtonNotClicked
+                }
+                onClick={() => handleButtonClick("ABM")}
+              >
+                ABM Users
+              </button> : undefined 
+            }
             <button
               className={
                 activeButton === "Orders" ? Buttonclicked : ButtonNotClicked
@@ -74,14 +80,16 @@ export default function () {
             >
               Orders
             </button>
-            <button
-              className={
-                activeButton === "LogOut" ? Buttonclicked : ButtonNotClicked
-              }
-              onClick={() => handleButtonClick("LogOut")}
-            >
-              Log Out
-            </button>
+            {/*
+              <button
+                className={
+                  activeButton === "LogOut" ? Buttonclicked : ButtonNotClicked
+                }
+                onClick={() => handleButtonClick("LogOut")}
+              >
+                Log Out
+              </button>
+            */}
           </div>
         </div>
 
