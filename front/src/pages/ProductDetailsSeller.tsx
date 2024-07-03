@@ -42,7 +42,7 @@ import { Camera} from "lucide-react";
 import { ColorResult, SketchPicker } from "react-color";
 import { Link, useParams } from "react-router-dom";
 import { fetchById, createProduct, updateProduct, colorArray} from "@/lib/products/products";
-import {  Material, ProductDetail, Size } from "@/models/products";
+import {  Material, Product, ProductDetail, Size } from "@/models/products";
 import { Input } from "@/components/ui/input";
 
 //import {imageToBlob} from "@/helpers/imgtoblob";
@@ -78,13 +78,13 @@ export default function ProductDetailsSeller() {
   const [prod, setProd] = useState<ProductDetail>(initialState);
   const [base64Image, setBase64Image] = useState<string | null>(null);
   
-  console.log(id);
   useEffect(() => {
     if (!id) return;
     const parsedId = parseInt(id);
     fetchById(parsedId).then((prod) => {
       if (prod === undefined) return;
       setProd(prod);
+      console.log("seteo")
     });
     
   }, []);
@@ -146,12 +146,7 @@ export default function ProductDetailsSeller() {
       if (!id){
         await createProduct(prod.description, Number(prod.price) , prod.sizes, prod.categories, prod.materials, prod.colors, prod.images);
       }else{
-        const colorArray: colorArray = {colorDescription: "", colorHex: "", colortype: "PRIMARY"}
-        const sizes: Size[] = [{
-          size: "",
-          stock: 0
-        }];
-        await updateProduct(parseInt(id), prod.description, new Float32Array([prod.price]), prod.stock, prod.categories, sizes, colorArray);
+        await updateProduct(parseInt(id), prod.description, new Float32Array([prod.price]), prod.stock, prod.categories, prod.sizes, prod.colors);
       }
     } catch (error) {
       console.error("Error creating product:", error);
@@ -239,7 +234,7 @@ export default function ProductDetailsSeller() {
                   Color
                 </h2>
                 <div className="flex flex-row w-full h-8">
-                  {prod.colors[0].colorDescription}
+                  {/* prod.colors[0].colorDescription */}
                   <div className="relative">
                     {<div style={{ background: color?.hex }}></div> && (
                       <img

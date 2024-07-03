@@ -10,8 +10,6 @@ async function imageToBase64(image) {
     reader.onloadend = () => resolve(reader.result);
     reader.onerror = reject;
     reader.readAsDataURL(blob);
-
-    
   });
 }
 
