@@ -53,17 +53,17 @@ export async function updateProduct(productId : number , description: string, pr
       colors: colorsArray
     })
   })
-    .then(response => {
+    .then((response) => {
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       return response.json();
     })
-    .then(data => {
+    .then((data) => {
       console.log(data); // Aquí procesas los datos obtenidos
     })
-    .catch(error => {
-      console.error('There was a problem with the fetch operation:', error);
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
     });
 }
 
@@ -72,60 +72,73 @@ export async function updateProduct(productId : number , description: string, pr
 
 export async function fetchAllProducts(): Promise<ProductDetail[]> {
   try {
-    const response = await fetch('http://localhost:8080/products', {
-      method: 'GET',
-      headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('accessToken') 
-      }
+    const response = await fetch("http://localhost:8080/front/products", {
+      method: "GET",
     });
 
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error("Network response was not ok");
     }
 
     const data = await response.json();
-    return data as ProductDetail[];
-
+    console.log(data);
+    return data.items as ProductDetail[];
   } catch (error) {
-    console.error('There was a problem with the fetch operation:', error);
+    console.error("There was a problem with the fetch operation:", error);
     throw error; // Re-lanza el error para que pueda ser manejado por el llamador
   }
 }
 
 export function filterByCategorie(
   products: ProductDetail[],
-  categorie: string
+  categoryName: string
 ): ProductDetail[] {
-  if (categorie === "None") {
-    return products;
-  } else {
-    return products.filter((product) => product.categories.includes(categorie));
-  }
+  if(categoryName === "None")return products;
+
+  if(products === null) return [];
+  
+  return products.filter((product) =>
+    product.categories.some((category) => category.name === categoryName)
+  );
 }
 
 export async function fetchById(productId: number): Promise<ProductDetail> {
   try {
-    const response = await fetch(`http://localhost:8080/products/${productId}`, {
-      method: 'GET',
-      headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('accessToken') 
+    const response = await fetch(
+      `http://localhost:8080/products/${productId}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
       }
-    });
+    );
 
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error("Network response was not ok");
     }
 
     const data = await response.json();
     return data as ProductDetail;
-
   } catch (error) {
-    console.error('There was a problem with the fetch operation:', error);
+    console.error("There was a problem with the fetch operation:", error);
     throw error; // Re-lanza el error para que pueda ser manejado por el llamador
   }
 }
 
-export async function fetchBySellerId(sellerId: number): Promise<ProductDetail[]> {
+export async function fetchBySellerId(
+  sellerId: number
+): Promise<ProductDetail[]> {
   const prods = fetchAllProducts();
-  return (await prods).filter((prod) => prod.seller.idSeller === sellerId)
+  return (await prods).filter((prod) => prod.seller.idSeller === sellerId);
 }
+
+
+export const fetchProductsByCategory = async (category: string): Promise<ProductDetail[]> => {
+  const response = await fetch(`http://localhost:8080/front/products/categories?categories=${category}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch products by category');
+  }
+  const data = await response.json();
+  return data;
+};

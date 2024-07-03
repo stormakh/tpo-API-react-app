@@ -1,8 +1,8 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserSession } from "@/models/users";
-import { Product, ProductDetail } from "@/models/products";
+import { Product, ProductDetail, Size } from "@/models/products";
 import { shoppingCart, shoppingItem } from "@/models/shoppingCart";
-// Define the initial state interface
+
 export interface AppState {
   shoppingCart: shoppingCart;
   userSession: UserSession | null;
@@ -70,7 +70,7 @@ const shoppingCartSlice = createSlice({
     },
     setProductSizes: (
       state,
-      action: PayloadAction<{ id: number; sizes: string[] }>
+      action: PayloadAction<{ id: number; sizes: Size[] }>
     ) => {
       const product = state.products.find(
         (product) => product.idProduct === action.payload.id
@@ -132,6 +132,7 @@ const userSessionSlice = createSlice({
 const rootReducer = {
   shoppingCart: shoppingCartSlice.reducer,
   userSession: userSessionSlice.reducer,
+
 };
 
 // Create the store
@@ -141,6 +142,10 @@ const store = configureStore({
 
 // Export the store
 export default store;
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
 
 // Export the action creators
 export const {
