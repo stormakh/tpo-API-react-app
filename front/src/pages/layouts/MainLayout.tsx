@@ -14,7 +14,7 @@ export default function Layout() {
 
   return (
     <>
-      {user && user.type === "seller" ? <NavBarSeller /> : <Navbar />}
+      {user && user.role === "SELLER" ? <NavBarSeller /> : <Navbar />}
 
       <Outlet />
 

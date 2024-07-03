@@ -41,10 +41,10 @@ const images = [
 import { Camera} from "lucide-react";
 import { ColorResult, SketchPicker } from "react-color";
 import { Link, useParams } from "react-router-dom";
-import { fetchById } from "@/lib/products";
+import { fetchById } from "@/lib/products/products";
 import {  ProductDetail } from "@/models/products";
 import { Input } from "@/components/ui/input";
-// import {imageToBlob} from "@/helpers/imgtoblob";
+//import {imageToBlob} from "@/helpers/imgtoblob";
 
 const initialState: ProductDetail = {
   idProduct: 0,
@@ -61,18 +61,20 @@ const initialState: ProductDetail = {
   }
 };
 
+/*
 const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
   if (event.target.files && event.target.files[0]) {
     const file = event.target.files[0];
     const Blob = await imageToBlob(file);
   }
 }
-
+*/
 
 export default function ProductDetailsSeller() {
 
   const { id } = useParams<{ id: string }>();
   const [prod, setProd] = useState<ProductDetail>(initialState);
+  const [base64Image, setBase64Image] = useState<string | null>(null);
   
   useEffect(() => {
     if (!id) return;
@@ -100,6 +102,26 @@ export default function ProductDetailsSeller() {
     current: HTMLDivElement | null;
   }
 
+
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const base64 = await fileToBase64(file);
+      setBase64Image(base64);
+    }
+  };
+
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
+
+
+  
   const handleClickOutside = useCallback((event: MouseEvent) => {
     if (
       pickerRef.current &&

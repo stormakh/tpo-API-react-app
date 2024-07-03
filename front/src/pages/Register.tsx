@@ -2,20 +2,34 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import image from "@/assets/LogIn_Back.svg";
-import { UserSession } from "@/models/users";
+import { UserSession, UserType } from "@/models/users";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "@/lib/auth";
+import { setUserSession } from "@/store/store";
+import { useDispatch } from "react-redux";
+import { getUserSession } from "@/lib/users";
 
 export default function Register() {
 
   const initialUser: UserSession = {
     id: 0,
-    firstname: "",
-    lastname: "",
-    type: "customer",
+    firstName: "",
+    lastName: "",
     password: "",
     email: "",
     dni: "",
+    address: "",
+    city: "",
+    postalCode: "",
+    phone: "",
+    orders: [],
+    role: "",
+    enabled: false,
+    username: "",
+    authorities: {
+      authority: ""
+    },
+    type: 'USER' as UserType
   };
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -25,12 +39,15 @@ export default function Register() {
     setShowPassword(!showPassword);
   }
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleRegistration = async() => {
     try {
       const tokenResponse = await register(user);
       if (tokenResponse != null){
         localStorage.setItem('accessToken', tokenResponse);
+        const userSession = await getUserSession(tokenResponse);
+        localStorage.setItem('userSession', JSON.stringify(tokenResponse));
+        dispatch(setUserSession(userSession));
         navigate("/");
       }else{
         setErrorMessage("no se ha podido loguear");
@@ -74,14 +91,14 @@ export default function Register() {
               />
               <Input
                 type="firstname"
-                value={user.firstname}
-                onChange={(e) => setUser({ ...user, firstname: e.target.value })}
+                value={user.firstName}
+                onChange={(e) => setUser({ ...user, firstName: e.target.value })}
                 placeholder="Firstname"
               />
                             <Input
                 type="lastname"
-                value={user.lastname}
-                onChange={(e) => setUser({ ...user, lastname: e.target.value })}
+                value={user.lastName}
+                onChange={(e) => setUser({ ...user, lastName: e.target.value })}
                 placeholder="Lastname"
               />
               <div className="relative w-full flex flex-col items-center justify-center">

@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { filterByCategorie } from "@/lib/products";
+import { filterByCategorie } from "@/lib/products/products";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { categories } from "@/models/products";
@@ -35,6 +35,9 @@ export default function CatalogFilter({
   function handleFilterByCat(categorie: string) {
     action(filterByCategorie(currentProds, categorie));
   }
+
+  
+
   return (
     <Select defaultValue={params.categorie} onValueChange={(value: string) => handleFilterByCat(value)}>
       <SelectTrigger className=" border-none focus:ring-0 focus:ring-offset-0 text-2xl">

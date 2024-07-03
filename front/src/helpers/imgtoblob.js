@@ -1,4 +1,22 @@
-/*export async function imageToBlob(image: any): Promise<Blob> {
+async function imageToBase64(image) {
+  const response = await fetch(image, {
+    headers: {
+      'Content-Type': 'image/png'
+    }
+  });
+  const blob = await response.blob();
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
+
+/*
+
+async function imageToBlob(image) {
   const response = await fetch(image, {
     headers: {
       'Content-Type': 'image/png'
@@ -8,6 +26,12 @@
 }
 
 
+*/
+
+
+
+
+/*
 document.getElementById('fileInput').addEventListener('change', function(event) {
   const file = event.target.files[0];
   if (!file) return;

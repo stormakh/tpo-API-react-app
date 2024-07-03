@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import {
   Heart,
+  LogOut,
   PackageSearch,
   Search,
   ShoppingBag,
@@ -8,23 +9,22 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import NavSheet from "./NavSheet";
-import { UserSession } from "@/models/users";
 import { useDispatch, useSelector } from "react-redux";
 import { clearUserSession } from "@/store/store";
 import noPayLogoSellers from "@/assets/nopaySellers.svg";
+import { getUserSession, logOutSession } from "@/helpers/user";
 interface NavBarProps {}
 
 export default function NavBar({}: NavBarProps) {
   const dispatch = useDispatch();
-  const user = useSelector(
-    (state: { userSession: UserSession }) => state.userSession
-  );
+  const user = getUserSession();
   const totalAmount = useSelector(
     (state: { shoppingCart: { totalAmount: number } }) =>
       state.shoppingCart.totalAmount
   );
   function handleLogOutUser() {
     dispatch(clearUserSession());
+    logOutSession();
   }
 
   return (
@@ -40,13 +40,10 @@ export default function NavBar({}: NavBarProps) {
         </Link>
       </div>
       <div className="flex justify-self-end gap-3 px-4">
-        <Button size="icon" className="bg-transparent hover:bg-slate-50">
-          <Link to="/login">
-            <UserRound color="black" />
-          </Link>
-        </Button>
         {user !== null ? (
-          <Button onClick={handleLogOutUser}>{user?.username}</Button>
+          <Link to={"user-profile"} className="relative">
+            <Button>{user.firstName}</Button>
+          </Link>
         ) : null}
         <Link to={"shopping-cart"} className="relative">
           <ShoppingBag className="z-0" color="black" />
@@ -59,6 +56,11 @@ export default function NavBar({}: NavBarProps) {
         <Button size="icon" className="bg-transparent hover:bg-slate-50">
           <Link to={"seller/abm-products"}>
             <PackageSearch className="mr-1" color="black" />
+          </Link>
+        </Button>
+        <Button size="icon" className="bg-transparent hover:bg-slate-50">
+          <Link to="/login">
+          <LogOut onClick={handleLogOutUser} color="black"/>
           </Link>
         </Button>
       </div>

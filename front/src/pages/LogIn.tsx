@@ -4,13 +4,17 @@ import image from "/src/assets/LogIn_Back.svg";
 import { useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "@/lib/auth";
+import { setUserSession } from "@/store/store";
+import { getUserSession } from "@/lib/users";
+import { useDispatch } from "react-redux";
+import { loadCategories } from "@/helpers/product";
 
 export default function LogIn() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -23,8 +27,14 @@ export default function LogIn() {
         emailRef.current?.value,
         passwordRef.current?.value
       )
+      console.log(tokenResponse);
       if (tokenResponse != null){
         localStorage.setItem('accessToken', tokenResponse);
+        const userSession = await getUserSession(tokenResponse);
+        localStorage.setItem('userSession', JSON.stringify(userSession));
+        console.log(userSession)
+        dispatch(setUserSession(userSession));
+        loadCategories();
         navigate("/");
       }else{
         setErrorMessage("no se ha podido loguear");

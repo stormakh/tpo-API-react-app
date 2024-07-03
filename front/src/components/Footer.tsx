@@ -1,9 +1,13 @@
 import { Phone, Mail } from "lucide-react";
 import React from "react";
-import { categories } from "@/models/products.ts";
 import { Link } from "react-router-dom";
+import { getCategories } from "@/helpers/product";
 
 const Footer: React.FC = () => {
+
+  const categories = getCategories();
+
+  console.log("categorias", categories);
   return (
     <footer className="bg-footer p-4 sticky bottom-auto w-full font-roboto">
       <div className="flex justify-between items-center">
@@ -21,14 +25,14 @@ const Footer: React.FC = () => {
           </div>
           <div className="w-1/4 text-letters">
             <h3 className="font-semibold ">Productos</h3>
-            {Object.values(categories).map(
+            {categories != null ? categories.map(
               (categorie) =>
-                categorie !== "None" && (
-                  <Link to={`catalog/${categorie}`} key={categorie}>
-                    <p className="">{categorie}</p>
+                categorie.name !== "None" && (
+                  <Link to={`catalog/${categorie}`} key={categorie.id}>
+                    <p className="">{categorie.name}</p>
                   </Link>
                 )
-            )}
+            ) : undefined}
           </div>
           <div className="w-1/4 text-letters">
             <h3 className="font-semibold ">Nuestros servicios</h3>

@@ -23,7 +23,7 @@ import {
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchAllProducts, fetchById } from "@/lib/products";
+import { fetchAllProducts, fetchById } from "@/lib/products/products";
 import { Product, ProductDetail } from "@/models/products";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "@/store/store";

@@ -4,7 +4,7 @@ import ImageSlide from "@/components/carousel/ImageSlide";
 import CatalogMenu from "@/components/catalog/CatalogMenu";
 import CatalogFilter from "@/components/catalog/CatalogFilter";
 import { useEffect, useRef, useState } from "react";
-import { fetchAllProducts } from "@/lib/products";
+import { fetchAllProducts } from "@/lib/products/products";
 import { ProductDetail } from "@/models/products";
 import CatalogSkeleton from "@/components/catalog/CatalogSkeleton";
 import { Skeleton } from "@/components/ui/skeleton";
