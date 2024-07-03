@@ -75,7 +75,7 @@ export default function () {
 
   useEffect(() => {
     if (prod.idProduct == 0){
-      setProd(getProduct(parseInt(id)));
+      setProd(fetchById(parseInt(id)));
     }
   }, []);
 

@@ -38,7 +38,7 @@ export default function(){
             <Card style={{margin: "20px"}}>
                 <CardContent className="flex flex-row flex-wrap bg-gray-200 p-12 justify-between">
                     {filteredProds.map(prod => ( 
-                        <CardProduct quantity={0} {...prod}></CardProduct>
+                        <CardProduct {...prod}></CardProduct>
                     ))}
                 </CardContent>
             </Card>
