@@ -25,8 +25,8 @@ export async function register(user: UserSession) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        firstname: user.firstname,
-        lastname: user.lastname,
+        firstname: user.firstName,
+        lastname: user.lastName,
         email: user.email,
         password: user.password
       })

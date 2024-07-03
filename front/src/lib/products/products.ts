@@ -26,6 +26,36 @@ export async function createProduct(description: string, price: Float32Array, qu
     });
 }
 
+
+export async function updateProduct(productId : number , description: string, price: Float32Array, quantity: number, categories: string[]) {
+  fetch(`http://localhost:8080/products/${productId}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': 'Bearer' + localStorage.getItem('accessToken') },
+    body: JSON.stringify({
+      description: description,
+      price: price,
+      quantity: quantity,
+      categories: categories
+    })
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data); // Aquí procesas los datos obtenidos
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
+}
+
+
+
+
 export async function fetchAllProducts(): Promise<ProductDetail[]> {
   try {
     const response = await fetch('http://localhost:8080/products', {

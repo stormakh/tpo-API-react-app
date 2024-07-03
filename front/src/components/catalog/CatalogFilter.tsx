@@ -26,9 +26,9 @@ export default function CatalogFilter({
   const params = useParams<{ categorie: categories }>();
 
   useEffect(() => {
-    if (params.categorie !== undefined && Object.values(categories).includes(params.categorie) ) {
+    if (params.categorie !== undefined && categories.includes(params.categorie) ) {
       action(filterByCategorie(currentProds, params.categorie));
-    } else if (params.categorie !== undefined && !Object.values(categories).includes(params.categorie)){
+    } else if (params.categorie !== undefined && !categories.includes(params.categorie)){
       action(currentProds);
     }
   }, [params.categorie]);
@@ -48,8 +48,8 @@ export default function CatalogFilter({
         <SelectGroup>
           <SelectLabel className="text-xl">Categories</SelectLabel>
           {categories != null ? categories.map((categorie, index) => (
-            <SelectItem key={index} value={categorie.id.toString()} className="text-xl">
-              {categorie.name}
+            <SelectItem key={index} value={categorie.toString()} className="text-xl">
+              {categorie}
             </SelectItem>
           )) : undefined}
         </SelectGroup>

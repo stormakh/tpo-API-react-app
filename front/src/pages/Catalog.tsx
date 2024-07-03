@@ -20,6 +20,7 @@ export default function Catalog() {
   useEffect(() => {
     fetchAllProducts().then((prods) => {
       currentProdsRef.current = prods;
+      console.log(prods);
       setFilteredProds(prods);
       setTimeout(() => {
         setIsLoading(false);

@@ -8,5 +8,5 @@ export async function loadCategories(){
 
 export function getCategories(){
   const localStorageCategories = localStorage.getItem('categories');
-  return JSON.parse(localStorageCategories!) as Category[];
+  return JSON.parse(localStorageCategories!) as string[];
 }
