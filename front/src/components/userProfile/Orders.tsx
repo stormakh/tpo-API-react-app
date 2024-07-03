@@ -1,29 +1,44 @@
-import { Pencil } from "lucide-react";
-import CardOrder from "./CardOrder";
-import SectionTitle from "../SectionTitle";
-import DefaultButton from "../DefaultButton";
+import { useDispatch, useSelector } from "react-redux";
+import { UserSession } from "@/models/users";
+import { fetchByUser } from "@/lib/orders";
+import { Order } from "@/models/orders";
+import { useEffect, useState } from "react";
 
 
 export default function (){
 
-    const orders =[
-        {order:11456, totalAmount:300000, paymentMethod:"TARJETA DE CREDITO", state:"DESPACHADO"},
-        {order:12345, totalAmount:546000, paymentMethod:"TRANSFERENCIA BANCARIA", state:"EN CURSO"}
-    ];
+    
+    const user = useSelector(
+        (state: { userSession: UserSession }) => state.userSession);
+        console.log("useeer ",user);
+    const [clientOrders, setClientOrders] = useState<Order[]>();
 
+    useEffect(() => {
+        const asyncOrders = async () => {
+            console.log("holis");
+            setClientOrders(await fetchByUser(user.id));
+        }
+        asyncOrders();
+    }, []);
+    
     return (
-        <div className="bg-white w-4/5 h-full flex flex-col pl-32 pr-32"> 
-            <div className="h-5/6 h-full ">
-                <SectionTitle text={"Orders"} height={"1/6"} width={"full"}></SectionTitle>  
-                <div className="flex pb-12 flex-wrap">
-                    {orders.map(order => ( 
-                        <CardOrder {...order}></CardOrder>
-                    ))}
-                </div>
-                <div className="h-1/6 flex justify-end pr-52 mt-12">
-                    <DefaultButton text={"Editar"}></DefaultButton>
-                </div>
-            </div>
-        </div>
-    );
+        <table>
+          <thead>
+            <tr>
+              <th>Orden del Pedido</th>
+              <th>Total</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            {clientOrders != null ? clientOrders.map((order) => (
+              <tr key={order.id}>
+                <td>{order.id}</td>
+                <td>{order.totalPrice.toFixed(2)}</td>
+                <td>{order.orderDate}</td>
+              </tr>
+            )) : <tr><td>loading..</td></tr>}
+          </tbody>
+        </table>
+      );
 }

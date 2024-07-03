@@ -1,6 +1,6 @@
 import { UserSession } from "@/models/users";
 
-const url = 'http://localhost:8080/auth/register';
+const url = 'http://localhost:8080/auth';
 
 export async function login(email: string, password: string) {
   const response = await fetch(`${url}/authenticate`, {
@@ -18,8 +18,7 @@ export async function login(email: string, password: string) {
   return data.access_token; // Returns the access_token
 }
 
-export async function register(user: UserSession) {
-  console.log("")
+export async function register(user :any) {
   try {
     const response = await fetch(`${url}/register`, {
       method: 'POST',
@@ -39,7 +38,7 @@ export async function register(user: UserSession) {
     }
 
     const data = await response.json();
-    return data;
+    return data.access_token;
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error);
     throw error;

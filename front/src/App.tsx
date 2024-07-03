@@ -36,6 +36,7 @@ export default function App() {
             { path: "catalog/:categorie", element: <Catalog /> },
             { path: '', element: <Home />},
             { path: "product-details-seller", element: <ProductDetailsSeller />},
+            { path: "catalog/:categorie", element: <Catalog /> },
             {
               path: "product-details-seller/:id",
               element: <ProductDetailsSeller />,

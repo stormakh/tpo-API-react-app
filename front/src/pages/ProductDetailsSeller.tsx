@@ -41,8 +41,8 @@ const images = [
 import { Camera} from "lucide-react";
 import { ColorResult, SketchPicker } from "react-color";
 import { Link, useParams } from "react-router-dom";
-import { fetchById, createProduct, updateProduct} from "@/lib/products/products";
-import {  ProductDetail } from "@/models/products";
+import { fetchById, createProduct, updateProduct, colorArray} from "@/lib/products/products";
+import {  Material, ProductDetail, Size } from "@/models/products";
 import { Input } from "@/components/ui/input";
 
 //import {imageToBlob} from "@/helpers/imgtoblob";
@@ -55,7 +55,7 @@ const initialState: ProductDetail = {
   categories: [],
   sizes: [],
   colors: [],
-  materials: [],
+  materials: [] ,
   seller: {
     idSeller: 0,
     name: ""
@@ -78,6 +78,7 @@ export default function ProductDetailsSeller() {
   const [prod, setProd] = useState<ProductDetail>(initialState);
   const [base64Image, setBase64Image] = useState<string | null>(null);
   
+  console.log(id);
   useEffect(() => {
     if (!id) return;
     const parsedId = parseInt(id);
@@ -85,6 +86,7 @@ export default function ProductDetailsSeller() {
       if (prod === undefined) return;
       setProd(prod);
     });
+    
   }, []);
   
   const [color, setColor] = useState<ColorResult>();
@@ -139,17 +141,22 @@ export default function ProductDetailsSeller() {
     };
   }, [handleClickOutside]);
 
-
-
-
-  const handleSubmit = async () => {
+  const handleAddProduct = async () => {
     try {
-      await createProduct(prod.description, new Float32Array([prod.price]), prod.stock, prod.categories);
+      if (!id){
+        await createProduct(prod.description, Number(prod.price) , prod.sizes, prod.categories, prod.materials, prod.colors, prod.images);
+      }else{
+        const colorArray: colorArray = {colorDescription: "", colorHex: "", colortype: "PRIMARY"}
+        const sizes: Size[] = [{
+          size: "",
+          stock: 0
+        }];
+        await updateProduct(parseInt(id), prod.description, new Float32Array([prod.price]), prod.stock, prod.categories, sizes, colorArray);
+      }
     } catch (error) {
       console.error("Error creating product:", error);
     }
   };
-
 
   return (
     <>
@@ -186,9 +193,11 @@ export default function ProductDetailsSeller() {
                 ))}
               </CarouselContent>
             </Carousel>
-              <input type = "file" className="flex font-semibold" accept="image/png" onChange={handleFileChange}>
-                Añadir Fotos <Camera className="mx-5" />
-              </input> 
+              {/*
+                <input type = "file" className="flex font-semibold" accept="image/png" onChange={handleFileChange}>
+                  Añadir Fotos <Camera className="mx-5" />
+                </input> 
+              */}
           </div>
 
           <Card className="w-full h-[450px] ">
@@ -200,6 +209,7 @@ export default function ProductDetailsSeller() {
                 <Input
                   defaultValue={prod.description}
                   className="h-16 w-2/4 border-gray-500 text-3xl rounded-xl"
+                  onChange={(e) => setProd({ ...prod, description: e.target.value })}
                 ></Input>
                 <h3 className=" font-roboto font-semibold my-5 text-3xl">
                   Precio
@@ -207,6 +217,7 @@ export default function ProductDetailsSeller() {
                 <Input
                   placeholder={`${prod.price}`}
                   className=" h-16 w-1/6 border-gray-500 text-3xl rounded-xl"
+                  onChange={(e) => setProd({ ...prod, price : Number(e.target.value)})}
                 ></Input>
               </CardHeader>
               
@@ -228,15 +239,7 @@ export default function ProductDetailsSeller() {
                   Color
                 </h2>
                 <div className="flex flex-row w-full h-8">
-                  <Popover>
-                    <PopoverTrigger>
-                      <img
-                        src="/src/assets/ColorPicker.svg"
-                        className=" pl-4"
-                      ></img>
-                    </PopoverTrigger>
-                    <PopoverContent>{prod.colors}</PopoverContent>
-                  </Popover>
+                  {prod.colors[0].colorDescription}
                   <div className="relative">
                     {<div style={{ background: color?.hex }}></div> && (
                       <img
@@ -266,7 +269,7 @@ export default function ProductDetailsSeller() {
             <CardFooter className="justify-center">
               <div className="flex flex-row gap-4">
                 <Link to={"/seller/abm-products"}>
-                  <Button className=" w-auto h-20 text-xl "  onClick={handleSubmit}>
+                  <Button className=" w-auto h-20 text-xl "  onClick={handleAddProduct}>
                     <Save className="mr-2" /> Save Changes
                   </Button>
                 </Link>

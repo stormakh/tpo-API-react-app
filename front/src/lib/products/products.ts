@@ -1,19 +1,24 @@
-import { ProductDetail } from "@/models/products";
+import { Color, ColorPost, Image, Material, ProductDetail, Size } from "@/models/products";
 
 export type colorType = "PRIMARY"| "SECONDARY" | "TERTIARY"
-export type size = {sizeDescription: string, stock: number}
+export type size = {size: string, stock: number}
 export type colorArray = {colorDescription: string, colorHex: string, colortype: colorType}
 
-export async function createProduct(description: string, price: Float32Array, quantity: number, categories: string[]) {
+export async function createProduct(description: string, price: number, sizes: Size[], categories: string[], material:  Material[], colors: ColorPost[], images: Image[]) {
   fetch('http://localhost:8080/products', {
     method: 'POST',
     headers: {
-      'Authorization': 'Bearer' + localStorage.getItem('accessToken') },
+      'Authorization': 'Bearer' + localStorage.getItem('accessToken'),
+      'Content-Type': 'application/json' 
+    },
     body: JSON.stringify({
       description: description,
       price: price,
-      quantity: quantity,
-      categories: categories
+      sizes: sizes,
+      categories: categories,
+      material: material,
+      colors: colors,
+      images: images
     })
   })
     .then(response => {
@@ -35,7 +40,9 @@ export async function updateProduct(productId : number , description: string, pr
   fetch(`http://localhost:8080/products/${productId}`, {
     method: 'PUT',
     headers: {
-      'Authorization': 'Bearer' + localStorage.getItem('accessToken') },
+      'Authorization': 'Bearer' + localStorage.getItem('accessToken') ,
+      'Content-Type': 'application/json' 
+    },
     body: JSON.stringify({
       description: description,
       price: price,

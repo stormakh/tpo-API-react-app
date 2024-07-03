@@ -21,8 +21,8 @@ export interface ProductDetail{
   stock: number;
   categories: string[];
   sizes: Size[];
-  colors: string[];
-  materials: string[];
+  colors: ColorPost[];
+  materials: Material[];
   seller: Seller;
   images: Image[];
 }
@@ -34,6 +34,12 @@ export interface Size{
 
 export interface Color{
   name: string;
+}
+
+export interface ColorPost {
+  colorDescription: string;
+  colorHex: string;
+  colorType: string;
 }
 
 export interface Image {
@@ -61,4 +67,8 @@ export enum categories {
   Formal = "Formal",
   Women = "Women",
   None = "None",
+}
+
+export interface Material {
+  description: string;
 }

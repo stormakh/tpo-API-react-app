@@ -14,6 +14,8 @@ import { clearCart } from "@/store/store";
 import { useNavigate } from "react-router-dom";
 import { getUserSession } from "@/helpers/user";
 import { createOrder } from "@/lib/orders";
+import { UserSession } from "@/models/users";
+import { OrderDetail } from "@/models/orders";
 export default function Checkout() {
   const cart = useSelector(
     (state: { shoppingCart: shoppingCart }) => state.shoppingCart
@@ -21,11 +23,22 @@ export default function Checkout() {
 
  const dispatch = useDispatch();
  const navigate = useNavigate();
- const user = getUserSession();
+ const user = useSelector(
+  (state: { userSession: UserSession }) => state.userSession);
 
   function handleFinalizePurchase() {
 
-    createOrder()
+    const orderDetails: OrderDetail[] = cart.products.map((prod) => {
+      return {
+        productId: prod.idProduct, // Asumiendo que `prod` tiene un campo `id`
+        quantity: prod.amount, // Asumiendo que `prod` tiene un campo `quantity`
+        sizeDescription: prod.sizes[0].size, // Asumiendo que `prod` tiene un campo `size`
+        // agregar otros campos necesarios
+      };
+    });
+
+    createOrder(orderDetails);
+
     // creo las ordenes
     dispatch(clearCart());
     toast("La compra se ha realizado exitosamente!");
@@ -60,14 +73,14 @@ export default function Checkout() {
                   Provincia:
                 </h2>
                 <Input
-                  placeholder={user.city}
+                  placeholder={user.city == null ? "" : user.city}
                   className=" h-24 border-gray-500 text-3xl rounded-xl"
                 ></Input>
                 <h2 className="my-4 font-light text-4xl pt-9 pb-3">
                   Codigo Postal:
                 </h2>
                 <Input
-                  placeholder={user.postalCode}
+                  placeholder={user.postalCode == null ? "" : user.postalCode}
                   className=" h-24 border-gray-500 text-3xl rounded-xl"
                 ></Input>
                 <h2 className="my-4 font-light text-4xl pt-9 pb-3">
@@ -90,19 +103,19 @@ export default function Checkout() {
                   Localidad:
                 </h2>
                 <Input
-                  placeholder={user.city}
+                  placeholder={user.city == null ? "" : user.city}
                   className=" h-24 border-gray-500 text-3xl rounded-xl"
                 ></Input>
                 <h2 className="my-4 font-light text-4xl pt-9 pb-3">
                   Telefono:
                 </h2>
                 <Input
-                  placeholder={user.phone}
+                  placeholder={user.phone == null ? "" : user.phone}
                   className=" h-24 border-gray-500 text-3xl rounded-xl"
                 ></Input>
                 <h2 className="my-4 font-light text-4xl pt-9 pb-3">DNI:</h2>
                 <Input
-                  placeholder={user.dni}
+                  placeholder={user.dni == null ? "" : user.dni}
                   className=" h-24 border-gray-500 text-3xl rounded-xl"
                 ></Input>
               </section>
