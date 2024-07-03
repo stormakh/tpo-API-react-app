@@ -54,10 +54,14 @@ export default function NavBar({}: NavBarProps) {
         </Button>
         <Button size="icon" className="bg-transparent hover:bg-slate-50">
           <Link to="/login">
-          <LogOut onClick={handleLogOutUser} color="black"/>
+            {user === null ? (
+              <UserRound color="black" onClick={handleLogOutUser}/>
+            ) : (
+              <LogOut onClick={handleLogOutUser} color="black" />
+            )}
           </Link>
         </Button>
       </div>
-    </nav>
+    </nav> 
   );
 }
