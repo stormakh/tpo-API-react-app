@@ -31,6 +31,7 @@ import { addProduct } from "@/store/store";
 import EmblaCarouselThumbs from "@/components/carouselThumbNails/EmblaCarouselThumbs";
 import { UserSession } from "@/models/users";
 
+
 const sizeSources = [
   "/src/assets/Size_1.svg",
   "/src/assets/Size_2.svg",
@@ -61,7 +62,8 @@ const initialState: ProductDetail = {
   seller: {
     idSeller: 0,
     name: ""
-  }
+  },
+  images: [],
 };
 
 export default function () {
@@ -74,15 +76,22 @@ export default function () {
   const user = useSelector((state: { userSession: UserSession }) => state.userSession);
 
   useEffect(() => {
-    if (prod.idProduct == 0){
-      setProd(fetchById(parseInt(id)));
+    async function getProduct(idProduct: number) {
+      const products = await fetchAllProducts();
+      const filteredProduct = products.find((product) => product.idProduct === idProduct);
+      if (filteredProduct) {
+        setProd(filteredProduct);
+      }
     }
+
+    if (prod === undefined) return;
+
+    if (id === undefined) return;
+
+    getProduct(parseInt(id));
+
   }, []);
 
-  async function getProduct(idProduct: number){
-    const products = await fetchAllProducts();
-    return products.filter((product) => product.idProduct === idProduct);
-  }
 
   function handleAddToCart() {
     if (prod === undefined) return;
@@ -112,13 +121,13 @@ export default function () {
 
   return (
     <>
-      <Banner text={prod.categories[1]} />
+      <Banner text={prod.categories[1]?.name} />
       <Link to={"/catalog"}>
         <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
           {prod?.categories?.join(" / ")}
         </h1>
       </Link>
-      <section className="font-roboto grid grid-cols-1 md:grid-cols-8 gap-4 m-8 md:items-start place-items-center">
+      <section className="font-roboto grid grid-cols-1 md:grid-cols-8 gap-4 m-8 md:items-start place-items-center min-h-[80dvh]">
         <EmblaCarouselThumbs
           //slides={prod?.images.map((image) => {
           slides={images.map((image) => {

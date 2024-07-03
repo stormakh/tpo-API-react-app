@@ -6,7 +6,7 @@ interface Seller {
 }
 
 export interface Product {
-  idProducto: number;
+  idProduct: number;
   description: string;
   price: number;
   quantity: number;
@@ -14,20 +14,26 @@ export interface Product {
   seller: Seller;
 }
 
-export interface ProductDetail{
+export interface Size {
+  size: string;
+  stock: number;
+
+}
+
+export interface ProductDetail {
   idProduct: number;
   description: string;
   price: number;
   stock: number;
-  categories: string[];
-  sizes: string[];
+  categories: Category[];
+  sizes: Size[];
   colors: string[];
-  materials: string[];
-  seller: Seller;
+  materials: { description: string }[];
+  images: Image[];
+  seller: { idSeller: number; name: string };
 }
-
 export interface Image {
-  idImage: string;
+  name: string;
   image: string;
 }
 

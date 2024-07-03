@@ -1,77 +1,50 @@
-import { Category, ProductDetail } from "@/models/products";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
-import { filterByCategorie } from "@/lib/products/products";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { fetchAllCategories } from '@/lib/products/categories';
+import { Category } from '@/models/products';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '../ui/select';
 
-
-import { fetchAllCategories } from "@/lib/products/categories";
 interface CatalogFilterProps {
-  action: React.Dispatch<React.SetStateAction<ProductDetail[]>>;
-  currentProds: ProductDetail[];
+  initialCategory: string;
+  onFilterChange: (category: string) => void;
 }
 
-export default function CatalogFilter({
-  action,
-  currentProds,
-}: CatalogFilterProps) {
-
-  const params = useParams();
-
-  useEffect(() => {
-    if (params.categorie !== undefined && Object.values(params.categorie).includes(params.categorie) ) {
-      action(filterByCategorie(currentProds, params.categorie));
-    } else if (params.categorie !== undefined && !Object.values(params.categorie).includes(params.categorie)){
-      action(currentProds);
-    }
-  }, [params.categorie]);
-
-  const [categories, setCategories] = useState<Category[] | null>(null);
+const CatalogFilter: React.FC<CatalogFilterProps> = ({ initialCategory, onFilterChange }) => {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const categories = await fetchAllCategories();
-        setCategories(categories);
+        const cats = await fetchAllCategories();
+        setCategories(cats);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
     };
-
     fetchCategories();
   }, []);
 
   useEffect(() => {
-  },[]);
-
-  function handleFilterByCat(categorie: string) {
-    action(filterByCategorie(currentProds, categorie));
-  }
-
+    onFilterChange(selectedCategory);
+  }, [selectedCategory, onFilterChange]);
 
   return (
-    <Select defaultValue={params.categorie} onValueChange={(value: string) => handleFilterByCat(value)}>
-      <SelectTrigger className=" border-none focus:ring-0 focus:ring-offset-0 text-2xl">
-        <SelectValue className="" placeholder={params.categorie !== undefined ? params.categorie : 'FILTER'} />
+    <Select defaultValue={selectedCategory} onValueChange={(value) => setSelectedCategory(value)}>
+      <SelectTrigger className="border-none focus:ring-0 focus:ring-offset-0 text-2xl">
+        <SelectValue placeholder={selectedCategory || 'FILTER'} />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
           <SelectLabel className="text-xl">Categories</SelectLabel>
-          {categories != null ? categories.map((categorie, index) => (
-            <SelectItem key={index} value={categorie.id.toString()} className="text-xl">
-              {categorie.name}
+          {categories.map((category) => (
+            <SelectItem key={category.id} value={category.name} className="text-xl">
+              {category.name}
             </SelectItem>
-          )) : undefined}
+          ))}
         </SelectGroup>
       </SelectContent>
     </Select>
   );
-}
+};
+
+export default CatalogFilter;
