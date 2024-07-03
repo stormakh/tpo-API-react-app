@@ -13,6 +13,7 @@ import { toast } from "sonner";
 import { clearCart } from "@/store/store";
 import { useNavigate } from "react-router-dom";
 import { getUserSession } from "@/helpers/user";
+import { createOrder } from "@/lib/orders";
 export default function Checkout() {
   const cart = useSelector(
     (state: { shoppingCart: shoppingCart }) => state.shoppingCart
@@ -21,7 +22,11 @@ export default function Checkout() {
  const dispatch = useDispatch();
  const navigate = useNavigate();
  const user = getUserSession();
+
   function handleFinalizePurchase() {
+
+    createOrder()
+    // creo las ordenes
     dispatch(clearCart());
     toast("La compra se ha realizado exitosamente!");
 

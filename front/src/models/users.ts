@@ -11,6 +11,7 @@ export interface UserSession {
     phone: string | null;
     fullName: string;
     role: UserType;
+    password: string;
 }
 
 

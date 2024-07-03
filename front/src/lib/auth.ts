@@ -1,6 +1,6 @@
 import { UserSession } from "@/models/users";
 
-const url = 'http://localhost:8080/auth';
+const url = 'http://localhost:8080/auth/register';
 
 export async function login(email: string, password: string) {
   const response = await fetch(`${url}/authenticate`, {
@@ -19,6 +19,7 @@ export async function login(email: string, password: string) {
 }
 
 export async function register(user: UserSession) {
+  console.log("")
   try {
     const response = await fetch(`${url}/register`, {
       method: 'POST',
@@ -29,6 +30,7 @@ export async function register(user: UserSession) {
         firstname: user.firstName,
         lastname: user.lastName,
         email: user.email,
+        password: user.password
       })
     });
 

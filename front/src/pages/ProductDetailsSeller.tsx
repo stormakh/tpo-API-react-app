@@ -41,9 +41,10 @@ const images = [
 import { Camera} from "lucide-react";
 import { ColorResult, SketchPicker } from "react-color";
 import { Link, useParams } from "react-router-dom";
-import { fetchById } from "@/lib/products/products";
+import { fetchById, createProduct, updateProduct} from "@/lib/products/products";
 import {  ProductDetail } from "@/models/products";
 import { Input } from "@/components/ui/input";
+
 //import {imageToBlob} from "@/helpers/imgtoblob";
 
 const initialState: ProductDetail = {
@@ -138,6 +139,18 @@ export default function ProductDetailsSeller() {
     };
   }, [handleClickOutside]);
 
+
+
+
+  const handleSubmit = async () => {
+    try {
+      await createProduct(prod.description, new Float32Array([prod.price]), prod.stock, prod.categories);
+    } catch (error) {
+      console.error("Error creating product:", error);
+    }
+  };
+
+
   return (
     <>
       <Banner text="Mis Productos"></Banner>
@@ -173,11 +186,9 @@ export default function ProductDetailsSeller() {
                 ))}
               </CarouselContent>
             </Carousel>
-            {/* 
               <input type = "file" className="flex font-semibold" accept="image/png" onChange={handleFileChange}>
                 Añadir Fotos <Camera className="mx-5" />
               </input> 
-            */}
           </div>
 
           <Card className="w-full h-[450px] ">
@@ -255,7 +266,7 @@ export default function ProductDetailsSeller() {
             <CardFooter className="justify-center">
               <div className="flex flex-row gap-4">
                 <Link to={"/seller/abm-products"}>
-                  <Button className=" w-auto h-20 text-xl ">
+                  <Button className=" w-auto h-20 text-xl "  onClick={handleSubmit}>
                     <Save className="mr-2" /> Save Changes
                   </Button>
                 </Link>

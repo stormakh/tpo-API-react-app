@@ -12,7 +12,6 @@ import { filterByCategorie } from "@/lib/products/products";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-
 import { fetchAllCategories } from "@/lib/products/categories";
 interface CatalogFilterProps {
   action: React.Dispatch<React.SetStateAction<ProductDetail[]>>;
@@ -25,6 +24,14 @@ export default function CatalogFilter({
 }: CatalogFilterProps) {
 
   const params = useParams();
+
+  useEffect(() => {
+    if (params.categorie !== undefined && Object.values(params.categorie).includes(params.categorie) ) {
+      action(filterByCategorie(currentProds, params.categorie));
+    } else if (params.categorie !== undefined && !Object.values(params.categorie).includes(params.categorie)){
+      action(currentProds);
+    }
+  }, [params.categorie]);
 
   const [categories, setCategories] = useState<Category[] | null>(null);
 
@@ -40,19 +47,14 @@ export default function CatalogFilter({
 
     fetchCategories();
   }, []);
-  
-  useEffect(() => {
-    if (params.categorie !== undefined && categories!.some(category => category.name === params.categorie) ) {
-      action(filterByCategorie(currentProds, params.categorie));
-    } else if (params.categorie !== undefined && !categories!.some(category => category.name === params.categorie)){
-      action(currentProds);
-    }
-  }, [params.categorie]);
 
+  useEffect(() => {
+  },[]);
 
   function handleFilterByCat(categorie: string) {
     action(filterByCategorie(currentProds, categorie));
   }
+
 
   return (
     <Select defaultValue={params.categorie} onValueChange={(value: string) => handleFilterByCat(value)}>
@@ -62,9 +64,9 @@ export default function CatalogFilter({
       <SelectContent>
         <SelectGroup>
           <SelectLabel className="text-xl">Categories</SelectLabel>
-          {categories != null ? categories.map((cat, index) => (
-            <SelectItem key={index} value={cat.toString()} className="text-xl">
-              {cat.name}
+          {categories != null ? categories.map((categorie, index) => (
+            <SelectItem key={index} value={categorie.id.toString()} className="text-xl">
+              {categorie.name}
             </SelectItem>
           )) : undefined}
         </SelectGroup>

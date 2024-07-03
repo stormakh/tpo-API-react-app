@@ -26,20 +26,7 @@ export async function createOrder(items: OrderDetail[], discountCodes?: string[]
 }
 
 export async function fetchByUser(userId: number): Promise<OrderDetail[]>{
-    
-    try{
-        const response = await fetch(`http://localhost:8080/orders/users/${userId}`, {
-            headers: {
-              'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-            }
-        }
-          });
-    
-    if(!response.ok) {
-        throw new Error('Network response was not ok')
-    }
-
-    const orders = await response.json();
-    return orders;
-    }
+   
+  return [] as OrderDetail[];
+}
 

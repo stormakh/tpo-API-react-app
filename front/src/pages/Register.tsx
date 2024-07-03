@@ -22,14 +22,8 @@ export default function Register() {
     city: "",
     postalCode: "",
     phone: "",
-    orders: [],
-    role: "",
-    enabled: false,
-    username: "",
-    authorities: {
-      authority: ""
-    },
-    type: 'USER' as UserType
+    role: "USER",
+    fullName: ""
   };
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -131,6 +125,6 @@ export default function Register() {
           {errorMessage ? errorMessage : null}
         </div>
       </div>
-    </div>
-  );
+    </div>
+  );
 }

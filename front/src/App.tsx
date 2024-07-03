@@ -33,6 +33,7 @@ export default function App() {
         {
           path: "seller", element: <SellerMiddleware/>,
           children: [
+            { path: "catalog/:categorie", element: <Catalog /> },
             { path: '', element: <Home />},
             { path: "product-details-seller", element: <ProductDetailsSeller />},
             {
