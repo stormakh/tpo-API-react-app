@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import image from "@/assets/LogIn_Back.svg";
-import { UserSession, UserType } from "@/models/users";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "@/lib/auth";
 import { setUserSession } from "@/store/store";
@@ -10,54 +9,40 @@ import { useDispatch } from "react-redux";
 import { getUserSession } from "@/lib/users";
 
 export default function Register() {
-
-  const initialUser: UserSession = {
-    id: 0,
+  const initialUser = {
     firstName: "",
     lastName: "",
-    password: "",
     email: "",
-    dni: "",
-    address: "",
-    city: "",
-    postalCode: "",
-    phone: "",
-    orders: [],
-    role: "",
-    enabled: false,
-    username: "",
-    authorities: {
-      authority: ""
-    },
-    type: 'USER' as UserType
+    password: "",
   };
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [user, setUser] = useState<UserSession>(initialUser);
+  const [user, setUser] = useState(initialUser);
+  
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
-  }
+  };
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleRegistration = async() => {
+  const handleRegistration = async () => {
     try {
       const tokenResponse = await register(user);
-      if (tokenResponse != null){
-        localStorage.setItem('accessToken', tokenResponse);
+      console.log(tokenResponse);
+      if (tokenResponse != null) {
+        localStorage.setItem("accessToken", tokenResponse);
+        console.log(tokenResponse);
         const userSession = await getUserSession(tokenResponse);
-        localStorage.setItem('userSession', JSON.stringify(tokenResponse));
         dispatch(setUserSession(userSession));
         navigate("/");
-      }else{
+      } else {
         setErrorMessage("no se ha podido loguear");
       }
-    }
-    catch(error) {
+    } catch (error) {
       console.error(error);
     }
     navigate("/");
-  }
+  };
 
   return (
     <div
@@ -92,10 +77,12 @@ export default function Register() {
               <Input
                 type="firstname"
                 value={user.firstName}
-                onChange={(e) => setUser({ ...user, firstName: e.target.value })}
+                onChange={(e) =>
+                  setUser({ ...user, firstName: e.target.value })
+                }
                 placeholder="Firstname"
               />
-                            <Input
+              <Input
                 type="lastname"
                 value={user.lastName}
                 onChange={(e) => setUser({ ...user, lastName: e.target.value })}
@@ -114,9 +101,7 @@ export default function Register() {
                   className="w-full"
                   type={showPassword ? "text" : "password"}
                   value={user.password}
-                  onChange={(e) =>
-                    setUser({ ...user, password: e.target.value })
-                  }
+                  onChange={(e) => setUser({ ...user, password: e.target.value })}
                   placeholder="Contraseña"
                 />
               </div>
@@ -131,6 +116,7 @@ export default function Register() {
           {errorMessage ? errorMessage : null}
         </div>
       </div>
-    </div>
-  );
+          
+    </div>
+  );
 }
