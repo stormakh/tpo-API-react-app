@@ -1,8 +1,9 @@
 import { UserSession } from "@/models/users";
 
+const url = 'http://localhost:8080/auth';
+
 export async function login(email: string, password: string) {
-  
-  const response = await fetch('http://127.0.0.1:8080/auth/authenticate', {
+  const response = await fetch(`${url}/authenticate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -12,14 +13,14 @@ export async function login(email: string, password: string) {
       password: password
     })
   });
-  
+
   const data = await response.json();
   return data.access_token; // Returns the access_token
 }
- 
+
 export async function register(user: UserSession) {
   try {
-    const response = await fetch('http://127.0.0.1:8080/auth/register', {
+    const response = await fetch(`${url}/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -28,7 +29,6 @@ export async function register(user: UserSession) {
         firstname: user.firstName,
         lastname: user.lastName,
         email: user.email,
-        password: user.password
       })
     });
 
@@ -42,4 +42,4 @@ export async function register(user: UserSession) {
     console.error('There was a problem with the fetch operation:', error);
     throw error;
   }
-}   
+}

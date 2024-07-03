@@ -27,9 +27,12 @@ export default function LogIn() {
         emailRef.current?.value,
         passwordRef.current?.value
       )
+      
       if (tokenResponse != null){
+        
         localStorage.setItem('accessToken', tokenResponse);
         const userSession = await getUserSession(tokenResponse);
+        console.log(userSession)
         localStorage.setItem('userSession', JSON.stringify(userSession));
         console.log(userSession)
         dispatch(setUserSession(userSession));
@@ -66,7 +69,7 @@ export default function LogIn() {
               ref={emailRef}
               type="username"
               className=" w-full"
-              placeholder="Usuario"
+              placeholder="Email"
             />
             <div className="relative w-full flex flex-col items-center justify-center">
               <img

@@ -2,22 +2,15 @@
 export interface UserSession {
     id: number;
     email: string;
-    password: string;
     firstName: string;
     lastName: string;
-    dni: string;
-    address: string;
-    city: string;
-    postalCode: string;
-    phone: string;
-    orders: [];
-    role: string;
-    enabled: boolean;
-    username: string;
-    type: UserType;
-    authorities: {
-        authority: string
-    }
+    dni: string | null;
+    address: string | null;
+    city: string | null;
+    postalCode: string | null;
+    phone: string | null;
+    fullName: string;
+    role: UserType;
 }
 
 
@@ -25,4 +18,4 @@ export interface UserRegister{
     
 }
 
-export type UserType = 'ADMIN' | 'CUSTOMER' | 'SELLER';
+export type UserType = 'ADMIN' | 'USER' | 'SELLER';
