@@ -64,7 +64,7 @@ export default function Catalog() {
         <CatalogMenu />
       </div>
 
-      <div className="grid  gap-4 m-8 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+      <div className="grid  gap-4 m-8 mx-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 h-full min-h-dvh">
         {filteredProds.map((prod) => (
           <div className="flex flex-col gap-2 cursor-pointer" key={prod.idProduct} onClick={() => handleNavigateToProduct(prod.idProduct)}>
             <CarouselWrapper

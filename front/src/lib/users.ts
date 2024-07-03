@@ -1,105 +1,104 @@
-import usersMock from "@/mock/usersMock.json";
 import { UserSession, UserType } from "@/models/users";
 import { NavigateFunction } from "react-router-dom";
 
+const url = "http://localhost:8080/user";
 
-export async function checkCorrectPath(userType : UserType | null , expected: UserType, navigate : NavigateFunction){
-  console.log("eee",userType,expected);
-  if(!userType){
+export async function checkCorrectPath(
+  userType: UserType | null,
+  expected: UserType,
+  navigate: NavigateFunction
+) {
+  if (!userType) {
     // Redirect to the correct route
-    navigate('/');
-  }else if(userType !== expected){
+    navigate("/");
+  } else if (userType !== expected) {
     // Redirect to the correct route
-    navigate(`/`)
+    navigate(`/`);
   }
 }
 
 export async function fetchAllUsers(userId: number) {
-  return  fetch(`http://localhost:8080/user/${userId}`, {
-    method: 'GET'
+  return fetch(`${url}/${userId}`, {
+    method: "GET",
   })
-    .then(response => {
+    .then((response) => {
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       return response.json();
     })
-    .then(data => {
+    .then((data) => {
       return data; // Devuelve el access_token
     })
-    .catch(error => {
-      console.error('There was a problem with the fetch operation:', error);
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
     });
 }
 
 export async function createUser(user: UserSession) {
-  return  fetch('http://127.0.0.1:8080/user', {
-    method: 'POST',
+  return fetch(`${url}`, {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       firstname: user.firstName,
       lastname: user.lastName,
       email: user.email,
-      password: user.password
-    })
+    }),
   })
-    .then(response => {
+    .then((response) => {
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       return response.json();
     })
-    .then(data => {
-      return data; 
+    .then((data) => {
+      return data;
     })
-    .catch(error => {
-      console.error('There was a problem with the fetch operation:', error);
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
     });
 }
-
 
 export async function fetchUserById(userId: number) {
-  return  fetch(`http://localhost:8080/user/${userId}`, {
-    method: 'GET',
+  return fetch(`${url}/${userId}`, {
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
   })
-    .then(response => {
+    .then((response) => {
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       return response.json();
     })
-    .then(data => {
+    .then((data) => {
       return data; // Devuelve el access_token
     })
-    .catch(error => {
-      console.error('There was a problem with the fetch operation:', error);
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
     });
 }
 
-export async function getUserSession(token: string): Promise<UserSession>{
+export async function getUserSession(token: string): Promise<UserSession> {
   try {
-    const response = await fetch(`http://localhost:8080/user`, {
-      method: 'GET',
+    const response = await fetch(`${url}`, {
+      method: "GET",
       headers: {
-        'Authorization': 'Bearer ' + token 
-      }
+        Authorization: "Bearer " + token,
+      },
     });
 
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error("Network response was not ok");
     }
 
     const data = await response.json();
     return data as UserSession;
-
   } catch (error) {
-    console.error('There was a problem with the fetch operation:', error);
+    console.error("There was a problem with the fetch operation:", error);
     throw error; // Re-lanza el error para que pueda ser manejado por el llamador
   }
 }
- 
