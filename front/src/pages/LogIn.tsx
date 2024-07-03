@@ -7,7 +7,6 @@ import { login } from "@/lib/auth";
 import { setUserSession } from "@/store/store";
 import { getUserSession } from "@/lib/users";
 import { useDispatch } from "react-redux";
-import { loadCategories } from "@/helpers/product";
 
 export default function LogIn() {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -26,19 +25,23 @@ export default function LogIn() {
       const tokenResponse = await login(
         emailRef.current?.value,
         passwordRef.current?.value
-      )
-      
-      if (tokenResponse != null){
-        
-        localStorage.setItem('accessToken', tokenResponse);
+      );
+
+      if (tokenResponse != null) {
+        localStorage.setItem("accessToken", tokenResponse);
         const userSession = await getUserSession(tokenResponse);
-        console.log(userSession)
-        localStorage.setItem('userSession', JSON.stringify(userSession));
-        console.log(userSession)
+        console.log(userSession);
+        localStorage.setItem("userSession", JSON.stringify(userSession));
+        console.log(userSession);
         dispatch(setUserSession(userSession));
-        loadCategories();
-        navigate("/");
-        if (tokenResponse == ""){
+        if ((userSession.role == "ADMIN") || (userSession.role == "SELLER")) {
+          console.log("navigated to seller");
+          navigate(`/seller`);
+        }else {
+          navigate(`/`);
+        }
+
+        if (tokenResponse == "") {
           setErrorMessage("no se ha podido loguear");
         }
       }

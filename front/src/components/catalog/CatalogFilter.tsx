@@ -60,7 +60,7 @@ export default function CatalogFilter({
   return (
     <Select defaultValue={params.categorie} onValueChange={(value: string) => handleFilterByCat(value)}>
       <SelectTrigger className=" border-none focus:ring-0 focus:ring-offset-0 text-2xl">
-        <SelectValue className="" placeholder={params.categorie && Object.values(params.categorie).includes(params.categorie) ? params.categorie : 'FILTER'} />
+        <SelectValue className="" placeholder={params.categorie !== undefined ? params.categorie : 'FILTER'} />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
