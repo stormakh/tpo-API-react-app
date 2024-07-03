@@ -20,15 +20,25 @@ export interface ProductDetail{
   price: number;
   stock: number;
   categories: string[];
-  sizes: string[];
+  sizes: Size[];
   colors: string[];
   materials: string[];
   seller: Seller;
+  images: Image[];
+}
+
+export interface Size{
+  size: string;
+  stock: number;
+}
+
+export interface Color{
+  name: string;
 }
 
 export interface Image {
-  idImage: string;
-  image: string;
+  name: string;
+  file: string;
 }
 
 export interface Category{

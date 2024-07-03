@@ -58,7 +58,8 @@ const initialState: ProductDetail = {
   seller: {
     idSeller: 0,
     name: ""
-  }
+  },
+  images: []
 };
 
 /*
