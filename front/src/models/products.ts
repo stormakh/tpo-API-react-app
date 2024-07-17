@@ -34,7 +34,7 @@ export interface ProductDetail {
 }
 export interface Image {
   name: string;
-  image: string;
+  file: string;
 }
 
 export interface Category{

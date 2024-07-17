@@ -11,6 +11,7 @@ export default function SellerMiddleware() {
   
   useEffect(() => {
     if (user) {
+      console.log(user.role);
       checkCorrectPath(user.role as UserType, allowedUserTypes, navigate);
     } else {
       checkCorrectPath(null, allowedUserTypes, navigate);

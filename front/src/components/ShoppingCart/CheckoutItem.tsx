@@ -6,14 +6,14 @@ export default function CheckoutItem(product: shoppingItem) {
       <td className="p-2 flex w-1/3">
         <img
           className="rounded-lg w-32 h-32 object-cover"
-          src={product.images[0]}
+          src={""}
           alt="Ejemplo"
         />
       </td>
       <td className="flex flex-col w-1/3 justify-evenly items-start ">
-        <p className="flex justify-start">{product.name}</p>
+        <p className="flex justify-start">{product.description}</p>
         <p className="flex justify-start font-thin">{product.colors[0]}</p>
-        <p className="flex justify-start font-thin">{product.sizes[0]}</p>
+        <p className="flex justify-start font-thin">{product.sizes[0].size}</p>
       </td>
       <td className="flex flex-col w-1/3 justify-evenly items-start">
         <p className="flex justify-end font-bold">${product.price}</p>

@@ -27,6 +27,7 @@ export default function Register() {
   const dispatch = useDispatch();
   const handleRegistration = async () => {
     try {
+      console.log(user)
       const tokenResponse = await register(user);
       console.log(tokenResponse);
       if (tokenResponse != null) {

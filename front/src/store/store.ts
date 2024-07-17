@@ -2,10 +2,14 @@ import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserSession } from "@/models/users";
 import { Product, ProductDetail, Size } from "@/models/products";
 import { shoppingCart, shoppingItem } from "@/models/shoppingCart";
+import catalog, { CatalogState } from "./catalog";
+import createProduct, { createProductState } from "./createProduct";
 
 export interface AppState {
   shoppingCart: shoppingCart;
   userSession: UserSession | null;
+  catalog: CatalogState;
+  createProduct: createProductState;
 }
 
 const initialShoppingCart: shoppingCart = {
@@ -132,6 +136,8 @@ const userSessionSlice = createSlice({
 const rootReducer = {
   shoppingCart: shoppingCartSlice.reducer,
   userSession: userSessionSlice.reducer,
+  catalog: catalog,
+  createProduct: createProduct,
 
 };
 
@@ -155,4 +161,6 @@ export const {
   addAmountToProduct,
   discountAmountToProduct,
 } = shoppingCartSlice.actions;
+
+
 export const { setUserSession, clearUserSession } = userSessionSlice.actions;

@@ -12,6 +12,10 @@ import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { clearCart } from "@/store/store";
 import { useNavigate } from "react-router-dom";
+
+import { createOrder } from "@/lib/orders";
+import { UserSession } from "@/models/users";
+import { OrderDetail } from "@/models/orders";
 export default function Checkout() {
   const cart = useSelector(
     (state: { shoppingCart: shoppingCart }) => state.shoppingCart
@@ -19,7 +23,23 @@ export default function Checkout() {
 
  const dispatch = useDispatch();
  const navigate = useNavigate();
+ const user = useSelector(
+  (state: { userSession: UserSession }) => state.userSession);
+
   function handleFinalizePurchase() {
+
+    const orderDetails: OrderDetail[] = cart.products.map((prod) => {
+      return {
+        productId: prod.idProduct, // Asumiendo que `prod` tiene un campo `id`
+        quantity: prod.amount, // Asumiendo que `prod` tiene un campo `quantity`
+        sizeDescription: prod.sizes[0].size, // Asumiendo que `prod` tiene un campo `size`
+        // agregar otros campos necesarios
+      };
+    });
+
+    createOrder(orderDetails);
+
+    // creo las ordenes
     dispatch(clearCart());
     toast("La compra se ha realizado exitosamente!");
 
@@ -46,28 +66,28 @@ export default function Checkout() {
                   Nombre:
                 </h2>
                 <Input
-                  placeholder="Nombre"
+                  placeholder={user != null &&  user.firstName == null ? "" : ""}
                   className=" h-24 border-gray-500 text-3xl rounded-xl"
                 ></Input>
                 <h2 className="my-4 font-light text-4xl pt-9 pb-3">
                   Provincia:
                 </h2>
                 <Input
-                  placeholder="Provincia"
+                  placeholder={user != null && user.city == null ? "" : ""}
                   className=" h-24 border-gray-500 text-3xl rounded-xl"
                 ></Input>
                 <h2 className="my-4 font-light text-4xl pt-9 pb-3">
                   Codigo Postal:
                 </h2>
                 <Input
-                  placeholder="Codigo Postal"
+                  placeholder={user != null && user.postalCode == null ? "" : ""}
                   className=" h-24 border-gray-500 text-3xl rounded-xl"
                 ></Input>
                 <h2 className="my-4 font-light text-4xl pt-9 pb-3">
                   Correo electrónico:
                 </h2>
                 <Input
-                  placeholder="Email"
+                  placeholder={user.email}
                   className=" h-24 border-gray-500 text-3xl rounded-xl"
                 ></Input>
               </section>
@@ -76,26 +96,26 @@ export default function Checkout() {
                   Apellido:
                 </h2>
                 <Input
-                  placeholder="Apellido"
+                  placeholder={user.lastName}
                   className=" h-24 border-gray-500 text-3xl rounded-xl"
                 ></Input>
                 <h2 className="my-4 font-light text-4xl pt-9 pb-3">
                   Localidad:
                 </h2>
                 <Input
-                  placeholder="Localidad"
+                  placeholder={user.city == null ? "" : user.city}
                   className=" h-24 border-gray-500 text-3xl rounded-xl"
                 ></Input>
                 <h2 className="my-4 font-light text-4xl pt-9 pb-3">
                   Telefono:
                 </h2>
                 <Input
-                  placeholder="Telefono"
+                  placeholder={user.phone == null ? "" : user.phone}
                   className=" h-24 border-gray-500 text-3xl rounded-xl"
                 ></Input>
                 <h2 className="my-4 font-light text-4xl pt-9 pb-3">DNI:</h2>
                 <Input
-                  placeholder="DNI"
+                  placeholder={user.dni == null ? "" : user.dni}
                   className=" h-24 border-gray-500 text-3xl rounded-xl"
                 ></Input>
               </section>

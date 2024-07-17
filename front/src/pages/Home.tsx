@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import nopayLogo from "@/assets/nopay.svg";
 import nopay2 from "@/assets/nopay2.svg";
 import { Link } from "react-router-dom";
-import { loadCategories } from "@/helpers/product";
+
 
 const urls = [
   "/src/assets/home-banner-1.svg",
