@@ -58,3 +58,7 @@ export enum categories {
   Women = "Women",
   None = "None",
 }
+
+export interface Material {
+  description: string;
+}

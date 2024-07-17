@@ -20,6 +20,7 @@ async function apiRequest(
     }
 
     const data = await response.json();
+    console.log("categoriiiies: ", data);
     return data;
   } catch (error) {
     console.error("There was a problem with the fetch operation:", error);

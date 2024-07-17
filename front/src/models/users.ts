@@ -1,3 +1,5 @@
+import User from "@/components/userProfile/User";
+
 // Define the user session interface
 export interface UserSession {
     id: number;
@@ -11,6 +13,7 @@ export interface UserSession {
     phone: string | null;
     fullName: string;
     role: UserType;
+    password: string;
 }
 
 
@@ -19,3 +22,9 @@ export interface UserRegister{
 }
 
 export type UserType = 'ADMIN' | 'USER' | 'SELLER';
+
+
+export interface sellerRequest {
+    idRequest: number;
+    user: UserSession;
+}

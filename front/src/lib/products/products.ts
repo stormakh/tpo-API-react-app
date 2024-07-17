@@ -1,22 +1,57 @@
-import { ProductDetail } from "@/models/products";
+import { Color, ColorPost, Image, Material, ProductDetail, Size } from "@/models/products";
 
-export async function createProduct(
-  description: string,
-  price: Float32Array,
-  quantity: number,
-  categories: string[]
-) {
-  fetch("http://localhost:8080/products", {
-    method: "POST",
+export type colorType = "PRIMARY"| "SECONDARY" | "TERTIARY"
+export type size = {size: string, stock: number}
+export type colorArray = {colorDescription: string, colorHex: string, colortype: colorType}
+
+export async function createProduct(description: string, price: number, sizes: Size[], categories: string[], material:  Material[], colors: ColorPost[], images: Image[]) {
+  try {
+    const response = await fetch('http://localhost:8080/products', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        description: description,
+        price: price,
+        sizes: sizes,
+        categories: categories,
+        material: material,
+        colors: colors,
+        images: images
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    console.log("categoriiiies: ", data);
+    return data;
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error);
+    throw error; // Re-throw the error so it can be handled by the caller
+  }
+}
+
+
+export async function updateProduct(productId : number , description: string, price: Float32Array, quantity: number, categories: string[], sizesParam: size[], colorsArray: ColorPost[]) {
+  fetch(`http://localhost:8080/products/${productId}`, {
+    method: 'PUT',
     headers: {
-      Authorization: "Bearer" + localStorage.getItem("accessToken"),
+      'Authorization': 'Bearer' + localStorage.getItem('accessToken') ,
+      'Content-Type': 'application/json' 
     },
     body: JSON.stringify({
       description: description,
       price: price,
       quantity: quantity,
       categories: categories,
-    }),
+      sizes: sizesParam,
+      colors: colorsArray
+    })
   })
     .then((response) => {
       if (!response.ok) {
@@ -31,6 +66,9 @@ export async function createProduct(
       console.error("There was a problem with the fetch operation:", error);
     });
 }
+
+
+
 
 export async function fetchAllProducts(): Promise<ProductDetail[]> {
   try {

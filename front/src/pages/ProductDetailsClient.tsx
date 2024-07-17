@@ -124,13 +124,13 @@ export default function () {
       <Banner text={prod.categories[1]?.name} />
       <Link to={"/catalog"}>
         <h1 className="font-roboto text-left text-3xl mt-5 ml-12 italic font-thin">
-          {prod?.categories?.join(" / ")}
+          {prod.categories.join(" / ")}
         </h1>
       </Link>
       <section className="font-roboto grid grid-cols-1 md:grid-cols-8 gap-4 m-8 md:items-start place-items-center min-h-[80dvh]">
         <EmblaCarouselThumbs
           //slides={prod?.images.map((image) => {
-          slides={images.map((image) => {
+          slides={prod.images.map((image) => {
             return <img src={image} className=""></img>;
           })}
           className="md:col-span-3 lg:col-span-3 xl:col-span-2"
@@ -150,8 +150,7 @@ export default function () {
               </h3>
             </div>
             <Separator className="mx-auto bg-silk my-7" />
-            <p className="font-roboto text-2xl">{prod?.description}</p>
-            <h2 className="font-roboto font-semibold my-5 text-3xl">Size</h2>
+            <h2 className="font-roboto font-semibold my-5 text-3xl">Sizes</h2>
             <Carousel
               opts={{
                 align: "start",
@@ -159,28 +158,38 @@ export default function () {
               className="w-full"
             >
               <CarouselContent className="-mt-1 h-fill w-52 ">
-                {sizeSources.map((source, index) => (
+                {prod.sizes.map((size, index) => (
                   <CarouselItem key={index} className="pt-1 md:basis-1/2">
                     <div className="p-1">
-                      <img src={source} className="mb-5"></img>
+                    <Button className="rounded-full" disabled>{size.size}</Button>
                     </div>
                   </CarouselItem>
                 ))}
               </CarouselContent>
             </Carousel>
             <h2 className="font-roboto font-semibold my-5 text-3xl">
-              {prod?.colors}
+              Colors
             </h2>
-            <Popover>
-              <PopoverTrigger>
-                <img src="/src/assets/ColorPicker.svg" className=""></img>
-              </PopoverTrigger>
-              <PopoverContent>Color palette goes here</PopoverContent>
-            </Popover>
+            <Carousel
+              opts={{
+                align: "start",
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-mt-1 h-fill w-52 ">
+                {prod.colors.map((color, index) => (
+                  <CarouselItem key={index} className="pt-1 md:basis-1/2">
+                    <div className="p-1">
+                    <Button className="rounded-full" disabled>{color}</Button>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
             <section className="flex flex-col font-roboto">
               {/* <a className="underline text-2xl mt-20">Ver Guía de talles</a> */}
               {prod?.stock ? (
-                <p className="text-2xl">Stock: {prod.stock}</p>
+                <p className="text-2xl">Disponibles: <b>{prod.stock}</b></p>
               ) : null}
 
               <Button
@@ -209,7 +218,7 @@ export default function () {
               <div className="flex items-center text-xl">
                 <CreditCard className="size-auto" />
                 <a className="my-5 ml-2 font-roboto font-semibold">
-                  Hasta 6 cuotas sin interés
+                  Hasta 3 cuotas sin interés
                 </a>
               </div>
               <div className="flex items-center text-xl">

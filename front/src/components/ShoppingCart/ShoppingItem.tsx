@@ -10,14 +10,17 @@ export default function ShoppingItem(product: shoppingItem){
   const dispatch = useDispatch();
 
   const addAmount = (id: number) => {
-    dispatch(addAmountToProduct({ id: id, amount: 1 }));
-    setCountQuantity(prevCount => prevCount + 1);
+    console.log(product.stock, countQuantity);
+    if(product.stock > countQuantity){
+      dispatch(addAmountToProduct({ id: id, amount: 1 }));
+      setCountQuantity(prevCount => prevCount + 1);
+    }
   };
 
   const discountAmount = (id: number) => {
     const amount = 1;
     if (countQuantity > amount) {
-      dispatch(discountAmountToProduct({ id: id, amount: amount }));
+      dispatch(discountAmountToProduct({ id: id, amount: 1 }));
       setCountQuantity(prevCount => prevCount - amount);
     } else {
       deleteProduct(id);

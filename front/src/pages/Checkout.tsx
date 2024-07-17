@@ -26,7 +26,23 @@ export default function Checkout() {
  const user = useSelector(
   (state: { userSession: UserSession }) => state.userSession);
 
+ const user = useSelector(
+  (state: { userSession: UserSession }) => state.userSession);
+
   function handleFinalizePurchase() {
+
+    const orderDetails: OrderDetail[] = cart.products.map((prod) => {
+      return {
+        productId: prod.idProduct, // Asumiendo que `prod` tiene un campo `id`
+        quantity: prod.amount, // Asumiendo que `prod` tiene un campo `quantity`
+        sizeDescription: prod.sizes[0].size, // Asumiendo que `prod` tiene un campo `size`
+        // agregar otros campos necesarios
+      };
+    });
+
+    createOrder(orderDetails);
+
+    // creo las ordenes
 
     const orderDetails: OrderDetail[] = cart.products.map((prod) => {
       return {
@@ -88,6 +104,7 @@ export default function Checkout() {
                 </h2>
                 <Input
                   placeholder={user.email}
+                  placeholder={user.email}
                   className=" h-24 border-gray-500 text-3xl rounded-xl"
                 ></Input>
               </section>
@@ -97,12 +114,14 @@ export default function Checkout() {
                 </h2>
                 <Input
                   placeholder={user.lastName}
+                  placeholder={user.lastName}
                   className=" h-24 border-gray-500 text-3xl rounded-xl"
                 ></Input>
                 <h2 className="my-4 font-light text-4xl pt-9 pb-3">
                   Localidad:
                 </h2>
                 <Input
+                  placeholder={user.city == null ? "" : user.city}
                   placeholder={user.city == null ? "" : user.city}
                   className=" h-24 border-gray-500 text-3xl rounded-xl"
                 ></Input>
@@ -111,10 +130,12 @@ export default function Checkout() {
                 </h2>
                 <Input
                   placeholder={user.phone == null ? "" : user.phone}
+                  placeholder={user.phone == null ? "" : user.phone}
                   className=" h-24 border-gray-500 text-3xl rounded-xl"
                 ></Input>
                 <h2 className="my-4 font-light text-4xl pt-9 pb-3">DNI:</h2>
                 <Input
+                  placeholder={user.dni == null ? "" : user.dni}
                   placeholder={user.dni == null ? "" : user.dni}
                   className=" h-24 border-gray-500 text-3xl rounded-xl"
                 ></Input>
